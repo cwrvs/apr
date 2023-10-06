@@ -7,9 +7,11 @@ function rollDice() {
 // Attach a click event listener to the button.
 document.getElementById('rollButton').addEventListener('click', function() {
     const rolledValue = rollDice();
-    document.getElementById('result').textContent = `You rolled a ${rolledValue}`;
+    const resultElement = document.getElementById('result');
     
     if (rolledValue === 7 || rolledValue === 11) {
-        document.getElementById('result').textContent += " - Unlucky craps!";
+        resultElement.textContent = `Unlucky craps! You rolled a ${rolledValue}`;
+    } else {
+        resultElement.textContent = `You rolled a ${rolledValue}`;
     }
 });
