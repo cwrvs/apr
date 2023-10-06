@@ -26,8 +26,8 @@ h1 {
 button {
     background-color: #0074d9;
     color: #fff;
-    font-size: 24px;
-    padding: 15px 30px;
+    font-size: 32px; /* Increase button font size for smaller screens */
+    padding: 20px 40px; /* Increase button padding for smaller screens */
     cursor: pointer;
     border: none;
 }
@@ -37,7 +37,7 @@ button:hover {
 }
 
 #result {
-    font-size: 28px;
+    font-size: 36px; /* Increase result text font size for smaller screens */
     font-weight: bold;
     margin-top: 20px;
 }
@@ -45,15 +45,6 @@ button:hover {
 /* Media query for smaller screens (e.g., mobile devices) */
 @media (max-width: 767px) {
     h1 {
-        font-size: 24px; /* Reduce heading font size on smaller screens */
-    }
-
-    button {
-        font-size: 18px; /* Reduce button font size on smaller screens */
-        padding: 10px 20px; /* Adjust button padding for smaller screens */
-    }
-
-    #result {
-        font-size: 20px; /* Reduce result text font size on smaller screens */
+        font-size: 28px; /* Reduce heading font size on smaller screens */
     }
 }
