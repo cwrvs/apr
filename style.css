@@ -49,31 +49,21 @@ button:hover {
     align-items: center;
 }
 
-.left {
-    display: inline-block;
-    margin-right: 20px; /* Adjust spacing */
-}
-
-.right {
-    display: inline-block;
-}
-
 .die {
     border: 2px solid #333;
-    width: 60px; /* Adjust size */
-    height: 60px; /* Adjust size */
+    width: 80px;
+    height: 80px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-content: space-between;
-    padding: 2px;
+    padding: 10px;
     box-sizing: content-box;
-    margin: 5px;
 }
 
 .dot {
-    width: 20%; /* Adjust size */
-    height: 20%; /* Adjust size */
+    width: 20%;
+    height: 20%;
     background-color: #333;
     border-radius: 50%;
 }
