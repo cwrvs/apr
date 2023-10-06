@@ -1,60 +1,86 @@
-// Initialize roll counts for each possible total value
-const rollCounts = {
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0,
-    7: 0,
-    8: 0,
-    9: 0,
-    10: 0,
-    11: 0,
-    12: 0,
-};
+// Function to simulate rolling a 6-sided die and return the result.
+function rollDie() {
+    return Math.floor(Math.random() * 6) + 1;
+}
 
-// Function to simulate rolling a pair of dice and display the result with animation.
+// Function to roll two dice, update the simulated dice, and display the result.
 function rollDice() {
-    const resultElement = document.getElementById('result');
     const die1Element = document.getElementById('die1');
     const die2Element = document.getElementById('die2');
 
-    // Roll two six-sided dice
-    const die1 = Math.floor(Math.random() * 6) + 1;
-    const die2 = Math.floor(Math.random() * 6) + 1;
-    const rolledValue = die1 + die2;
+    // Roll two dice
+    const roll1 = rollDie();
+    const roll2 = rollDie();
 
-    // Clear existing dots
-    die1Element.innerHTML = '';
-    die2Element.innerHTML = '';
+    // Update the simulated dice
+    updateSimulatedDie(die1Element, roll1);
+    updateSimulatedDie(die2Element, roll2);
 
-    // Update and display the dots for die 1
-    for (let i = 0; i < die1; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'dot';
-        die1Element.appendChild(dot);
-    }
+    // Calculate the total roll
+    const totalRoll = roll1 + roll2;
 
-    // Update and display the dots for die 2
-    for (let i = 0; i < die2; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'dot';
-        die2Element.appendChild(dot);
-    }
-
-    // Update roll counts
-    rollCounts[rolledValue]++;
-
-    // Display the updated roll counts for the total value
-    updateRollCounts(rolledValue);
-
-    return rolledValue;
+    // Display the result message
+    displayResult(totalRoll);
 }
 
-// Function to update and display the roll counts for the total value
-function updateRollCounts(totalValue) {
-    const countElement = document.getElementById(`rollCount${totalValue}`);
-    countElement.textContent = rollCounts[totalValue];
+// Function to update the simulated die with dots based on the roll.
+function updateSimulatedDie(dieElement, roll) {
+    // Clear the die
+    dieElement.innerHTML = '';
+
+    // Define dot positions for each face of a 6-sided die
+    const dotPositions = [
+        [],
+        [4],
+        [0, 8],
+        [0, 4, 8],
+        [0, 2, 6, 8],
+        [0, 2, 4, 6, 8],
+        [0, 2, 3, 5, 6, 8],
+    ];
+
+    // Create dots based on the roll
+    dotPositions[roll].forEach((position) => {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        // Position the dot based on the position index
+        switch (position) {
+            case 0:
+                dot.style.top = '12px';
+                dot.style.left = '12px';
+                break;
+            case 2:
+                dot.style.top = '12px';
+                dot.style.left = '38px';
+                break;
+            case 3:
+                dot.style.top = '25px';
+                dot.style.left = '12px';
+                break;
+            case 5:
+                dot.style.top = '25px';
+                dot.style.left = '38px';
+                break;
+            case 6:
+                dot.style.top = '38px';
+                dot.style.left = '12px';
+                break;
+            case 8:
+                dot.style.top = '38px';
+                dot.style.left = '38px';
+                break;
+            default:
+                break;
+        }
+        // Append the dot to the die
+        dieElement.appendChild(dot);
+    });
+}
+
+// Function to display the result message
+function displayResult(totalRoll) {
+    const outcomeMessageElement = document.getElementById('outcomeMessage');
+    outcomeMessageElement.textContent = `You rolled a total of ${totalRoll}`;
 }
 
 // Attach a click event listener to the button to roll the dice
