@@ -9,6 +9,11 @@ body {
     background-position: center center;
     font-family: Arial, sans-serif;
 }
+/* Add a square box around the dice roll results */
+.your-element-class {
+  border: 2px solid #000; /* Border thickness and color */
+  padding: 10px; /* Adjust padding as needed for spacing inside the box */
+}
 
 #container {
     background-color: rgba(255, 255, 255, 0.8);
