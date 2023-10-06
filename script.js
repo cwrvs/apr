@@ -1,5 +1,5 @@
 // Define an array to represent the faces of a standard 6-sided die.
-const diceFaces = [1, 2, 3, 4, 5, 6];
+const diceFaces = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 // Function to simulate rolling the dice and display the result.
 function rollDice() {
