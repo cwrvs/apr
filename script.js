@@ -10,12 +10,12 @@ function rollDice() {
     resultElement.innerHTML = ''; // Clear previous results
 
     const dice1 = document.createElement('span');
-    dice1.className = 'die';
+    dice1.className = 'number'; // Use 'number' class for styling
     dice1.textContent = rolledValue1;
     resultElement.appendChild(dice1);
 
     const dice2 = document.createElement('span');
-    dice2.className = 'die';
+    dice2.className = 'number'; // Use 'number' class for styling
     dice2.textContent = rolledValue2;
     resultElement.appendChild(dice2);
 
@@ -24,3 +24,8 @@ function rollDice() {
 
     // Rest of the game logic...
 }
+
+// Attach a click event listener to the button.
+document.getElementById('rollButton').addEventListener('click', function() {
+    rollDice();
+});
