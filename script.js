@@ -14,6 +14,8 @@ const rollCounts = {
     12: 0,
 };
 
+let totalSpins = 0;
+
 // Function to update and display the roll counts
 function updateRollCounts(rolledValue) {
     // Increment the count for the rolled value
@@ -26,6 +28,15 @@ function updateRollCounts(rolledValue) {
             rollCountElement.textContent = rollCounts[i];
         }
     }
+}
+
+// Function to add a result to the roll history
+function addToRollHistory(rolledValue) {
+    totalSpins++;
+    const historyList = document.getElementById('historyList');
+    const li = document.createElement('li');
+    li.textContent = `Spin ${totalSpins}: ${rolledValue}`;
+    historyList.appendChild(li);
 }
 
 // Function to simulate rolling a 12-sided die and display the result with animation.
@@ -58,6 +69,9 @@ function rollDice() {
 
     // Update and display the roll counts
     updateRollCounts(rolledValue);
+
+    // Add the result to the roll history
+    addToRollHistory(rolledValue);
 
     return rolledValue;
 }
