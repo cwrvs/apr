@@ -1,3 +1,6 @@
+// Initialize an object to store roll counts
+const rollCounts = {};
+
 // Function to simulate rolling two 6-sided dice and determine the game outcome.
 function rollDice() {
     const resultElement = document.getElementById('result');
@@ -19,8 +22,19 @@ function rollDice() {
     dice2.textContent = rolledValue2;
     resultElement.appendChild(dice2);
 
+    // Update roll counts
+    if (rollCounts[total]) {
+        rollCounts[total]++;
+    } else {
+        rollCounts[total] = 1;
+    }
+
     // Display the roll result
     rollValueElement.textContent = `You rolled: ${total}`;
+
+    // Display roll counts
+    const rollCountsElement = document.getElementById('rollCounts');
+    rollCountsElement.textContent = 'Roll Counts: ' + JSON.stringify(rollCounts);
 
     // Rest of the game logic...
 }
