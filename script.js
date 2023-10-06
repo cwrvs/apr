@@ -5,7 +5,7 @@ function rollDice() {
     const rolledValue = Math.floor(Math.random() * 12) + 1;
 
     // Remove the existing result content
-    resultElement.innerHTML = '';
+    //resultElement.innerHTML = '';
 
     // Calculate the translateY value for animation
     const translateY = -(rolledValue - 1) * 40; // Adjust the multiplier for desired spacing
