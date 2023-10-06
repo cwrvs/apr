@@ -1,49 +1,31 @@
-// Function to simulate rolling a 12-sided die and display the result with animation.
+// Function to simulate rolling two 6-sided dice and determine the game outcome.
 function rollDice() {
     const resultElement = document.getElementById('result');
-    const resultNumbers = resultElement.querySelectorAll('.number');
-    const rolledValue = Math.floor(Math.random() * 12) + 1;
+    const rollValueElement = document.getElementById('rollValue'); // Get the element for displaying the roll value
+    const rolledValue1 = Math.floor(Math.random() * 6) + 1;
+    const rolledValue2 = Math.floor(Math.random() * 6) + 1;
+    const total = rolledValue1 + rolledValue2;
 
-    // Remove the existing result content
-    resultElement.innerHTML = '';
+    // Create and append new span elements for each rolled die
+    resultElement.innerHTML = ''; // Clear previous results
 
-    // Calculate the translateY value for animation
-    const translateY = -(rolledValue - 1) * 40; // Adjust the multiplier for desired spacing
+    const dice1 = document.createElement('span');
+    dice1.className = 'number'; // Use 'number' class for styling
+    dice1.textContent = rolledValue1;
+    resultElement.appendChild(dice1);
 
-    // Create and append new span elements for each digit
-    const digits = rolledValue.toString().split('');
-    digits.forEach((digit, index) => {
-        const span = document.createElement('span');
-        span.className = 'number';
-        span.textContent = digit;
-        span.style.transform = `translateY(${translateY}px)`;
-        span.style.transition = `transform ${(index + 1) * 0.2}s ease-out`; // Adjust the delay for desired animation speed
-        resultElement.appendChild(span);
+    const dice2 = document.createElement('span');
+    dice2.className = 'number'; // Use 'number' class for styling
+    dice2.textContent = rolledValue2;
+    resultElement.appendChild(dice2);
 
-        // Trigger the animation by reading the computed style (force reflow)
-        setTimeout(() => {
-            span.style.transform = 'translateY(0)';
-        }, 10);
-    });
+    // Display the roll result
+    rollValueElement.textContent = `You rolled: ${total}`;
 
-    // Determine the outcome based on Craps rules
-    let outcome = '';
-    if (rolledValue === 7 || rolledValue === 11) {
-        outcome = 'Winner';
-    } else if (rolledValue === 2 || rolledValue === 3 || rolledValue === 12) {
-        outcome = 'Loser';
-    } else {
-        outcome = `Point: ${rolledValue}`;
-    }
-
-    // Display the outcome
-    const outcomeElement = document.getElementById('outcome');
-    outcomeElement.textContent = outcome;
-
-    return rolledValue;
+    // Rest of the game logic...
 }
 
 // Attach a click event listener to the button.
-document.getElementById('rollButton').addEventListener('click', function () {
+document.getElementById('rollButton').addEventListener('click', function() {
     rollDice();
 });
