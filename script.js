@@ -1,38 +1,24 @@
-// Initialize roll counts for each number
-const rollCounts = {
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0,
-    7: 0,
-    8: 0,
-    9: 0,
-    10: 0,
-    11: 0,
-    12: 0,
-};
-
-// Function to update and display the roll counts
-function updateRollCounts(rolledValue) {
-    // Increment the count for the rolled value
-    rollCounts[rolledValue]++;
-    
-    // Display the updated counts
-    for (let i = 1; i <= 12; i++) {
-        const rollCountElement = document.getElementById(`rollCount${i}`);
-        if (rollCountElement) {
-            rollCountElement.textContent = rollCounts[i];
-        }
-    }
-}
-
 // Function to simulate rolling a 12-sided die and display the result with animation.
 function rollDice() {
     const resultElement = document.getElementById('result');
     const resultNumbers = resultElement.querySelectorAll('.number');
-    const rolledValue = Math.floor(Math.random() * 12) + 1;
+
+    // Define the probabilities for each number (1/12 chance for each)
+    const probabilities = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+    const totalProbability = probabilities.reduce((sum, probability) => sum + probability, 0);
+
+    // Generate a random number to select the rolled value based on probabilities
+    let randomValue = Math.random() * totalProbability;
+    let rolledValue = 0;
+
+    // Determine the rolled value based on probabilities
+    for (let i = 0; i < probabilities.length; i++) {
+        randomValue -= probabilities[i];
+        if (randomValue <= 0) {
+            rolledValue = i + 1;
+            break;
+        }
+    }
 
     // Remove the existing result content
     resultElement.innerHTML = '';
@@ -56,16 +42,5 @@ function rollDice() {
         }, 10);
     });
 
-    // Update and display the roll counts
-    updateRollCounts(rolledValue);
-
     return rolledValue;
 }
-
-// Attach a click event listener to the button.
-document.getElementById('rollButton').addEventListener('click', function() {
-    const rolledValue = rollDice();
-    setTimeout(() => {
-        document.getElementById('result').textContent = `You rolled a ${rolledValue}`;
-    }, 1000); // Adjust the delay to match the animation duration
-});
