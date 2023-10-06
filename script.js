@@ -8,4 +8,8 @@ function rollDice() {
 document.getElementById('rollButton').addEventListener('click', function() {
     const rolledValue = rollDice();
     document.getElementById('result').textContent = `You rolled a ${rolledValue}`;
+    
+    if (rolledValue === 7 || rolledValue === 11) {
+        document.getElementById('result').textContent += " - Unlucky craps!";
+    }
 });
