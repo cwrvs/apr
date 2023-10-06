@@ -1,10 +1,6 @@
-// Define an array to represent the faces of a 12-sided die.
-const diceFaces = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-
-// Function to simulate rolling the 12-sided die and display the result.
+// Function to simulate rolling a 12-sided die and display the result.
 function rollDice() {
-    const randomIndex = Math.floor(Math.random() * diceFaces.length);
-    const result = diceFaces[randomIndex];
+    const result = Math.floor(Math.random() * 12) + 1; // Generates a random number from 1 to 12
     return result;
 }
 
