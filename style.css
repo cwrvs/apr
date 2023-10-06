@@ -1,7 +1,18 @@
-/* Add your CSS styles here */
 body {
-    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://images.unsplash.com/photo-1605870445919-838d190e8e1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2944&q=80');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
     font-family: Arial, sans-serif;
+}
+
+#container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    text-align: center;
 }
 
 h1 {
@@ -14,16 +25,11 @@ button {
     font-size: 18px;
     padding: 10px 20px;
     cursor: pointer;
+    border: none;
 }
 
 button:hover {
     background-color: #0056b3;
-}
-
-#diceImage {
-    max-width: 100%;
-    margin: 20px auto;
-    display: block;
 }
 
 #result {
