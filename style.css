@@ -52,6 +52,15 @@ button:hover {
     white-space: nowrap;
 }
 
+.left {
+    display: inline-block;
+    margin-right: 10px; /* Adjust the spacing between the left and right numbers */
+}
+
+.right {
+    display: inline-block;
+}
+
 .number {
     transform: translateY(0);
     transition: transform 1s ease-out;
