@@ -9,6 +9,14 @@ body {
     background-position: center center;
     font-family: Arial, sans-serif;
 }
+<<<<<<< HEAD
+=======
+/* Add a square box around the dice roll results */
+.your-element-class {
+  border: 2px solid #000; /* Border thickness and color */
+  padding: 10px; /* Adjust padding as needed for spacing inside the box */
+}
+>>>>>>> 3a26403046b855ef502f423b9eff3c3ec8e930b8
 
 #container {
     background-color: rgba(255, 255, 255, 0.8);
@@ -59,6 +67,7 @@ button:hover {
     margin: 0 10px;
 }
 
+<<<<<<< HEAD
 #rollCounter {
     margin-top: 20px;
 }
@@ -72,4 +81,46 @@ button:hover {
     font-size: 24px;
     font-weight: bold;
     margin-top: 20px;
+=======
+/* Responsive styles for smaller screens (e.g., mobile devices) */
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    button {
+        font-size: 18px;
+        padding: 10px 20px;
+    }
+
+    .slot-machine {
+        font-size: 24px;
+        margin-top: 10px;
+    }
+
+    .number {
+        font-size: 18px;
+        margin: 0 5px;
+    }
+
+    /* Add responsive styles for the "Your Roll" section */
+    #diceResult {
+        font-size: 18px;
+    }
+
+    /* Adjust margins and spacing for better layout on smaller screens */
+    #rules {
+        margin-top: 10px;
+    }
+
+    ul {
+        list-style-type: disc;
+        padding-left: 20px;
+    }
+
+    li {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+>>>>>>> 3a26403046b855ef502f423b9eff3c3ec8e930b8
 }
