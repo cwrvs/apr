@@ -1,3 +1,33 @@
+// Initialize roll counts for each number
+const rollCounts = {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0,
+    7: 0,
+    8: 0,
+    9: 0,
+    10: 0,
+    11: 0,
+    12: 0,
+};
+
+// Function to update and display the roll counts
+function updateRollCounts(rolledValue) {
+    // Increment the count for the rolled value
+    rollCounts[rolledValue]++;
+    
+    // Display the updated counts
+    for (let i = 1; i <= 12; i++) {
+        const rollCountElement = document.getElementById(`rollCount${i}`);
+        if (rollCountElement) {
+            rollCountElement.textContent = rollCounts[i];
+        }
+    }
+}
+
 // Function to simulate rolling a 12-sided die and display the result with animation.
 function rollDice() {
     const resultElement = document.getElementById('result');
@@ -25,6 +55,9 @@ function rollDice() {
             span.style.transform = 'translateY(0)';
         }, 10);
     });
+
+    // Update and display the roll counts
+    updateRollCounts(rolledValue);
 
     return rolledValue;
 }
