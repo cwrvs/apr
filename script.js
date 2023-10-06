@@ -1,45 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Random Dice Generator</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-    <div id="container">
-        <h1>Roll the Dice!</h1>
-        <button id="rollButton">Roll</button>
-        <div id="result" class="slot-machine">
-            <span class="number">1</span>
-            <span class="number">2</span>
-            <span class="number">3</span>
-            <span class="number">4</span>
-            <span class="number">5</span>
-            <span class="number">6</span>
-            <span class="number">7</span>
-            <span class="number">8</span>
-            <span class="number">9</span>
-            <span class="number">10</span>
-            <span class="number">11</span>
-            <span class="number">12</span>
-        </div>
-        <div id="rollCounter">
-            <h2>Roll Counter</h2>
-            <ul>
-                <li><span class="roll-label">2:</span> <span id="rollCount2">0</span></li>
-                <li><span class="roll-label">3:</span> <span id="rollCount3">0</span></li>
-                <li><span class="roll-label">4:</span> <span id="rollCount4">0</span></li>
-                <li><span class="roll-label">5:</span> <span id="rollCount5">0</span></li>
-                <li><span class="roll-label">6:</span> <span id="rollCount6">0</span></li>
-                <li><span class="roll-label">7:</span> <span id="rollCount7">0</span></li>
-                <li><span class="roll-label">8:</span> <span id="rollCount8">0</span></li>
-                <li><span class="roll-label">9:</span> <span id="rollCount9">0</span></li>
-                <li><span class="roll-label">10:</span> <span id="rollCount10">0</span></li>
-                <li><span class="roll-label">11:</span> <span id="rollCount11">0</span></li>
-                <li><span class="roll-label">12:</span> <span id="rollCount12">0</span></li>
-            </ul>
-        </div>
-        <div id="outcomeMessage"></div>
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+// Function to simulate rolling a 12-sided die and display the result with animation.
+function rollDice() {
+    const resultElement = document.getElementById('result');
+    const resultNumbers = resultElement.querySelectorAll('.number');
+    const rolledValue = Math.floor(Math.random() * 12) + 1;
+
+    // Remove the existing result content
+    resultElement.innerHTML = '';
+
+    // Calculate the translateY value for animation
+    const translateY = -(rolledValue - 1) * 40; // Adjust the multiplier for desired spacing
+
+    // Create and append new span elements for each digit
+    const digits = rolledValue.toString().split('');
+    digits.forEach((digit, index) => {
+        const span = document.createElement('span');
+        span.className = 'number';
+        span.textContent = digit;
+        span.style.transform = `translateY(${translateY}px)`;
+        span.style.transition = `transform ${(index + 1) * 0.2}s ease-out`; // Adjust the delay for desired animation speed
+        resultElement.appendChild(span);
+
+        // Trigger the animation by reading the computed style (force reflow)
+        setTimeout(() => {
+            span.style.transform = 'translateY(0)';
+        }, 10);
+    });
+
+    return rolledValue;
+}
+
+// Attach a click event listener to the button.
+document.getElementById('rollButton').addEventListener('click', function() {
+    rollDice();
+});
