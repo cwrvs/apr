@@ -1,33 +1,60 @@
-/* Add your CSS styles here */
+/* Default styles for larger screens */
 body {
-    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://images.unsplash.com/photo-1605870445919-838d190e8e1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2944&q=80');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
     font-family: Arial, sans-serif;
+}
+
+#container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
     color: #333;
+    font-size: 36px;
 }
 
 button {
     background-color: #0074d9;
     color: #fff;
-    font-size: 18px;
-    padding: 10px 20px;
+    font-size: 32px;
+    padding: 20px 40px;
     cursor: pointer;
+    border: none;
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-#diceImage {
-    max-width: 100%;
-    margin: 20px auto;
-    display: block;
-}
-
-#result {
-    font-size: 24px;
+.slot-machine {
+    font-size: 36px;
     font-weight: bold;
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.number {
+    transform: translateY(0);
+    transition: transform 1s ease-out;
+    display: inline-block;
+    margin: 0 10px;
 }
