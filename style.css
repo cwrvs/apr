@@ -1,1 +1,18 @@
 
+/* Background style */
+body {
+    background-color: #f0f0f0; /* Choose a color you like */
+    background-image: url('your-background-image.jpg'); /* If you have an image */
+    background-size: cover; /* To make it cover the entire screen */
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    /* Adjust the font size and button size for smaller screens */
+    h1 {
+        font-size: 24px;
+    }
+    button {
+        font-size: 16px;
+    }
+}
