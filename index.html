@@ -3,51 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Novelty Dice Roll Simulator - Roll a virtual 12-sided dice with animation.">
-    <title>Novelty Dice Roll Simulator</title>
+    <meta name="description" content="Novelty Dice Roll Simulator - Roll two 6-sided dice and play a simplified craps game.">
+    <title>Craps Dice Game</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Novelty Dice Roll Simulator</h1>
+        <h1>Craps Dice Game</h1>
     </header>
     <main>
         <button id="rollButton">Roll</button>
         <div id="result" class="slot-machine">
             <!-- Your dice animation spans can be generated using JavaScript -->
         </div>
-        <div id="rollCounts">
-            <h2>Roll Counts</h2>
-            <table>
-                <tr>
-                    <td>2</td>
-                    <td id="rollCount2">0</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td id="rollCount3">0</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td id="rollCount4">0</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td id="rollCount5">0</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td id="rollCount6">0</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td id="rollCount7">0</td>
-                </tr>
-            </table>
+        <div id="rules">
+            <h2>Rules</h2>
+            <ul>
+                <li>If you roll a 7 or 11 on the first roll, you win!</li>
+                <li>If you roll a 2, 3, or 12 on the first roll, you lose (Craps)!</li>
+                <li>Any other first roll becomes your point.</li>
+                <li>Keep rolling until you match your point (you win) or roll a 7 (you lose)!</li>
+            </ul>
         </div>
     </main>
     <footer>
-        <p>&copy; 2023 DiceSimulator.com</p>
+        <p>&copy; 2023 CrapsDiceGame.com</p>
     </footer>
     <script src="script.js"></script>
 </body>
