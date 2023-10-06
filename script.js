@@ -1,24 +1,43 @@
+// Initialize roll counts for each number
+const rollCounts = {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0,
+    7: 0,
+    8: 0,
+    9: 0,
+    10: 0,
+    11: 0,
+    12: 0,
+};
+
+// Function to handle the outcome of a roll
+function handleRollOutcome(rolledValue) {
+    // Increment the count for the rolled value
+    rollCounts[rolledValue]++;
+
+    // Check for craps (2, 3, or 12)
+    if (rolledValue === 2 || rolledValue === 3 || rolledValue === 12) {
+        return 'craps';
+    }
+
+    // Check for natural (7 or 11)
+    if (rolledValue === 7 || rolledValue === 11) {
+        return 'natural';
+    }
+
+    // Establish the point number (4, 5, 6, 8, 9, or 10)
+    return 'point';
+}
+
 // Function to simulate rolling a 12-sided die and display the result with animation.
 function rollDice() {
     const resultElement = document.getElementById('result');
     const resultNumbers = resultElement.querySelectorAll('.number');
-
-    // Define the probabilities for each number (1/12 chance for each)
-    const probabilities = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-    const totalProbability = probabilities.reduce((sum, probability) => sum + probability, 0);
-
-    // Generate a random number to select the rolled value based on probabilities
-    let randomValue = Math.random() * totalProbability;
-    let rolledValue = 0;
-
-    // Determine the rolled value based on probabilities
-    for (let i = 0; i < probabilities.length; i++) {
-        randomValue -= probabilities[i];
-        if (randomValue <= 0) {
-            rolledValue = i + 1;
-            break;
-        }
-    }
+    const rolledValue = Math.floor(Math.random() * 12) + 1;
 
     // Remove the existing result content
     resultElement.innerHTML = '';
@@ -42,5 +61,29 @@ function rollDice() {
         }, 10);
     });
 
+    // Determine the outcome of the roll
+    const rollOutcome = handleRollOutcome(rolledValue);
+
+    if (rollOutcome === 'craps') {
+        setTimeout(() => {
+            document.getElementById('result').textContent = 'Craps! You lose.';
+        }, 1000); // Adjust the delay to match the animation duration
+    } else if (rollOutcome === 'natural') {
+        setTimeout(() => {
+            document.getElementById('result').textContent = 'Natural! You win.';
+        }, 1000); // Adjust the delay to match the animation duration
+    } else {
+        setTimeout(() => {
+            document.getElementById('result').textContent = `Point established: ${rolledValue}`;
+        }, 1000); // Adjust the delay to match the animation duration
+    }
+
     return rolledValue;
 }
+
+// Attach a click event listener to the button.
+document.getElementById('rollButton').addEventListener('click', function() {
+    const rolledValue = rollDice();
+    // Update and display the roll counts (optional)
+    updateRollCounts(rolledValue);
+});
