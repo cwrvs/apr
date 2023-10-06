@@ -31,11 +31,11 @@ function updateSimulatedDie(dieElement, roll) {
     // Define dot positions for each face of a 6-sided die
     const dotPositions = [
         [],
-        [0, 6, 8],
-        [0, 2, 6, 8],
-        [0, 2, 4, 6, 8],
-        [0, 2, 3, 5, 6, 8],
-        [0, 2, 3, 5, 6, 8, 9],
+        [0],
+        [0, 2],
+        [0, 1, 2],
+        [0, 1, 2, 4],
+        [0, 1, 2, 3, 4],
     ];
 
     // Create dots based on the roll
