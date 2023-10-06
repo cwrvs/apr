@@ -71,6 +71,9 @@ button:hover {
     display: inline-block;
     margin: 0 10px;
     color: #0074d9; /* Change to your preferred color */
+    border: 2px solid #0074d9; /* Add a border around each die result */
+    padding: 5px; /* Adjust padding as needed */
+    border-radius: 5px; /* Add rounded corners */
 }
 
 /* Responsive styles for smaller screens (e.g., mobile devices) */
