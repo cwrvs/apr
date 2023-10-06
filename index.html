@@ -1,38 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Novelty Dice Roll Simulator - Roll two 6-sided dice and play a simplified craps game.">
-    <title>Craps Dice Game</title>
+    <title>Random Dice Generator</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Craps Dice Game</h1>
-    </header>
-    <main>
+    <div id="container">
+        <h1>Roll the Dice!</h1>
         <button id="rollButton">Roll</button>
         <div id="result" class="slot-machine">
-            <!-- Your dice animation spans can be generated using JavaScript -->
+            <span class="number">1</span>
+            <span class="number">2</span>
+            <span class="number">3</span>
+            <span class="number">4</span>
+            <span class="number">5</span>
+            <span class="number">6</span>
+            <span class="number">7</span>
+            <span class="number">8</span>
+            <span class="number">9</span>
+            <span class="number">10</span>
+            <span class="number">11</span>
+            <span class="number">12</span>
         </div>
-        <div id="diceResult">
-            <h2>Your Roll:</h2>
-            <p id="rollValue"></p>
-        </div>
-        <div id="rules">
-            <h2>Rules</h2>
+        <div id="outcome"></div>
+        <div id="rollCounter">
+            <h2>Roll Counter</h2>
             <ul>
-                <li>If you roll a 7 or 11 on the first roll, you win!</li>
-                <li>If you roll a 2, 3, or 12 on the first roll, you lose (Craps)!</li>
-                <li>Any other first roll becomes your point.</li>
-                <li>Keep rolling until you match your point (you win) or roll a 7 (you lose)!</li>
+                <li><span class="roll-label">1:</span> <span id="rollCount1">0</span></li>
+                <li><span class="roll-label">2:</span> <span id="rollCount2">0</span></li>
+                <li><span class="roll-label">3:</span> <span id="rollCount3">0</span></li>
+                <li><span class="roll-label">4:</span> <span id="rollCount4">0</span></li>
+                <li><span class="roll-label">5:</span> <span id="rollCount5">0</span></li>
+                <li><span class="roll-label">6:</span> <span id="rollCount6">0</span></li>
+                <li><span class="roll-label">7:</span> <span id="rollCount7">0</span></li>
+                <li><span class="roll-label">8:</span> <span id="rollCount8">0</span></li>
+                <li><span class="roll-label">9:</span> <span id="rollCount9">0</span></li>
+                <li><span class="roll-label">10:</span> <span id="rollCount10">0</span></li>
+                <li><span class="roll-label">11:</span> <span id="rollCount11">0</span></li>
+                <li><span class="roll-label">12:</span> <span id="rollCount12">0</span></li>
             </ul>
         </div>
-    </main>
-    <footer>
-        <p>&copy; 2023 CrapsDiceGame.com</p>
-    </footer>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
