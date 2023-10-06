@@ -11,7 +11,7 @@ body {
 }
 
 /* Styles for the main container */
-#container {
+main {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
     text-align: center;
@@ -59,8 +59,21 @@ button:hover {
 
 /* Style for individual numbers in the animation */
 .number {
-    transform: translateY(0);
+    transform: translateY(-100%);
     transition: transform 1s ease-out;
     display: inline-block;
     margin: 0 10px;
+}
+
+/* Animation class */
+.animate {
+    transform: translateY(0);
+}
+
+/* Footer style */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
 }
