@@ -36,4 +36,31 @@ function rollDice() {
         span.className = 'number';
         span.textContent = digit;
         span.style.transform = `translateY(${translateY}px)`;
-        span.style.transition = `
+        span.style.transition = `transform ${(index + 1) * 0.2}s ease-out`; // Adjust the delay for desired animation speed
+        resultElement.appendChild(span);
+
+        // Trigger the animation by reading the computed style (force reflow)
+        setTimeout(() => {
+            span.style.transform = 'translateY(0)';
+        }, 10);
+    });
+
+    // Update roll counts
+    rollCounts[rolledValue]++;
+
+    // Display the updated roll counts
+    updateRollCounts();
+
+    return rolledValue;
+}
+
+// Function to update and display the roll counts
+function updateRollCounts() {
+    for (const value in rollCounts) {
+        const countElement = document.getElementById(`rollCount${value}`);
+        countElement.textContent = rollCounts[value];
+    }
+}
+
+// Attach a click event listener to the button to roll the dice
+document.getElementById('rollButton').addEventListener('click', rollDice);
