@@ -1,37 +1,45 @@
-// Function to simulate rolling a six-sided die
-function rollDie() {
-    return Math.floor(Math.random() * 6) + 1;
-}
-
-// Function to update the dice display
-function updateDice() {
-    const die1 = document.getElementById('die1');
-    const die2 = document.getElementById('die2');
-    
-    const roll1 = rollDie();
-    const roll2 = rollDie();
-    
-    die1.textContent = roll1;
-    die2.textContent = roll2;
-    
-    return roll1 + roll2;
-}
-
-// Function to update the total and tally
-function updateTotal(total, tally) {
-    const totalElement = document.getElementById('total');
-    totalElement.textContent = total;
-
-    tally[total] = (tally[total] || 0) + 1;
-}
-
-const rollButton = document.getElementById('rollButton');
-const tally = {};
-
-rollButton.addEventListener('click', () => {
-    const total = updateDice();
-    updateTotal(total, tally);
-});
-
-// Initial roll
-updateDice();
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Dice Generator</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <h1>Roll the Dice!</h1>
+        <button id="rollButton">Roll</button>
+        <div id="result" class="slot-machine">
+            <span class="number">1</span>
+            <span class="number">2</span>
+            <span class="number">3</span>
+            <span class="number">4</span>
+            <span class="number">5</span>
+            <span class="number">6</span>
+            <span class="number">7</span>
+            <span class="number">8</span>
+            <span class="number">9</span>
+            <span class="number">10</span>
+            <span class="number">11</span>
+            <span class="number">12</span>
+        </div>
+        <div id="rollCounter">
+            <h2>Roll Counter</h2>
+            <ul>
+                <li><span class="roll-label">2:</span> <span id="rollCount2">0</span></li>
+                <li><span class="roll-label">3:</span> <span id="rollCount3">0</span></li>
+                <li><span class="roll-label">4:</span> <span id="rollCount4">0</span></li>
+                <li><span class="roll-label">5:</span> <span id="rollCount5">0</span></li>
+                <li><span class="roll-label">6:</span> <span id="rollCount6">0</span></li>
+                <li><span class="roll-label">7:</span> <span id="rollCount7">0</span></li>
+                <li><span class="roll-label">8:</span> <span id="rollCount8">0</span></li>
+                <li><span class="roll-label">9:</span> <span id="rollCount9">0</span></li>
+                <li><span class="roll-label">10:</span> <span id="rollCount10">0</span></li>
+                <li><span class="roll-label">11:</span> <span id="rollCount11">0</span></li>
+                <li><span class="roll-label">12:</span> <span id="rollCount12">0</span></li>
+            </ul>
+        </div>
+        <div id="outcomeMessage"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
