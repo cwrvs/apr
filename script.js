@@ -1,45 +1,48 @@
-// Initialize an object to store roll counts
-const rollCounts = {
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0,
-    7: 0,
-};
+// Initialize game variables
+let isPointEstablished = false;
+let point = 0;
 
-// Function to simulate rolling a 12-sided die and update counts.
+// Function to simulate rolling two 6-sided dice and determine the game outcome.
 function rollDice() {
     const resultElement = document.getElementById('result');
-    const rolledValue = Math.floor(Math.random() * 12) + 1;
+    const rolledValue1 = Math.floor(Math.random() * 6) + 1;
+    const rolledValue2 = Math.floor(Math.random() * 6) + 1;
+    const total = rolledValue1 + rolledValue2;
 
-    // Create and append new span elements for each digit of the rolled value
+    // Create and append new span elements for each rolled die
     resultElement.innerHTML = ''; // Clear previous results
-    const digits = rolledValue.toString().split('');
-    digits.forEach((digit, index) => {
-        const span = document.createElement('span');
-        span.className = 'number';
-        span.textContent = digit;
-        resultElement.appendChild(span);
 
-        // Trigger the animation by reading the computed style (force reflow)
-        setTimeout(() => {
-            span.classList.add('animate');
-        }, 10);
-    });
+    const dice1 = document.createElement('span');
+    dice1.className = 'die';
+    dice1.textContent = rolledValue1;
+    resultElement.appendChild(dice1);
 
-    // Update roll count
-    rollCounts[rolledValue] += 1;
-    updateRollCounts();
-    
-    return rolledValue;
-}
+    const dice2 = document.createElement('span');
+    dice2.className = 'die';
+    dice2.textContent = rolledValue2;
+    resultElement.appendChild(dice2);
 
-// Function to update the roll counts in the table
-function updateRollCounts() {
-    for (let i = 2; i <= 7; i++) {
-        const countElement = document.getElementById(`rollCount${i}`);
-        countElement.textContent = rollCounts[i];
+    // Check the game outcome based on the rules
+    if (!isPointEstablished) {
+        if (total === 7 || total === 11) {
+            resultElement.textContent = 'Winner! Natural!';
+        } else if (total === 2 || total === 3 || total === 12) {
+            resultElement.textContent = 'Loser! Craps!';
+        } else {
+            isPointEstablished = true;
+            point = total;
+            resultElement.textContent = `Point is ${point}. Keep rolling!`;
+        }
+    } else {
+        if (total === 7) {
+            resultElement.textContent = 'Loser! Point lost.';
+            isPointEstablished = false;
+        } else if (total === point) {
+            resultElement.textContent = 'Winner! Point matched!';
+            isPointEstablished = false;
+        } else {
+            resultElement.textContent = `Roll again for point ${point}.`;
+        }
     }
 }
 
