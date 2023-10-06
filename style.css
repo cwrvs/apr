@@ -1,4 +1,4 @@
-/* Default styles for larger screens */
+/* Reset default margin and padding for body */
 body {
     margin: 0;
     padding: 0;
@@ -10,6 +10,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
+/* Styles for the main container */
 #container {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
@@ -23,11 +24,13 @@ body {
     align-items: center;
 }
 
+/* Header style */
 h1 {
     color: #333;
     font-size: 36px;
 }
 
+/* Button style */
 button {
     background-color: #0074d9;
     color: #fff;
@@ -37,10 +40,12 @@ button {
     border: none;
 }
 
+/* Button hover effect */
 button:hover {
     background-color: #0056b3;
 }
 
+/* Style for the slot machine animation */
 .slot-machine {
     font-size: 36px;
     font-weight: bold;
@@ -52,6 +57,7 @@ button:hover {
     white-space: nowrap;
 }
 
+/* Style for individual numbers in the animation */
 .number {
     transform: translateY(0);
     transition: transform 1s ease-out;
