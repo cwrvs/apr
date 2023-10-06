@@ -84,6 +84,5 @@ function rollDice() {
 // Attach a click event listener to the button.
 document.getElementById('rollButton').addEventListener('click', function() {
     const rolledValue = rollDice();
-    // Update and display the roll counts (optional)
-    updateRollCounts(rolledValue);
+    // Optionally, you can update and display the roll counts here if needed.
 });
