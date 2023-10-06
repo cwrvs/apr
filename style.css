@@ -10,8 +10,21 @@ body {
     font-family: Arial, sans-serif;
 }
 
+/* Background Overlay */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Adjust the transparency as needed */
+    z-index: -1;
+}
+
 #container {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #fff; /* Change to your preferred background color */
+    color: #333; /* Text color */
     padding: 20px;
     text-align: center;
     max-width: 600px;
@@ -24,8 +37,8 @@ body {
 }
 
 h1 {
-    color: #333;
     font-size: 36px;
+    font-weight: bold;
 }
 
 button {
@@ -57,6 +70,7 @@ button:hover {
     transition: transform 1s ease-out;
     display: inline-block;
     margin: 0 10px;
+    color: #0074d9; /* Change to your preferred color */
 }
 
 /* Responsive styles for smaller screens (e.g., mobile devices) */
@@ -78,11 +92,6 @@ button:hover {
     .number {
         font-size: 18px;
         margin: 0 5px;
-    }
-
-    /* Add responsive styles for the "Your Roll" section */
-    #diceResult {
-        font-size: 18px;
     }
 
     /* Adjust margins and spacing for better layout on smaller screens */
