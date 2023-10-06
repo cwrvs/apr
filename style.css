@@ -41,44 +41,39 @@ button:hover {
     background-color: #0056b3;
 }
 
-.slot-machine {
+.dice {
     font-size: 36px;
-    font-weight: bold;
     margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    white-space: nowrap;
 }
 
 .left {
     display: inline-block;
-    margin-right: 10px; /* Adjust the spacing between the left and right numbers */
+    margin-right: 20px; /* Adjust spacing */
 }
 
 .right {
     display: inline-block;
 }
 
-.number {
-    transform: translateY(0);
-    transition: transform 1s ease-out;
-    display: inline-block;
-    margin: 0 10px;
+.die {
+    border: 2px solid #333;
+    width: 60px; /* Adjust size */
+    height: 60px; /* Adjust size */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;
+    padding: 2px;
+    box-sizing: content-box;
+    margin: 5px;
 }
 
-#rollCounter {
-    margin-top: 20px;
-}
-
-.roll-label {
-    font-weight: bold;
-    font-size: 24px;
-}
-
-#outcomeMessage {
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 20px;
+.dot {
+    width: 20%; /* Adjust size */
+    height: 20%; /* Adjust size */
+    background-color: #333;
+    border-radius: 50%;
 }
