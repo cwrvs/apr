@@ -31,48 +31,17 @@ function updateSimulatedDie(dieElement, roll) {
     // Define dot positions for each face of a 6-sided die
     const dotPositions = [
         [],
-        [4],
-        [0, 8],
-        [0, 4, 8],
+        [0, 2, 6],
         [0, 2, 6, 8],
-        [0, 2, 4, 6, 8],
-        [0, 2, 3, 5, 6, 8],
+        [0, 1, 3, 5, 7],
+        [0, 1, 3, 5, 6, 7],
+        [0, 1, 2, 4, 5, 6, 7],
     ];
 
     // Create dots based on the roll
     dotPositions[roll].forEach((position) => {
         const dot = document.createElement('div');
         dot.className = 'dot';
-        // Position the dot based on the position index
-        switch (position) {
-            case 0:
-                dot.style.top = '12px';
-                dot.style.left = '12px';
-                break;
-            case 2:
-                dot.style.top = '12px';
-                dot.style.left = '38px';
-                break;
-            case 3:
-                dot.style.top = '25px';
-                dot.style.left = '12px';
-                break;
-            case 5:
-                dot.style.top = '25px';
-                dot.style.left = '38px';
-                break;
-            case 6:
-                dot.style.top = '38px';
-                dot.style.left = '12px';
-                break;
-            case 8:
-                dot.style.top = '38px';
-                dot.style.left = '38px';
-                break;
-            default:
-                break;
-        }
-        // Append the dot to the die
         dieElement.appendChild(dot);
     });
 }
