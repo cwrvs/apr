@@ -1,4 +1,4 @@
-// Initialize roll counts for each possible total (2 to 12)
+// Initialize roll counts for each possible total value
 const rollCounts = {
     2: 0,
     3: 0,
@@ -16,50 +16,45 @@ const rollCounts = {
 // Function to simulate rolling a pair of dice and display the result with animation.
 function rollDice() {
     const resultElement = document.getElementById('result');
-    const resultNumbers = resultElement.querySelectorAll('.number');
+    const die1Element = document.getElementById('die1');
+    const die2Element = document.getElementById('die2');
 
     // Roll two six-sided dice
     const die1 = Math.floor(Math.random() * 6) + 1;
     const die2 = Math.floor(Math.random() * 6) + 1;
     const rolledValue = die1 + die2;
 
-    // Remove the existing result content
-    resultElement.innerHTML = '';
+    // Clear existing dots
+    die1Element.innerHTML = '';
+    die2Element.innerHTML = '';
 
-    // Calculate the translateY value for animation
-    const translateY = -(rolledValue - 2) * 40; // Adjust the multiplier for desired spacing
+    // Update and display the dots for die 1
+    for (let i = 0; i < die1; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        die1Element.appendChild(dot);
+    }
 
-    // Create and append new span elements for each digit
-    const digits = rolledValue.toString().split('');
-    digits.forEach((digit, index) => {
-        const span = document.createElement('span');
-        span.className = 'number';
-        span.textContent = digit;
-        span.style.transform = `translateY(${translateY}px)`;
-        span.style.transition = `transform ${(index + 1) * 0.2}s ease-out`; // Adjust the delay for desired animation speed
-        resultElement.appendChild(span);
-
-        // Trigger the animation by reading the computed style (force reflow)
-        setTimeout(() => {
-            span.style.transform = 'translateY(0)';
-        }, 10);
-    });
+    // Update and display the dots for die 2
+    for (let i = 0; i < die2; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        die2Element.appendChild(dot);
+    }
 
     // Update roll counts
     rollCounts[rolledValue]++;
 
-    // Display the updated roll counts
-    updateRollCounts();
+    // Display the updated roll counts for the total value
+    updateRollCounts(rolledValue);
 
     return rolledValue;
 }
 
-// Function to update and display the roll counts
-function updateRollCounts() {
-    for (const total in rollCounts) {
-        const countElement = document.getElementById(`rollCount${total}`);
-        countElement.textContent = rollCounts[total];
-    }
+// Function to update and display the roll counts for the total value
+function updateRollCounts(totalValue) {
+    const countElement = document.getElementById(`rollCount${totalValue}`);
+    countElement.textContent = rollCounts[totalValue];
 }
 
 // Attach a click event listener to the button to roll the dice
