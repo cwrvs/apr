@@ -1,4 +1,4 @@
-// Initialize roll counts for each number
+// Initialize roll counts for each possible total (2 to 12)
 const rollCounts = {
     2: 0,
     3: 0,
@@ -56,9 +56,9 @@ function rollDice() {
 
 // Function to update and display the roll counts
 function updateRollCounts() {
-    for (const value in rollCounts) {
-        const countElement = document.getElementById(`rollCount${value}`);
-        countElement.textContent = rollCounts[value];
+    for (const total in rollCounts) {
+        const countElement = document.getElementById(`rollCount${total}`);
+        countElement.textContent = rollCounts[total];
     }
 }
 
