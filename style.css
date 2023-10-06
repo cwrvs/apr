@@ -58,3 +58,18 @@ button:hover {
     display: inline-block;
     margin: 0 10px;
 }
+
+#rollCounter {
+    margin-top: 20px;
+}
+
+.roll-label {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+#outcomeMessage {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
