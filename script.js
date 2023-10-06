@@ -1,27 +1,19 @@
 // Function to simulate rolling a 12-sided die and display the result with animation.
 function rollDice() {
     const resultElement = document.getElementById('result');
-    const resultNumbers = resultElement.querySelectorAll('.number');
     const rolledValue = Math.floor(Math.random() * 12) + 1;
 
-    // Check if the animation class is already added, and remove it to reset the animation
-    resultElement.classList.remove('rolling');
+    // Remove the existing result content and classes
+    resultElement.innerHTML = '';
 
-    // Calculate the translateY value for animation
-    const translateY = -(rolledValue - 1) * 40; // Adjust the multiplier for desired spacing
-
-    // Animate the numbers
-    resultNumbers.forEach((number, index) => {
-        const animationDelay = index * 100; // Adjust the delay for desired animation speed
-        setTimeout(() => {
-            number.style.transform = `translateY(${translateY}px)`;
-        }, animationDelay);
+    // Create and append new span elements for each digit
+    const digits = rolledValue.toString().split('');
+    digits.forEach((digit) => {
+        const span = document.createElement('span');
+        span.className = 'number';
+        span.textContent = digit;
+        resultElement.appendChild(span);
     });
-
-    // Add the animation class to trigger the animation
-    setTimeout(() => {
-        resultElement.classList.add('rolling');
-    }, 10); // A small delay to ensure the class is added after resetting
 
     return rolledValue;
 }
