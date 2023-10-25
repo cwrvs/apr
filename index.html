@@ -3,35 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Number Generator and List Selector</title>
-    <meta name="description" content="Generate random numbers and select items from a list with this online tool. Simple and easy to use.">
-    <meta name="keywords" content="random number generator, list selector, online tool, random numbers, item selection">
+    <title>Random Name Selector</title>
+    <meta name="description" content="Randomly select names and display results in various formats.">
+    <meta name="keywords" content="random name selector, decision making, non-repeating names, numbered list">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Welcome to the Random Generator</h1>
+        <h1>Welcome to the Random Name Selector</h1>
     </header>
-    
-    <section id="number-generator">
-        <h2>Generate Random Number</h2>
-        <p>Enter a range:</p>
-        <input type="number" id="min" placeholder="Min">
-        <input type="number" id="max" placeholder="Max">
-        <button id="generate-number">Generate</button>
-        <p id="random-number"></p>
+
+    <section id="name-selector">
+        <h2>Make a Decision</h2>
+        <p>Enter a list of options (e.g., restaurants, movies, team members):</p>
+        <input type="text" id="decision-list" placeholder="Option 1, Option 2, Option 3">
+        <button id="make-decision">Decide</button>
     </section>
 
-    <section id="list-selector">
-        <h2>Select from List</h2>
-        <p>Enter a comma-separated list:</p>
-        <input type="text" id="item-list" placeholder="Item 1, Item 2, Item 3">
-        <button id="select-item">Select</button>
-        <p id="selected-item"></p>
+    <section id="results">
+        <div class="left-results">
+            <h2>Non-Repeating Names</h2>
+            <ul id="non-repeating-names"></ul>
+        </div>
+        <div class="right-results">
+            <h2>Numbered List</h2>
+            <ol id="numbered-list"></ol>
+        </div>
     </section>
 
     <footer>
-        <p>Instructions: Enter a range for the random number generator and a list of items for the list selector. Click the respective buttons to generate/select.</p>
+        <p>Potential Use Cases: Use this tool to make decisions, select team members, or choose items from a list.</p>
     </footer>
 
     <script src="script.js"></script>
