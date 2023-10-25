@@ -27,6 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const selectNameButton = document.getElementById('select-name');
     const nameListInput = document.getElementById('name-list');
     const selectedNameDisplay = document.getElementById('selected-name');
+    
+    let availableNames = [];
 
     selectNameButton.addEventListener('click', function() {
         const nameList = nameListInput.value.split(',').map(name => name.trim());
@@ -36,8 +38,17 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        const randomIndex = Math.floor(Math.random() * nameList.length);
-        const selectedName = nameList[randomIndex];
+        if (availableNames.length === 0) {
+            alert('All names have been chosen.');
+            return;
+        }
+
+        const randomIndex = Math.floor(Math.random() * availableNames.length);
+        const selectedName = availableNames.splice(randomIndex, 1)[0];
         selectedNameDisplay.textContent = `Selected Name: ${selectedName}`;
+    });
+
+    nameListInput.addEventListener('input', function() {
+        availableNames = nameListInput.value.split(',').map(name => name.trim());
     });
 });
