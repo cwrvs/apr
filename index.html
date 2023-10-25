@@ -3,44 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A versatile random selector tool. Choose a random number or pick a name from a list.">
-    <title>Random Selector</title>
+    <meta name="description" content="The ultimate Random Selector tool: Generate multiple numbers or pick a name from a list. Ideal for decision-making, games, and random selections.">
+    <title>Advanced Random Selector Tool</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Random Selector</h1>
-        <div id="number-section">
-            <button onclick="generateRandomNumber()">Generate Random Number (1-100)</button>
-            <p id="number-result">Your random number will appear here.</p>
-        </div>
-        <div id="name-section">
+        <h1>Advanced Random Selector Tool</h1>
+        
+        <section class="number-section">
+            <h2>Random Number Generator</h2>
+            <label for="min">Min:</label>
+            <input type="number" id="min" value="1">
+            <label for="max">Max:</label>
+            <input type="number" id="max" value="100">
+            <label for="count">How many numbers?:</label>
+            <input type="number" id="count" value="1">
+            <button onclick="generateRandomNumbers()">Generate Numbers</button>
+            <p id="number-result">Your random numbers will appear here.</p>
+        </section>
+        
+        <section class="name-section">
+            <h2>Random Name Picker</h2>
             <textarea id="name-list" rows="10" placeholder="Enter up to 20 names, separated by new lines"></textarea>
             <button onclick="pickRandomName()">Pick Random Name</button>
             <p id="name-result">The selected name will appear here.</p>
+        </section>
+        
+        <div class="instructions">
+            <h2>Guided Instructions for the Random Selector Tool</h2>
+            <p>Welcome to our state-of-the-art Random Selector tool. Below, you'll find step-by-step guidelines tailored for both newcomers and seasoned users. Dive in and let randomness be your guide!</p>
+
+            <h3>Random Number Generator:</h3>
+            <ol>
+                <li>Under the "Random Number Generator" section, input your desired minimum and maximum values.</li>
+                <li>Decide how many random numbers you want and input that number.</li>
+                <li>Click the "Generate Numbers" button and behold as the numbers get displayed instantly!</li>
+            </ol>
+
+            <h3>Random Name Picker:</h3>
+            <ol>
+                <li>Move to the "Random Name Picker" section.</li>
+                <li>Input up to 20 names, ensuring each name starts on a new line.</li>
+                <li>Hit the "Pick Random Name" button and watch as a name gets randomly selected from your list.</li>
+            </ol>
+
+            <p>Our Random Selector tool is engineered to deliver swift and accurate results, making your decision-making process smoother and more enjoyable. Perfect for games, classroom activities, or any scenario where a dash of randomness is needed. Explore and enjoy!</p>
         </div>
     </div>
     <script src="script.js"></script>
-    <div class="instructions">
-    <h2>How to Use the Random Selector Tool</h2>
-    
-    <p>Welcome to the Random Selector! This versatile tool helps you make random choices in two distinct ways. Here's how to make the most of it:</p>
-
-    <h3>1. Generating a Random Number</h3>
-    <ol>
-        <li>Look for the section titled <strong>"Generate Random Number (1-100)"</strong>.</li>
-        <li>Simply click the button in this section.</li>
-        <li>Voilà! A random number between 1 and 100 will be displayed right below the button.</li>
-    </ol>
-
-    <h3>2. Picking a Random Name from a List</h3>
-    <ol>
-        <li>In the next section, you'll find a spacious text area. Here, you can input up to 20 names. Make sure to enter each name on a new line.</li>
-        <li>Once you've entered the names, click the button below the text area.</li>
-        <li>The tool will then randomly select and display one name from your list.</li>
-    </ol>
-
-    <p>This tool is perfect for making random selections, be it for a fun game night, classroom activity, or any decision-making scenario where you'd like a touch of randomness. Enjoy!</p>
-</div>
 </body>
 </html>
