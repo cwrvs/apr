@@ -1,26 +1,80 @@
-function generateRandomNumbers() {
-    const min = parseInt(document.getElementById('min').value);
-    const max = parseInt(document.getElementById('max').value);
-    const count = Math.min(parseInt(document.getElementById('count').value), max - min + 1);
-    let numbers = [];
-    
-    while (numbers.length < count) {
-        let number = Math.floor(Math.random() * (max - min + 1)) + min;
-        if (!numbers.includes(number)) {
-            numbers.push(number);
-        }
-    }
-    document.getElementById('number-result').innerText = "Random Numbers: " + numbers.join(', ');
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e6eefa;
+    margin: 0;
+    padding: 0;
 }
 
-function pickRandomName() {
-    const names = document.getElementById('name-list').value.split('\n').filter(name => name.trim() !== '');
-    
-    if (names.length === 0) {
-        document.getElementById('name-result').innerText = "Please input names.";
-        return;
-    }
-    
-    const randomName = names[Math.floor(Math.random() * names.length)];
-    document.getElementById('name-result').innerText = "Selected Name: " + randomName;
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 20px 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #f5f8fa;
+    border-radius: 10px;
+}
+
+h2 {
+    color: #333;
+    border-bottom: 2px solid #bdc3c7;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+p, label, input, textarea, button {
+    margin-bottom: 15px;
+}
+
+input, textarea, button {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.instructions {
+    background-color: #e6eefa;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+li {
+    margin-bottom: 5px;
 }
