@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
     resetNameGeneratorButton.addEventListener('click', function() {
         availableNames = [];
         selectedNames = [];
-        allChosenNamesMessage.classList.add('hidden');
+        allChosenNamesMessage.classList.add('hidden'); // Clear the message
         selectedNameDisplay.textContent = '';
         selectedNamesList.innerHTML = '';
     });
@@ -109,6 +109,6 @@ document.addEventListener('DOMContentLoaded', function() {
         availableNames = nameListInput.value.split(',').map(name => name.trim());
         selectedNames = [];
         selectedNamesList.innerHTML = '';
-        allChosenNamesMessage.classList.add('hidden');
+        allChosenNamesMessage.classList.add('hidden'); // Clear the message
     });
 });
