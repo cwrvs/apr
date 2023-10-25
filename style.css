@@ -96,4 +96,35 @@ textarea {
     border-radius: 5px;
     resize: vertical;
 }
+/* ... Previous CSS ... */
+
+.instructions {
+    background-color: #e6eefa;
+    padding: 1.5em;
+    border-radius: 15px;
+    margin-top: 2em;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.instructions h2, .instructions h3 {
+    color: #2c3e50;
+    border-bottom: 2px solid #bdc3c7;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+}
+
+.instructions p {
+    color: #34495e;
+    line-height: 1.6;
+    margin-bottom: 1.5em;
+}
+
+.instructions ol {
+    list-style-type: decimal;
+    margin-left: 1.5em;
+}
+
+.instructions li {
+    margin-bottom: 0.5em;
+}
 }
