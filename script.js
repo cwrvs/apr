@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const maxInput = document.getElementById('max');
     const randomNumberDisplay = document.getElementById('random-number');
     const allChosenMessage = document.getElementById('all-chosen');
+    const resetNumberGeneratorButton = document.getElementById('reset-number-generator');
     
     let generatedNumbers = [];
 
@@ -38,6 +39,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    resetNumberGeneratorButton.addEventListener('click', function() {
+        generatedNumbers = [];
+        allChosenMessage.classList.add('hidden');
+        randomNumberDisplay.textContent = '';
+    });
+
     // Name Generator
     const selectNameOneByOneButton = document.getElementById('select-name');
     const selectNamesAllButton = document.getElementById('select-names-all');
@@ -45,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const selectedNameDisplay = document.getElementById('selected-name');
     const selectedNamesList = document.getElementById('selected-names-list');
     const allChosenNamesMessage = document.getElementById('all-chosen-names');
+    const resetNameGeneratorButton = document.getElementById('reset-name-generator');
     
     let availableNames = [];
     let selectedNames = [];
@@ -87,6 +95,14 @@ document.addEventListener('DOMContentLoaded', function() {
         selectedNamesList.innerHTML = selectedNames.map(name => `<li>${name}</li>`).join('');
         allChosenNamesMessage.classList.remove('hidden');
         selectedNameDisplay.textContent = '';
+    });
+
+    resetNameGeneratorButton.addEventListener('click', function() {
+        availableNames = [];
+        selectedNames = [];
+        allChosenNamesMessage.classList.add('hidden');
+        selectedNameDisplay.textContent = '';
+        selectedNamesList.innerHTML = '';
     });
 
     nameListInput.addEventListener('input', function() {
