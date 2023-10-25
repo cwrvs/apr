@@ -1,43 +1,52 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Random Number Generator
-    const generateNumberButton = document.getElementById('generate-number');
-    const minInput = document.getElementById('min');
-    const maxInput = document.getElementById('max');
-    const randomNumberDisplay = document.getElementById('random-number');
+    const makeDecisionButton = document.getElementById('make-decision');
+    const decisionListInput = document.getElementById('decision-list');
+    const nonRepeatingNamesList = document.getElementById('non-repeating-names');
+    const numberedList = document.getElementById('numbered-list');
 
-    generateNumberButton.addEventListener('click', function() {
-        const min = parseInt(minInput.value);
-        const max = parseInt(maxInput.value);
+    makeDecisionButton.addEventListener('click', function() {
+        const optionList = decisionListInput.value.split(',').map(item => item.trim());
         
-        if (isNaN(min) || isNaN(max)) {
-            alert('Please enter valid numbers for both minimum and maximum values.');
+        if (optionList.length < 2) {
+            alert('Please enter at least two options.');
             return;
         }
 
-        if (min >= max) {
-            alert('Minimum value must be less than the maximum value.');
-            return;
-        }
+        // Shuffle the optionList to randomize names
+        shuffleArray(optionList);
 
-        const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-        randomNumberDisplay.textContent = `Random Number: ${randomNumber}`;
+        // Display non-repeating names on the left
+        displayNonRepeatingNames(optionList);
+
+        // Display numbered list on the right
+        displayNumberedList(optionList);
     });
 
-    // List Selector
-    const selectItemButton = document.getElementById('select-item');
-    const itemListInput = document.getElementById('item-list');
-    const selectedItemDisplay = document.getElementById('selected-item');
-
-    selectItemButton.addEventListener('click', function() {
-        const itemList = itemListInput.value.split(',').map(item => item.trim());
-        
-        if (itemList.length < 2) {
-            alert('Please enter at least two items in the list.');
-            return;
+    // Shuffle an array to randomize elements
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
         }
+    }
 
-        const randomIndex = Math.floor(Math.random() * itemList.length);
-        const selectedItem = itemList[randomIndex];
-        selectedItemDisplay.textContent = `Selected Item: ${selectedItem}`;
-    });
+    // Display non-repeating names
+    function displayNonRepeatingNames(names) {
+        nonRepeatingNamesList.innerHTML = '';
+        names.forEach(name => {
+            const li = document.createElement('li');
+            li.textContent = name;
+            nonRepeatingNamesList.appendChild(li);
+        });
+    }
+
+    // Display numbered list
+    function displayNumberedList(names) {
+        numberedList.innerHTML = '';
+        names.forEach((name, index) => {
+            const li = document.createElement('li');
+            li.textContent = `${index + 1}. ${name}`;
+            numberedList.appendChild(li);
+        });
+    }
 });
