@@ -50,25 +50,29 @@ document.addEventListener('DOMContentLoaded', function() {
     let selectedNames = [];
 
     selectNameOneByOneButton.addEventListener('click', function() {
-        availableNames = nameListInput.value.split(',').map(name => name.trim());
-        selectedNames = [];
+        if (selectedNames.length === availableNames.length) {
+            alert('All names have been chosen.');
+            return;
+        }
 
         if (availableNames.length < 2) {
             alert('Please enter at least two names in the list.');
             return;
         }
 
-        if (availableNames.length === selectedNames.length) {
-            alert('All names have been chosen.');
-            return;
-        }
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * availableNames.length);
+        } while (selectedNames.includes(availableNames[randomIndex]));
 
-        const randomIndex = Math.floor(Math.random() * availableNames.length);
-        const selectedName = availableNames.splice(randomIndex, 1)[0];
+        const selectedName = availableNames[randomIndex];
         selectedNames.push(selectedName);
-
         selectedNamesList.innerHTML += `<li>${selectedName}</li>`;
         selectedNameDisplay.textContent = `Selected Name: ${selectedName}`;
+
+        if (selectedNames.length === availableNames.length) {
+            allChosenNamesMessage.classList.remove('hidden');
+        }
     });
 
     selectNamesAllButton.addEventListener('click', function() {
