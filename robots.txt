@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /private/      # Disallow crawling of a private directory
+Disallow: /admin/       # Disallow crawling of an admin directory
+Disallow: /restricted/  # Disallow crawling of restricted content
+
+# Allow crawling of specific files or directories
+Allow: /images/
+Allow: /public/
+
+# Set a crawl delay (in seconds) to control the crawl rate
+Crawl-delay: 10
+
+# Sitemap directive to specify the location of your sitemap.xml file
+Sitemap: https://cwrvs.github.io/sitemap.xml
