@@ -14,7 +14,7 @@
         <!-- Number Generator Section -->
         <section class="number-section">
             <h2>Random Number Generator</h2>
-            <p>Generate random numbers within your specified range. Great for lotteries, games, or just for fun!</p>
+            <p>Generate random numbers within your specified range. Whether you're organizing lotteries, playing games, or just experimenting, our number generator is your ideal companion.</p>
             <label for="min">Min:</label>
             <input type="number" id="min" value="1">
             <label for="max">Max:</label>
@@ -23,22 +23,38 @@
             <input type="number" id="count" value="1">
             <button onclick="generateRandomNumbers()">Generate Numbers</button>
             <p id="number-result">Your random numbers will appear here.</p>
+            <div class="instructions">
+                <h3>How to Use the Number Generator:</h3>
+                <ol>
+                    <li>Specify the minimum value in the 'Min' input box.</li>
+                    <li>Specify the maximum value in the 'Max' input box.</li>
+                    <li>Indicate how many random numbers you want to generate.</li>
+                    <li>Click the 'Generate Numbers' button and view the results below.</li>
+                </ol>
+            </div>
         </section>
 
         <!-- Name/Choice Generator Section -->
         <section class="name-section">
             <h2>Random Name/Choice Picker</h2>
-            <p>Can't make a decision? Use our random name picker for various purposes. Whether it's choosing dinner, deciding on a movie, or picking a travel destination, our tool has got you covered.</p>
+            <p>Having trouble making a decision? Our random name/choice picker can help. From selecting tonight's dinner to choosing a movie or even picking a travel destination, let randomness guide you.</p>
             <textarea id="name-list" rows="10" placeholder="Enter choices separated by new lines"></textarea>
             <button onclick="pickRandomName()">Pick Random Choice</button>
             <p id="name-result">The selected choice will appear here.</p>
-            <h3>Examples of Uses:</h3>
-            <ul>
-                <li>Dinner choices: Pizza, Sushi, Burger, Salad, Tacos.</li>
-                <li>Movie genres: Action, Romance, Comedy, Horror, Documentary.</li>
-                <li>Travel spots: Paris, Tokyo, New York, Bali, Sydney.</li>
-                <!-- ... Add more examples as needed ... -->
-            </ul>
+            <div class="instructions">
+                <h3>How to Use the Name/Choice Picker:</h3>
+                <ol>
+                    <li>Enter your list of names or choices, each on a new line in the provided text box.</li>
+                    <li>Click the 'Pick Random Choice' button.</li>
+                    <li>Your randomly selected choice will be displayed below.</li>
+                </ol>
+                <h4>Examples of Uses:</h4>
+                <ul>
+                    <li>Dinner choices: Pizza, Sushi, Burger, Salad, Tacos.</li>
+                    <li>Movie genres: Action, Romance, Comedy, Horror, Documentary.</li>
+                    <li>Travel spots: Paris, Tokyo, New York, Bali, Sydney.</li>
+                </ul>
+            </div>
         </section>
     </div>
     <script src="script.js"></script>
