@@ -1,126 +1,21 @@
-/* Default styles for larger screens */
+/* styles.css */
 body {
-    margin: 0;
-    padding: 0;
-    background-image: url('https://images.unsplash.com/photo-1605870445919-838d190e8e1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2944&q=80');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center center;
     font-family: Arial, sans-serif;
-}
-<<<<<<< HEAD
-=======
-/* Add a square box around the dice roll results */
-.your-element-class {
-  border: 2px solid #000; /* Border thickness and color */
-  padding: 10px; /* Adjust padding as needed for spacing inside the box */
-}
->>>>>>> 3a26403046b855ef502f423b9eff3c3ec8e930b8
-
-#container {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-    height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    background-color: #f2f2f2;
 }
 
-h1 {
-    color: #333;
-    font-size: 36px;
+.container {
+    background-color: #fff;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 button {
-    background-color: #0074d9;
-    color: #fff;
-    font-size: 32px;
-    padding: 20px 40px;
-    cursor: pointer;
-    border: none;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.slot-machine {
-    font-size: 36px;
-    font-weight: bold;
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.number {
-    transform: translateY(0);
-    transition: transform 1s ease-out;
-    display: inline-block;
-    margin: 0 10px;
-}
-
-<<<<<<< HEAD
-#rollCounter {
-    margin-top: 20px;
-}
-
-.roll-label {
-    font-weight: bold;
-    font-size: 24px;
-}
-
-#outcomeMessage {
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 20px;
-=======
-/* Responsive styles for smaller screens (e.g., mobile devices) */
-@media screen and (max-width: 768px) {
-    h1 {
-        font-size: 24px;
-    }
-
-    button {
-        font-size: 18px;
-        padding: 10px 20px;
-    }
-
-    .slot-machine {
-        font-size: 24px;
-        margin-top: 10px;
-    }
-
-    .number {
-        font-size: 18px;
-        margin: 0 5px;
-    }
-
-    /* Add responsive styles for the "Your Roll" section */
-    #diceResult {
-        font-size: 18px;
-    }
-
-    /* Adjust margins and spacing for better layout on smaller screens */
-    #rules {
-        margin-top: 10px;
-    }
-
-    ul {
-        list-style-type: disc;
-        padding-left: 20px;
-    }
-
-    li {
-        font-size: 16px;
-        margin-bottom: 5px;
-    }
->>>>>>> 3a26403046b855ef502f423b9eff3c3ec8e930b8
+    display: block;
+    margin: 1em 0;
 }
