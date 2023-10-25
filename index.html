@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The ultimate Random Selector tool: Generate multiple numbers or pick a name from a list. Ideal for decision-making, games, and random selections.">
+    <meta name="description" content="The ultimate Random Selector tool: Generate numbers or pick a choice from a list. Ideal for decision-making, games, and various selections.">
     <title>Advanced Random Selector Tool</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <h1>Advanced Random Selector Tool</h1>
-        
+
+        <!-- Number Generator Section -->
         <section class="number-section">
             <h2>Random Number Generator</h2>
+            <p>Generate random numbers within your specified range. Great for lotteries, games, or just for fun!</p>
             <label for="min">Min:</label>
             <input type="number" id="min" value="1">
             <label for="max">Max:</label>
@@ -22,33 +24,28 @@
             <button onclick="generateRandomNumbers()">Generate Numbers</button>
             <p id="number-result">Your random numbers will appear here.</p>
         </section>
-        
+
+        <!-- Name/Choice Generator Section -->
         <section class="name-section">
-            <h2>Random Name Picker</h2>
-            <textarea id="name-list" rows="10" placeholder="Enter up to 20 names, separated by new lines"></textarea>
-            <button onclick="pickRandomName()">Pick Random Name</button>
-            <p id="name-result">The selected name will appear here.</p>
+            <h2>Random Name/Choice Picker</h2>
+            <p>Can't make a decision? Use our random name picker for various purposes. Whether it's choosing dinner, deciding on a movie, or picking a travel destination, our tool has got you covered.</p>
+            <textarea id="name-list" rows="10" placeholder="Enter choices separated by new lines"></textarea>
+            <button onclick="pickRandomName()">Pick Random Choice</button>
+            <p id="name-result">The selected choice will appear here.</p>
+            <h3>Examples of Uses:</h3>
+            <ul>
+                <li>Dinner choices: Pizza, Sushi, Burger, Salad, Tacos.</li>
+                <li>Movie genres: Action, Romance, Comedy, Horror, Documentary.</li>
+                <li>Travel spots: Paris, Tokyo, New York, Bali, Sydney.</li>
+                <!-- ... Add more examples as needed ... -->
+            </ul>
         </section>
-        
+
+        <!-- Instructions -->
         <div class="instructions">
             <h2>Guided Instructions for the Random Selector Tool</h2>
             <p>Welcome to our state-of-the-art Random Selector tool. Below, you'll find step-by-step guidelines tailored for both newcomers and seasoned users. Dive in and let randomness be your guide!</p>
-
-            <h3>Random Number Generator:</h3>
-            <ol>
-                <li>Under the "Random Number Generator" section, input your desired minimum and maximum values.</li>
-                <li>Decide how many random numbers you want and input that number.</li>
-                <li>Click the "Generate Numbers" button and behold as the numbers get displayed instantly!</li>
-            </ol>
-
-            <h3>Random Name Picker:</h3>
-            <ol>
-                <li>Move to the "Random Name Picker" section.</li>
-                <li>Input up to 20 names, ensuring each name starts on a new line.</li>
-                <li>Hit the "Pick Random Name" button and watch as a name gets randomly selected from your list.</li>
-            </ol>
-
-            <p>Our Random Selector tool is engineered to deliver swift and accurate results, making your decision-making process smoother and more enjoyable. Perfect for games, classroom activities, or any scenario where a dash of randomness is needed. Explore and enjoy!</p>
+            <!-- ... rest of the instructions ... -->
         </div>
     </div>
     <script src="script.js"></script>
