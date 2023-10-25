@@ -1,95 +1,41 @@
+/* Your CSS styles here */
+
 body {
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #e6eefa;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
 }
 
-.container {
-    background-color: #ffffff;
-    padding: 2em;
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    width: 80%;
-    max-width: 600px;
-}
-
-h1 {
+header {
+    background-color: #333;
+    color: white;
     text-align: center;
-    color: #2c3e50;
-    margin-bottom: 20px;
+    padding: 20px 0;
 }
 
 section {
-    margin-top: 2em;
-    padding: 1.5em;
-    border-radius: 10px;
-    border: 2px solid #bdc3c7;  /* Added border for section separation */
-    background-color: #f5f8fa; 
-}
-
-h2 {
-    color: #333;
-    border-bottom: 2px solid #bdc3c7;
-    padding-bottom: 0.5em;
-    margin-bottom: 1em;
-}
-
-label, p, textarea, input, button {
-    margin-bottom: 1em;
-}
-
-input, textarea {
-    width: 100%;
-    padding: 0.7em;  /* Increased padding for a modern look */
-    border: 1px solid #ccc;
+    background-color: white;
+    padding: 20px;
+    margin: 20px;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);  /* Added shadow for depth */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+input[type="number"], input[type="text"] {
+    padding: 5px;
+    margin-right: 10px;
 }
 
 button {
-    padding: 0.7em 1.2em;  /* Adjusted for a modern look */
-    background-color: #007bff;
-    color: #fff;
+    padding: 5px 10px;
+    background-color: #333;
+    color: white;
     border: none;
-    border-radius: 25px;  /* Rounded edges for modern look */
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;  /* Added transform for button interaction */
 }
 
-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);  /* Button grows slightly on hover */
-}
-
-.instructions {
-    background-color: #e6eefa;
-    padding: 1.5em;
-    border-radius: 15px;
-    margin-top: 2em;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-}
-
-.instructions h2, .instructions h3 {
-    color: #2c3e50;
-    border-bottom: 2px solid #bdc3c7;
-    padding-bottom: 0.5em;
-    margin-bottom: 1em;
-}
-
-.instructions p {
-    color: #34495e;
-    line-height: 1.6;
-    margin-bottom: 1.5em;
-}
-
-.instructions ol {
-    list-style-type: decimal;
-    margin-left: 1.5em;
-}
-
-.instructions li {
-    margin-bottom: 0.5em;
+footer {
+    text-align: center;
+    padding: 10px;
 }
