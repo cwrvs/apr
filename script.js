@@ -112,4 +112,3 @@ document.addEventListener('DOMContentLoaded', function() {
         allChosenNamesMessage.classList.add('hidden');
     });
 });
-S
