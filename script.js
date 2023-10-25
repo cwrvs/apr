@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const selectNameButton = document.getElementById('select-name');
     const nameListInput = document.getElementById('name-list');
     const selectedNameDisplay = document.getElementById('selected-name');
+    const selectedNamesList = document.getElementById('selected-names-list');
     
     let availableNames = [];
 
@@ -45,10 +46,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const randomIndex = Math.floor(Math.random() * availableNames.length);
         const selectedName = availableNames.splice(randomIndex, 1)[0];
+        selectedNamesList.innerHTML += `<li>${selectedName}</li>`;
         selectedNameDisplay.textContent = `Selected Name: ${selectedName}`;
     });
 
     nameListInput.addEventListener('input', function() {
         availableNames = nameListInput.value.split(',').map(name => name.trim());
+        selectedNamesList.innerHTML = '';
     });
 });
