@@ -57,3 +57,33 @@ p {
     font-size: 1.5em;
     color: #555;
 }
+
+/* Responsive styles for smaller screens */
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 1.5em;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    label {
+        font-size: 0.9em;
+    }
+
+    .input-box {
+        font-size: 0.9em;
+        padding: 0.4em;
+    }
+
+    button {
+        font-size: 0.9em;
+        padding: 0.4em 0.8em;
+    }
+
+    p {
+        font-size: 1.2em;
+    }
+}
