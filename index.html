@@ -3,60 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The ultimate Random Selector tool: Generate numbers or pick a choice from a list. Ideal for decision-making, games, and various selections.">
-    <title>Advanced Random Selector Tool</title>
+    <title>Random Number Generator and List Selector</title>
+    <meta name="description" content="Generate random numbers and select items from a list with this online tool. Simple and easy to use.">
+    <meta name="keywords" content="random number generator, list selector, online tool, random numbers, item selection">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Advanced Random Selector Tool</h1>
+    <header>
+        <h1>Welcome to the Random Generator</h1>
+    </header>
+    
+    <section id="number-generator">
+        <h2>Generate Random Number</h2>
+        <p>Enter a range:</p>
+        <input type="number" id="min" placeholder="Min">
+        <input type="number" id="max" placeholder="Max">
+        <button id="generate-number">Generate</button>
+        <p id="random-number"></p>
+    </section>
 
-        <!-- Number Generator Section -->
-        <section class="number-section">
-            <h2>Random Number Generator</h2>
-            <p>Generate random numbers within your specified range. Whether you're organizing lotteries, playing games, or just experimenting, our number generator is your ideal companion.</p>
-            <label for="min">Min:</label>
-            <input type="number" id="min" value="1">
-            <label for="max">Max:</label>
-            <input type="number" id="max" value="100">
-            <label for="count">How many numbers?:</label>
-            <input type="number" id="count" value="1">
-            <button onclick="generateRandomNumbers()">Generate Numbers</button>
-            <p id="number-result">Your random numbers will appear here.</p>
-            <div class="instructions">
-                <h3>How to Use the Number Generator:</h3>
-                <ol>
-                    <li>Specify the minimum value in the 'Min' input box.</li>
-                    <li>Specify the maximum value in the 'Max' input box.</li>
-                    <li>Indicate how many random numbers you want to generate.</li>
-                    <li>Click the 'Generate Numbers' button and view the results below.</li>
-                </ol>
-            </div>
-        </section>
+    <section id="list-selector">
+        <h2>Select from List</h2>
+        <p>Enter a comma-separated list:</p>
+        <input type="text" id="item-list" placeholder="Item 1, Item 2, Item 3">
+        <button id="select-item">Select</button>
+        <p id="selected-item"></p>
+    </section>
 
-        <!-- Name/Choice Generator Section -->
-        <section class="name-section">
-            <h2>Random Name/Choice Picker</h2>
-            <p>Having trouble making a decision? Our random name/choice picker can help. From selecting tonight's dinner to choosing a movie or even picking a travel destination, let randomness guide you.</p>
-            <textarea id="name-list" rows="10" placeholder="Enter choices separated by new lines"></textarea>
-            <button onclick="pickRandomName()">Pick Random Choice</button>
-            <p id="name-result">The selected choice will appear here.</p>
-            <div class="instructions">
-                <h3>How to Use the Name/Choice Picker:</h3>
-                <ol>
-                    <li>Enter your list of names or choices, each on a new line in the provided text box.</li>
-                    <li>Click the 'Pick Random Choice' button.</li>
-                    <li>Your randomly selected choice will be displayed below.</li>
-                </ol>
-                <h4>Examples of Uses:</h4>
-                <ul>
-                    <li>Dinner choices: Pizza, Sushi, Burger, Salad, Tacos.</li>
-                    <li>Movie genres: Action, Romance, Comedy, Horror, Documentary.</li>
-                    <li>Travel spots: Paris, Tokyo, New York, Bali, Sydney.</li>
-                </ul>
-            </div>
-        </section>
-    </div>
+    <footer>
+        <p>Instructions: Enter a range for the random number generator and a list of items for the list selector. Click the respective buttons to generate/select.</p>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
