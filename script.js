@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const minInput = document.getElementById('min');
     const maxInput = document.getElementById('max');
     const randomNumberDisplay = document.getElementById('random-number');
+    
+    let generatedNumbers = [];
 
     generateNumberButton.addEventListener('click', function() {
         const min = parseInt(minInput.value);
@@ -19,7 +21,13 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+        // Generate unique random number
+        let randomNumber;
+        do {
+            randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+        } while (generatedNumbers.includes(randomNumber));
+        
+        generatedNumbers.push(randomNumber);
         randomNumberDisplay.textContent = `Random Number: ${randomNumber}`;
     });
 
