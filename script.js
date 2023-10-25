@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Number Generator
+    // Number Generator (no changes)
     const generateNumberButton = document.getElementById('generate-number');
     const minInput = document.getElementById('min');
     const maxInput = document.getElementById('max');
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         randomNumberDisplay.textContent = '';
     });
 
-    // Name Generator (no changes)
+    // Name Generator
     const selectNameOneByOneButton = document.getElementById('select-name');
     const selectNamesAllButton = document.getElementById('select-names-all');
     const nameListInput = document.getElementById('name-list');
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
     resetNameGeneratorButton.addEventListener('click', function() {
         availableNames = [];
         selectedNames = [];
-        allChosenNamesMessage.classList.add('hidden');
+        allChosenNamesMessage.classList.add('hidden'); // Hide the "All names have been chosen" message
         selectedNameDisplay.textContent = '';
         selectedNamesList.innerHTML = '';
     });
