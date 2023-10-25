@@ -1,4 +1,4 @@
-// script.js j
+// script.js
 function generateRandomNumber() {
     const min = parseInt(document.getElementById('min').value);
     const max = parseInt(document.getElementById('max').value);
