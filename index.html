@@ -20,6 +20,7 @@
         <input type="number" id="max" placeholder="Max">
         <button id="generate-number">Generate</button>
         <p id="random-number"></p>
+        <p id="all-chosen" class="hidden">All numbers have been chosen.</p>
         <p class="instructions">To generate a random number without duplicates, enter a range and click "Generate."</p>
     </section>
 
@@ -27,10 +28,12 @@
         <h2>Random Name Selector</h2>
         <p>Enter a list of names:</p>
         <input type="text" id="name-list" placeholder="Name 1, Name 2, Name 3">
-        <button id="select-name">Select Name</button>
+        <button id="select-name">Select Name One by One</button>
+        <button id="select-names-all">Select All Names at Once</button>
         <p id="selected-name"></p>
         <ul id="selected-names-list"></ul>
-        <p class="instructions">To select a random name without repetition and see the order in which they were drawn, enter a list of names and click "Select Name."</p>
+        <p id="all-chosen-names" class="hidden">All names have been chosen.</p>
+        <p class="instructions">Choose how you want to select names. Click "Select Name One by One" for one-by-one selection or "Select All Names at Once" to see all results at once.</p>
     </section>
 
     <footer>
