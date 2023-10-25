@@ -3,22 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Name Selector and Number Generator</title>
-    <meta name="description" content="Randomly select names, generate random numbers, and display results in various formats.">
-    <meta name="keywords" content="random name selector, number generator, decision making, non-repeating names, numbered list">
+    <title>Random Number and Name Generator</title>
+    <meta name="description" content="Generate random numbers and select names randomly with this online tool. Simple and easy to use.">
+    <meta name="keywords" content="random number generator, random name selector, online tool, decision making">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Welcome to the Random Name Selector and Number Generator</h1>
+        <h1>Welcome to the Random Number and Name Generator</h1>
     </header>
-
-    <section id="name-selector">
-        <h2>Make a Decision</h2>
-        <p>Enter a list of options (e.g., restaurants, movies, team members):</p>
-        <input type="text" id="decision-list" placeholder="Option 1, Option 2, Option 3">
-        <button id="make-decision">Decide</button>
-    </section>
 
     <section id="number-generator">
         <h2>Generate Random Number</h2>
@@ -27,17 +20,16 @@
         <input type="number" id="max" placeholder="Max">
         <button id="generate-number">Generate</button>
         <p id="random-number"></p>
+        <p class="instructions">To generate a random number, enter a range and click "Generate."</p>
     </section>
 
-    <section id="results">
-        <div class="left-results">
-            <h2>Non-Repeating Names</h2>
-            <ul id="non-repeating-names"></ul>
-        </div>
-        <div class="right-results">
-            <h2>Numbered List</h2>
-            <ol id="numbered-list"></ol>
-        </div>
+    <section id="name-generator">
+        <h2>Random Name Selector</h2>
+        <p>Enter a list of names:</p>
+        <input type="text" id="name-list" placeholder="Name 1, Name 2, Name 3">
+        <button id="select-name">Select Name</button>
+        <p id="selected-name"></p>
+        <p class="instructions">To select a random name, enter a list of names and click "Select Name."</p>
     </section>
 
     <footer>
