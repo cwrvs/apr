@@ -1,80 +1,43 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #e6eefa;
-    margin: 0;
-    padding: 0;
-}
+document.addEventListener('DOMContentLoaded', function() {
+    // Random Number Generator
+    const generateNumberButton = document.getElementById('generate-number');
+    const minInput = document.getElementById('min');
+    const maxInput = document.getElementById('max');
+    const randomNumberDisplay = document.getElementById('random-number');
 
-.container {
-    max-width: 800px;
-    margin: 50px auto;
-    background-color: #ffffff;
-    padding: 20px 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+    generateNumberButton.addEventListener('click', function() {
+        const min = parseInt(minInput.value);
+        const max = parseInt(maxInput.value);
+        
+        if (isNaN(min) || isNaN(max)) {
+            alert('Please enter valid numbers for both minimum and maximum values.');
+            return;
+        }
 
-h1 {
-    text-align: center;
-    color: #2c3e50;
-    margin-bottom: 20px;
-}
+        if (min >= max) {
+            alert('Minimum value must be less than the maximum value.');
+            return;
+        }
 
-section {
-    margin-bottom: 30px;
-    padding: 20px;
-    background-color: #f5f8fa;
-    border-radius: 10px;
-}
+        const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+        randomNumberDisplay.textContent = `Random Number: ${randomNumber}`;
+    });
 
-h2 {
-    color: #333;
-    border-bottom: 2px solid #bdc3c7;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-}
+    // List Selector
+    const selectItemButton = document.getElementById('select-item');
+    const itemListInput = document.getElementById('item-list');
+    const selectedItemDisplay = document.getElementById('selected-item');
 
-p, label, input, textarea, button {
-    margin-bottom: 15px;
-}
+    selectItemButton.addEventListener('click', function() {
+        const itemList = itemListInput.value.split(',').map(item => item.trim());
+        
+        if (itemList.length < 2) {
+            alert('Please enter at least two items in the list.');
+            return;
+        }
 
-input, textarea, button {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.instructions {
-    background-color: #e6eefa;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h3 {
-    color: #2c3e50;
-    margin-bottom: 10px;
-}
-
-ul {
-    list-style-type: disc;
-    margin-left: 20px;
-}
-
-li {
-    margin-bottom: 5px;
-}
+        const randomIndex = Math.floor(Math.random() * itemList.length);
+        const selectedItem = itemList[randomIndex];
+        selectedItemDisplay.textContent = `Selected Item: ${selectedItem}`;
+    });
+});
