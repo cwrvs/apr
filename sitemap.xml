@@ -6,17 +6,5 @@
         <changefreq>daily</changefreq> <!-- How often your homepage changes -->
         <priority>1.0</priority> <!-- Priority of the homepage -->
     </url>
-    <url>
-        <loc>https://cwrvs.github.io/numbers.html</loc> <!-- URL of another page on your site -->
-        <lastmod>2023-10-25</lastmod> <!-- Last modification date of the page -->
-        <changefreq>weekly</changefreq> <!-- How often this page changes -->
-        <priority>0.8</priority> <!-- Priority of this page -->
-    </url>
-    <url>
-        <loc>https://cwrvs.github.io/names.html</loc> <!-- URL of another page on your site -->
-        <lastmod>2023-10-25</lastmod> <!-- Last modification date of the page -->
-        <changefreq>monthly</changefreq> <!-- How often this page changes -->
-        <priority>0.6</priority> <!-- Priority of this page -->
-    </url>
-    <!-- Add more <url> entries for other pages on your site -->
+       <!-- Add more <url> entries for other pages on your site -->
 </urlset>
