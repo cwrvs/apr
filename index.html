@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A simple random number generator tool. Input your desired range and get a random number instantly.">
-    <title>Random Number Generator</title>
+    <meta name="description" content="A versatile random selector tool. Choose a random number or pick a name from a list.">
+    <title>Random Selector</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Random Number Generator</h1>
-        <label for="min">Minimum Number:</label>
-        <input type="number" id="min" value="1" class="input-box">
-        <label for="max">Maximum Number:</label>
-        <input type="number" id="max" value="100" class="input-box">
-        <button onclick="generateRandomNumber()">Generate</button>
-        <p id="result">Your random number will appear here.</p>
+        <h1>Random Selector</h1>
+        <div id="number-section">
+            <button onclick="generateRandomNumber()">Generate Random Number (1-100)</button>
+            <p id="number-result">Your random number will appear here.</p>
+        </div>
+        <div id="name-section">
+            <textarea id="name-list" rows="10" placeholder="Enter up to 20 names, separated by new lines"></textarea>
+            <button onclick="pickRandomName()">Pick Random Name</button>
+            <p id="name-result">The selected name will appear here.</p>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
