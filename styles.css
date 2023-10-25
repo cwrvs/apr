@@ -66,3 +66,11 @@ footer {
 .hidden {
     display: none;
 }
+
+/* Adjust spacing between the buttons for mobile devices */
+@media (max-width: 767px) {
+    #name-generator button {
+        display: block;
+        margin-bottom: 10px; /* Add some vertical spacing between the buttons */
+    }
+}
