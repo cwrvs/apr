@@ -58,13 +58,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let selectedNames = [];
 
     selectNameOneByOneButton.addEventListener('click', function() {
-        if (selectedNames.length === availableNames.length) {
-            alert('All names have been chosen.');
+        if (availableNames.length < 2) {
+            alert('Please enter at least two names in the list.');
             return;
         }
 
-        if (availableNames.length < 2) {
-            alert('Please enter at least two names in the list.');
+        if (selectedNames.length === availableNames.length) {
+            alert('All names have been chosen.');
             return;
         }
 
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     selectNamesAllButton.addEventListener('click', function() {
         availableNames = nameListInput.value.split(',').map(name => name.trim());
-        selectedNames = [...availableNames];
+        selectedNames = shuffle([...availableNames]); // Shuffle the names to make it random
 
         if (availableNames.length < 2) {
             alert('Please enter at least two names in the list.');
@@ -111,4 +111,20 @@ document.addEventListener('DOMContentLoaded', function() {
         selectedNamesList.innerHTML = '';
         allChosenNamesMessage.classList.add('hidden');
     });
+
+    // Function to shuffle an array randomly
+    function shuffle(array) {
+        let currentIndex = array.length, randomIndex, temporaryValue;
+      
+        while (currentIndex !== 0) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+      
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+      
+        return array;
+    }
 });
