@@ -1,11 +1,10 @@
-/* styles.css */
 body {
     font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f7f9fc;
+    background-color: #e6eefa;
 }
 
 .container {
@@ -14,31 +13,40 @@ body {
     border-radius: 15px;
     box-shadow: 0 0 15px rgba(0,0,0,0.1);
     width: 80%;
-    max-width: 500px;
+    max-width: 600px;
 }
 
 h1 {
     text-align: center;
+    color: #2c3e50;
+}
+
+section {
+    margin-top: 2em;
+    background-color: #f5f8fa;
+    padding: 1.5em;
+    border-radius: 10px;
+}
+
+h2 {
     color: #333;
+    border-bottom: 2px solid #bdc3c7;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
 }
 
-label {
-    font-weight: bold;
-    display: block;
-    margin-top: 1em;
+label, p, textarea, input, button {
+    margin-bottom: 1em;
 }
 
-.input-box {
+input, textarea {
     width: 100%;
     padding: 0.5em;
-    margin: 0.5em 0;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
 button {
-    display: block;
-    margin: 1em 0;
     padding: 0.5em 1em;
     background-color: #007bff;
     color: #fff;
@@ -51,52 +59,6 @@ button {
 button:hover {
     background-color: #0056b3;
 }
-
-p {
-    text-align: center;
-    font-size: 1.5em;
-    color: #555;
-}
-
-/* Responsive styles for smaller screens */
-@media only screen and (max-width: 600px) {
-    .container {
-        width: 90%;
-        padding: 1.5em;
-    }
-
-    h1 {
-        font-size: 1.5em;
-    }
-
-    label {
-        font-size: 0.9em;
-    }
-
-    .input-box {
-        font-size: 0.9em;
-        padding: 0.4em;
-    }
-
-    button {
-        font-size: 0.9em;
-        padding: 0.4em 0.8em;
-    }
-
-    p {
-        font-size: 1.2em;
-    }
-    /* ... Previous CSS ... */
-
-textarea {
-    width: 100%;
-    padding: 0.5em;
-    margin: 0.5em 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: vertical;
-}
-/* ... Previous CSS ... */
 
 .instructions {
     background-color: #e6eefa;
@@ -126,5 +88,4 @@ textarea {
 
 .instructions li {
     margin-bottom: 0.5em;
-}
 }
