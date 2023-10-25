@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Number Generator (no changes)
+    // Number Generator
     const generateNumberButton = document.getElementById('generate-number');
     const minInput = document.getElementById('min');
     const maxInput = document.getElementById('max');
@@ -44,6 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
         generatedNumbers = [];
         allChosenMessage.classList.add('hidden');
         randomNumberDisplay.textContent = '';
+        minInput.value = ''; // Clear the minimum input
+        maxInput.value = ''; // Clear the maximum input
     });
 
     // Name Generator
@@ -104,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
         allChosenNamesMessage.classList.add('hidden'); // Hide the "All names have been chosen" message
         selectedNameDisplay.textContent = '';
         selectedNamesList.innerHTML = '';
+        nameListInput.value = ''; // Clear the name list input
     });
 
     nameListInput.addEventListener('input', function() {
