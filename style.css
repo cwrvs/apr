@@ -86,4 +86,14 @@ p {
     p {
         font-size: 1.2em;
     }
+    /* ... Previous CSS ... */
+
+textarea {
+    width: 100%;
+    padding: 0.5em;
+    margin: 0.5em 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
 }
