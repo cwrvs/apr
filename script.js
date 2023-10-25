@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Check if all numbers have been chosen
-        if (generatedNumbers.length === max - min + 1) {
+        if (generatedNumbers.length === (max - min + 1)) {
             allChosenMessage.classList.remove('hidden');
             randomNumberDisplay.textContent = '';
         } else {
@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             generatedNumbers.push(randomNumber);
             randomNumberDisplay.textContent = `Random Number: ${randomNumber}`;
+            allChosenMessage.classList.add('hidden'); // Hide the "All numbers have been chosen" message
         }
     });
 
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         randomNumberDisplay.textContent = '';
     });
 
-    // Name Generator
+    // Name Generator (no changes)
     const selectNameOneByOneButton = document.getElementById('select-name');
     const selectNamesAllButton = document.getElementById('select-names-all');
     const nameListInput = document.getElementById('name-list');
@@ -85,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     selectNamesAllButton.addEventListener('click', function() {
         availableNames = nameListInput.value.split(',').map(name => name.trim());
-        selectedNames = shuffle([...availableNames]); // Shuffle the names to make it random
+        selectedNames = shuffle([...availableNames]);
 
         if (availableNames.length < 2) {
             alert('Please enter at least two names in the list.');
@@ -112,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
         allChosenNamesMessage.classList.add('hidden');
     });
 
-    // Function to shuffle an array randomly
+    // Function to shuffle an array randomly (no changes)
     function shuffle(array) {
         let currentIndex = array.length, randomIndex, temporaryValue;
       
