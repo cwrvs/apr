@@ -92,14 +92,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     selectNamesAllButton.addEventListener('click', function() {
         if (canSelectAll) {
-            availableNames = nameListInput.value.split(',').map(name => name.trim());
-            selectedNames = shuffle([...availableNames]);
+            const namesInput = nameListInput.value.trim();
+            if (namesInput === '') {
+                alert('Please enter names in the list before selecting all names.');
+                return;
+            }
 
+            availableNames = namesInput.split(',').map(name => name.trim());
             if (availableNames.length < 2) {
                 alert('Please enter at least two names in the list.');
                 return;
             }
 
+            selectedNames = shuffle([...availableNames]);
             selectedNamesList.innerHTML = selectedNames.map(name => `<li>${name}</li>`).join('');
             allChosenNamesMessage.classList.remove('hidden');
             selectedNameDisplay.textContent = '';
