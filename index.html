@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EasyPickings - Random Name Selector and Number Generator</title>
-    <meta name="description" content="Generate random numbers and select names randomly with EasyPickings. It's a simple and versatile online tool for decision making, team selection, and more.">
-    <meta name="keywords" content="random number generator, random name selector, online tool, decision making, team selection">
+    <meta name="description" content="Generate random numbers and select names randomly with this online tool. Simple and easy to use.">
+    <meta name="keywords" content="random number generator, random name selector, online tool, decision making">
     <link rel="stylesheet" href="styles.css">
+    <!-- Your website's head content here -->
 </head>
 <body>
     <header>
         <h1>Welcome to EasyPickings</h1>
-        <p>Your Go-To Tool for Random Name Selection and Number Generation</p>
     </header>
 
     <section id="number-generator">
-        <h2>Generate Random Numbers</h2>
-        <p>Enter a range below to generate random numbers:</p>
+        <h2>Generate Random Number</h2>
+        <p>Enter a range:</p>
         <input type="number" id="min" placeholder="Min">
         <input type="number" id="max" placeholder="Max">
         <button id="generate-number">Generate</button>
@@ -28,7 +28,7 @@
 
     <section id="name-generator">
         <h2>Random Name Selector</h2>
-        <p>Enter a list of names below to select them randomly:</p>
+        <p>Enter a list of names:</p>
         <input type="text" id="name-list" placeholder="Name 1, Name 2, Name 3">
         <button id="select-name">Select Name One by One</button>
         <button id="select-names-all">Select All Names at Once</button>
@@ -39,22 +39,17 @@
         <button id="reset-name-generator">Reset</button>
     </section>
 
-    <section id="potential-uses">
-        <h2>Potential Uses of EasyPickings</h2>
-        <p>EasyPickings is a versatile tool that can benefit you in various ways:</p>
-        <ul>
-            <li>Quickly make decisions by letting chance decide.</li>
-            <li>Select team members for activities and projects effortlessly.</li>
-            <li>Randomly choose items or winners for contests and giveaways.</li>
-            <li>Generate random numbers for simulations, games, or research.</li>
-            <li>Create randomized test data for software development and testing.</li>
-        </ul>
-        <p>Discover the convenience and simplicity of EasyPickings for your random selection needs.</p>
-    </section>
-
     <footer>
-        <p>&copy; 2023 EasyPickings. All rights reserved.</p>
+        <p>Potential Use Cases: Use EasyPickings to make decisions, select team members, choose items from a list, or generate random numbers.</p>
     </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent" class="cookie-consent">
+        This website uses cookies to ensure you get the best experience on our website. By continuing to use this site, you consent to the use of cookies in accordance with our <a href="/cookie-policy">Cookie Policy</a>.
+        <button id="accept-cookies">Accept</button>
+    </div>
+
+    <!-- Your website's JavaScript files and other content here -->
 
     <script src="script.js"></script>
 </body>
