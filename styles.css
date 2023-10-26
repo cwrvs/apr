@@ -1,8 +1,13 @@
+/* Reset default styles */
+body, h1 {
+    margin: 0;
+    padding: 0;
+}
+
+/* Basic styling for body and header */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0; /* Light gray background */
-    margin: 0;
-    padding: 0;
 }
 
 header {
@@ -12,10 +17,7 @@ header {
     text-align: center;
 }
 
-h1 {
-    margin: 0;
-}
-
+/* Common styles for sections and buttons */
 section {
     background-color: #fff; /* White section background */
     margin: 20px;
@@ -37,6 +39,7 @@ button:hover {
     background-color: #2980b9; /* Darker blue on hover */
 }
 
+/* Input field styles */
 input[type="number"], input[type="text"] {
     padding: 10px;
     width: 100%;
@@ -45,34 +48,24 @@ input[type="number"], input[type="text"] {
     border-radius: 3px;
 }
 
+/* List styles */
 ul {
     list-style-type: none;
     padding: 0;
 }
-/* Limit the width of the number input fields on mobile */
-@media (max-width: 768px) {
-    input[type="number"] {
-        max-width: 100px; /* Adjust the width as needed */
-    }
-/* Add this CSS to your styles.css file */
-/* Limit the width of the text input field and increase its height on mobile */
-@media (max-width: 768px) {
-    input[type="text"] {
-        max-width: 100px; /* Adjust the width as needed */
-        height: 100px; /* Adjust the height as needed */
-    }
+
+/* Hidden element */
+.hidden {
+    display: none;
 }
 
-
-}
-
-/* Previous styles (if any) */
-/* You can keep your existing styles here */
+/* Instructions */
 .instructions {
     font-style: italic;
     color: #555; /* Dark gray for instructions */
 }
 
+/* Footer styles */
 footer {
     text-align: center;
     background-color: #3498db; /* Blue footer background */
@@ -81,12 +74,20 @@ footer {
     margin-top: 20px;
 }
 
-.hidden {
-    display: none;
-}
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    /* Limit the width of number input fields */
+    input[type="number"] {
+        max-width: 100px; /* Adjust the width as needed */
+    }
 
-/* Adjust spacing between the buttons for mobile devices */
-@media (max-width: 767px) {
+    /* Limit the width and increase the height of text input field */
+    input[type="text"] {
+        max-width: 100px; /* Adjust the width as needed */
+        height: 100px; /* Adjust the height as needed */
+    }
+
+    /* Adjust spacing between buttons for mobile devices */
     #name-generator button {
         display: block;
         margin-bottom: 10px; /* Add some vertical spacing between the buttons */
