@@ -55,12 +55,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Name Generator
     const selectNameOneByOneButton = document.getElementById('select-name');
     const selectNamesAllButton = document.getElementById('select-names-all');
+    const printResultsButton = document.getElementById('print-results'); // New "Print Results" button
     const nameListInput = document.getElementById('name-list');
     const selectedNameDisplay = document.getElementById('selected-name');
     const selectedNamesList = document.getElementById('selected-names-list');
     const allChosenNamesMessage = document.getElementById('all-chosen-names');
     const resetNameGeneratorButton = document.getElementById('reset-name-generator');
-    const printResultsButton = document.getElementById('print-results'); // New "Print Results" button
 
     let availableNames = [];
     let selectedNames = [];
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const selectedName = availableNames[randomIndex];
         selectedNames.push(selectedName);
-        selectedNamesList.innerHTML += `<li>${selectedName}</li>`;
+        selectedNamesList.innerHTML += `<li>${capitalizeFirstLetter(selectedName)}</li>`; // Capitalize the first letter
         selectedNameDisplay.textContent = `Selected Name: ${selectedName}`;
 
         if (selectedNames.length === availableNames.length) {
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             selectedNames = shuffle([...availableNames]);
-            selectedNamesList.innerHTML = selectedNames.map(name => `<li>${name}</li>`).join('');
+            selectedNamesList.innerHTML = selectedNames.map(name => `<li>${capitalizeFirstLetter(name)}</li>`).join(''); // Capitalize the first letter
             allChosenNamesMessage.classList.remove('hidden');
             selectedNameDisplay.textContent = '';
 
@@ -119,7 +119,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Re-enable the button after the cooldown period
                 canSelectAll = true;
                 selectNamesAllButton.disabled = false;
-                alert("You can now select all names again.");
             }, 60000); // 60,000 milliseconds = 60 seconds
         } else {
             // Display an error message to the user
@@ -128,8 +127,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     printResultsButton.addEventListener('click', function() {
-        // Trigger the browser's print dialog
-        window.print();
+        // Create a string of selected names with a date and timestamp
+        const currentDate = new Date();
+        const formattedDate = `${currentDate.toDateString()} ${currentDate.toLocaleTimeString()}`;
+        const resultText = `Selected Names (${formattedDate}):\n\n${selectedNames.join('\n')}`;
+
+        // Open the print dialog with the result text
+        const printWindow = window.open('', '', 'width=600,height=600');
+        printWindow.document.open();
+        printWindow.document.write(`<pre>${resultText}</pre>`);
+        printWindow.document.close();
+        printWindow.print();
+        printWindow.close();
     });
 
     resetNameGeneratorButton.addEventListener('click', function() {
@@ -162,5 +171,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         return array;
+    }
+
+    // Function to capitalize the first letter of a string
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
     }
 });
