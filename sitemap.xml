@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://cwrvs.github.io/</loc> <!-- URL of your homepage -->
-        <lastmod>2023-10-25</lastmod> <!-- Last modification date of your homepage -->
-        <changefreq>daily</changefreq> <!-- How often your homepage changes -->
-        <priority>1.0</priority> <!-- Priority of the homepage -->
+        <loc>https://cwrvs.github.io/</loc> <!-- Updated URL -->
+        <lastmod>2023-10-25</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
     </url>
-       <!-- Add more <url> entries for other pages on your site -->
+        <!-- Add more <url> entries for other pages on your site -->
 </urlset>
