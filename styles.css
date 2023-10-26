@@ -1,108 +1,69 @@
-/* Reset some default styles */
-body, h1, h2, p, ul, li, button, input[type="number"], input[type="text"] {
-    margin: 0;
-    padding: 0;
-    width: 100%; /* Set width to 100% for input fields */
-    box-sizing: border-box; /* Ensure padding and border are included in the total width */
-}
-
-/* Global Styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;
-    padding: 0;
-}
-
+/* Header Styles */
 header {
     background-color: #333;
-    color: white;
     text-align: center;
     padding: 20px;
     margin-bottom: 20px;
+    color: white; /* Text color set to white for visibility */
 }
 
+/* Main Content Styles */
 section {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f5f5f5;
     padding: 20px;
-    margin: 20px;
-}
-
-h1, h2 {
-    color: #333;
-}
-
-p {
-    margin: 10px 0;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-/* Input Styles */
-input[type="number"], input[type="text"] {
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Button Styles */
 button {
-    background-color: #333;
+    background-color: #007bff;
     color: white;
-    border: none;
     padding: 10px 20px;
-    border-radius: 4px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    margin: 5px 0;
-    width: 100%;
 }
 
-button:hover {
-    background-color: #555;
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
-/* Hidden Class */
-.hidden {
-    display: none;
-}
-
-/* Mobile Styles */
-@media (max-width: 600px) {
-    section {
-        padding: 10px;
-    }
+/* Instructions Styles */
+.instructions {
+    font-style: italic;
+    margin-top: 10px;
 }
 
 /* Footer Styles */
 footer {
     text-align: center;
-    padding: 20px;
+    padding: 10px 0;
     background-color: #333;
     color: white;
     clear: both;
 }
 
-/* Print Button Styles */
-#print-results {
-    background-color: #333;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 10px;
-    width: 100%;
-}
+/* Add your additional styles below this line */
 
-#print-results:hover {
-    background-color: #555;
+/* Responsive Styles for Mobile */
+@media (max-width: 768px) {
+    /* Adjust styles for smaller screens here */
+    header {
+        padding: 10px;
+        font-size: 20px;
+    }
+
+    section {
+        padding: 10px;
+    }
+
+    /* Input box styles for uniformity */
+    input[type="text"],
+    input[type="number"] {
+        width: 100%; /* Make input boxes full width on smaller screens */
+        margin-bottom: 10px;
+    }
 }
