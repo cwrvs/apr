@@ -19,6 +19,7 @@ header {
     color: white;
     text-align: center;
     padding: 20px;
+    margin-bottom: 20px;
 }
 
 section {
@@ -48,6 +49,7 @@ input[type="number"], input[type="text"] {
     margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
+    width: 100%;
 }
 
 /* Button Styles */
@@ -59,6 +61,8 @@ button {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin: 5px 0;
+    width: 100%;
 }
 
 button:hover {
@@ -83,6 +87,7 @@ footer {
     padding: 20px;
     background-color: #333;
     color: white;
+    clear: both;
 }
 
 /* Print Button Styles */
@@ -95,6 +100,7 @@ footer {
     cursor: pointer;
     transition: background-color 0.3s;
     margin-top: 10px;
+    width: 100%;
 }
 
 #print-results:hover {
