@@ -54,6 +54,16 @@ ul {
     input[type="number"] {
         max-width: 100px; /* Adjust the width as needed */
     }
+/* Add this CSS to your styles.css file */
+/* Limit the width of the text input field and increase its height on mobile */
+@media (max-width: 768px) {
+    input[type="text"] {
+        max-width: 100px; /* Adjust the width as needed */
+        height: 100px; /* Adjust the height as needed */
+    }
+}
+
+
 }
 
 /* Previous styles (if any) */
