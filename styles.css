@@ -17,7 +17,7 @@ header {
 h1 {
     margin: 0;
 }
-
+<input type="text" id="name-list" placeholder="Name 1, Name 2, Name 3" style="vertical-align: top;">
 /* Section styles */
 section {
     background-color: #fff; /* White section background */
