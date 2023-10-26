@@ -1,3 +1,7 @@
+// JavaScript code
+let canSelectAll = true; // Initially, allow selecting all names
+let cooldownTimer; // Store the cooldown timer
+
 document.addEventListener('DOMContentLoaded', function() {
     // Number Generator
     const generateNumberButton = document.getElementById('generate-number');
@@ -6,13 +10,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const randomNumberDisplay = document.getElementById('random-number');
     const allChosenMessage = document.getElementById('all-chosen');
     const resetNumberGeneratorButton = document.getElementById('reset-number-generator');
-    
+
     let generatedNumbers = [];
 
     generateNumberButton.addEventListener('click', function() {
         const min = parseInt(minInput.value);
         const max = parseInt(maxInput.value);
-        
+
         if (isNaN(min) || isNaN(max)) {
             alert('Please enter valid numbers for both minimum and maximum values.');
             return;
@@ -33,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
             do {
                 randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
             } while (generatedNumbers.includes(randomNumber));
-            
+
             generatedNumbers.push(randomNumber);
             randomNumberDisplay.textContent = `Random Number: ${randomNumber}`;
             allChosenMessage.classList.add('hidden'); // Hide the "All numbers have been chosen" message
@@ -56,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const selectedNamesList = document.getElementById('selected-names-list');
     const allChosenNamesMessage = document.getElementById('all-chosen-names');
     const resetNameGeneratorButton = document.getElementById('reset-name-generator');
-    
+
     let availableNames = [];
     let selectedNames = [];
 
@@ -87,17 +91,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     selectNamesAllButton.addEventListener('click', function() {
-        availableNames = nameListInput.value.split(',').map(name => name.trim());
-        selectedNames = shuffle([...availableNames]);
+        if (canSelectAll) {
+            availableNames = nameListInput.value.split(',').map(name => name.trim());
+            selectedNames = shuffle([...availableNames]);
 
-        if (availableNames.length < 2) {
-            alert('Please enter at least two names in the list.');
-            return;
+            if (availableNames.length < 2) {
+                alert('Please enter at least two names in the list.');
+                return;
+            }
+
+            selectedNamesList.innerHTML = selectedNames.map(name => `<li>${name}</li>`).join('');
+            allChosenNamesMessage.classList.remove('hidden');
+            selectedNameDisplay.textContent = '';
+
+            // Disable the button temporarily
+            canSelectAll = false;
+            selectNamesAllButton.disabled = true;
+
+            // Set a cooldown timer (e.g., 60 seconds)
+            cooldownTimer = setTimeout(function() {
+                // Re-enable the button after the cooldown period
+                canSelectAll = true;
+                selectNamesAllButton.disabled = false;
+            }, 60000); // 60,000 milliseconds = 60 seconds
+        } else {
+            // Display an error message to the user
+            alert("Please wait before selecting all names again.");
         }
-
-        selectedNamesList.innerHTML = selectedNames.map(name => `<li>${name}</li>`).join('');
-        allChosenNamesMessage.classList.remove('hidden');
-        selectedNameDisplay.textContent = '';
     });
 
     resetNameGeneratorButton.addEventListener('click', function() {
@@ -119,16 +139,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to shuffle an array randomly (no changes)
     function shuffle(array) {
         let currentIndex = array.length, randomIndex, temporaryValue;
-      
+
         while (currentIndex !== 0) {
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex--;
-      
-          temporaryValue = array[currentIndex];
-          array[currentIndex] = array[randomIndex];
-          array[randomIndex] = temporaryValue;
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
         }
-      
+
         return array;
     }
 });
