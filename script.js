@@ -113,47 +113,10 @@ document.addEventListener('DOMContentLoaded', function() {
             canSelectAll = false;
             selectNamesAllButton.disabled = true;
 
-            // Set a cooldown timer (e.g., 10 seconds)
+            // Set a cooldown timer (e.g., 60 seconds)
             cooldownTimer = setTimeout(function() {
                 // Re-enable the button after the cooldown period
                 canSelectAll = true;
                 selectNamesAllButton.disabled = false;
-            }, 10000); // 10,000 milliseconds = 10 seconds
-        } else {
-            // Display an error message to the user
-            alert("Please wait before selecting all names again.");
-        }
-    });
-
-    resetNameGeneratorButton.addEventListener('click', function() {
-        availableNames = [];
-        selectedNames = [];
-        allChosenNamesMessage.classList.add('hidden'); // Hide the "All names have been chosen" message
-        selectedNameDisplay.textContent = '';
-        selectedNamesList.innerHTML = '';
-        nameListInput.value = ''; // Clear the name list input
-    });
-
-    nameListInput.addEventListener('input', function() {
-        availableNames = nameListInput.value.split(',').map(name => name.trim());
-        selectedNames = [];
-        selectedNamesList.innerHTML = '';
-        allChosenNamesMessage.classList.add('hidden');
-    });
-
-    // Function to shuffle an array randomly (no changes)
-    function shuffle(array) {
-        let currentIndex = array.length, randomIndex, temporaryValue;
-
-        while (currentIndex !== 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
-
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
-        }
-
-        return array;
-    }
-});
+            }, 60000); // 60,000 milliseconds = 60 seconds
+       
