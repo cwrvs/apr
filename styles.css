@@ -1,15 +1,12 @@
-/* Reset default styles */
-body, h1 {
+/* Reset default margin and padding */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Light gray background */
     margin: 0;
     padding: 0;
 }
 
-/* Basic styling for body and header */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0; /* Light gray background */
-}
-
+/* Header styles */
 header {
     background-color: #3498db; /* Blue header background */
     color: #fff; /* White text */
@@ -17,7 +14,11 @@ header {
     text-align: center;
 }
 
-/* Common styles for sections and buttons */
+h1 {
+    margin: 0;
+}
+
+/* Section styles */
 section {
     background-color: #fff; /* White section background */
     margin: 20px;
@@ -26,6 +27,7 @@ section {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Light shadow */
 }
 
+/* Button styles */
 button {
     background-color: #3498db; /* Blue button background */
     color: #fff; /* White text on buttons */
@@ -39,8 +41,9 @@ button:hover {
     background-color: #2980b9; /* Darker blue on hover */
 }
 
-/* Input field styles */
-input[type="number"], input[type="text"] {
+/* Input styles */
+input[type="number"],
+input[type="text"] {
     padding: 10px;
     width: 100%;
     margin-bottom: 10px;
@@ -54,12 +57,27 @@ ul {
     padding: 0;
 }
 
-/* Hidden element */
-.hidden {
-    display: none;
+/* Additional styles for mobile devices */
+@media (max-width: 768px) {
+    /* Limit the width of number input fields */
+    input[type="number"] {
+        max-width: 100px; /* Adjust the width as needed */
+    }
+
+    /* Adjust the width and height of text input field for a more spacious appearance */
+    input[type="text"] {
+        max-width: 200px; /* Adjust the width as needed */
+        height: 150px; /* Adjust the height as needed */
+    }
+
+    /* Adjust spacing between buttons for mobile devices */
+    #name-generator button {
+        display: block;
+        margin-bottom: 10px; /* Add some vertical spacing between the buttons */
+    }
 }
 
-/* Instructions */
+/* Instructions styles */
 .instructions {
     font-style: italic;
     color: #555; /* Dark gray for instructions */
@@ -74,22 +92,7 @@ footer {
     margin-top: 20px;
 }
 
-/* Mobile-specific styles */
-@media (max-width: 768px) {
-    /* Limit the width of number input fields */
-    input[type="number"] {
-        max-width: 100px; /* Adjust the width as needed */
-    }
-
-    /* Limit the width and increase the height of text input field */
-    input[type="text"] {
-        max-width: 100px; /* Adjust the width as needed */
-        height: 100px; /* Adjust the height as needed */
-    }
-
-    /* Adjust spacing between buttons for mobile devices */
-    #name-generator button {
-        display: block;
-        margin-bottom: 10px; /* Add some vertical spacing between the buttons */
-    }
+/* Hidden class to hide elements */
+.hidden {
+    display: none;
 }
