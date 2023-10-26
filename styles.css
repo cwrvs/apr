@@ -1,98 +1,108 @@
-/* Reset default margin and padding */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0; /* Light gray background */
+/* Reset some default styles */
+body, h1, h2, p, ul, li, button {
     margin: 0;
     padding: 0;
 }
 
-/* Header styles */
+/* Basic styling for the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styling */
 header {
-    background-color: #3498db; /* Blue header background */
-    color: #fff; /* White text */
+    background-color: #007acc;
+    color: #fff;
+    text-align: center;
     padding: 20px 0;
+}
+
+header h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Section styling */
+section {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    padding: 20px;
     text-align: center;
 }
 
-h1 {
-    margin: 0;
-}
-<input type="text" id="name-list" placeholder="Name 1, Name 2, Name 3" style="vertical-align: top;">
-/* Section styles */
-section {
-    background-color: #fff; /* White section background */
-    margin: 20px;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Light shadow */
-}
-
-/* Button styles */
+/* Buttons */
 button {
-    background-color: #3498db; /* Blue button background */
-    color: #fff; /* White text on buttons */
+    background-color: #007acc;
     border: none;
-    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: 16px;
+    margin: 5px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #2980b9; /* Darker blue on hover */
+    background-color: #005faa;
 }
 
-/* Input styles */
+/* Input fields */
 input[type="number"],
 input[type="text"] {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin: 5px;
     padding: 10px;
     width: 100%;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
 }
 
-/* List styles */
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-/* Additional styles for mobile devices */
-@media (max-width: 768px) {
-    /* Limit the width of number input fields */
-    input[type="number"] {
-        max-width: 100px; /* Adjust the width as needed */
-    }
-
-    /* Adjust the width and height of text input field for a more spacious appearance */
-    input[type="text"] {
-        max-width: 200px; /* Adjust the width as needed */
-        height: 150px; /* Adjust the height as needed */
-    }
-
-    /* Adjust spacing between buttons for mobile devices */
-    #name-generator button {
-        display: block;
-        margin-bottom: 10px; /* Add some vertical spacing between the buttons */
-    }
-}
-
-/* Instructions styles */
-.instructions {
-    font-style: italic;
-    color: #555; /* Dark gray for instructions */
-}
-
-/* Footer styles */
-footer {
-    text-align: center;
-    background-color: #3498db; /* Blue footer background */
-    color: #fff; /* White text in footer */
-    padding: 10px 0;
-    margin-top: 20px;
-}
-
-/* Hidden class to hide elements */
+/* Messages and Instructions */
 .hidden {
     display: none;
+}
+
+.instructions {
+    font-style: italic;
+    color: #777;
+    margin-top: 10px;
+}
+
+/* Footer styling */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* List styling */
+ul {
+    list-style: none;
+}
+
+ul li {
+    margin-bottom: 5px;
+}
+
+/* Results section */
+#selected-names-list {
+    text-align: left;
+}
+
+/* Print button */
+#print-results {
+    background-color: #28a745;
+}
+
+#print-results:hover {
+    background-color: #1e7e34;
 }
