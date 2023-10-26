@@ -1,102 +1,132 @@
-/* Reset default margin and padding */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0; /* Light gray background */
-    margin: 0;
-    padding: 0;
-}
+// JavaScript code
+let canSelectAll = true; // Initially, allow selecting all names
+let cooldownTimer; // Store the cooldown timer
 
-/* Header styles */
-header {
-    background-color: #3498db; /* Blue header background */
-    color: #fff; /* White text */
-    padding: 20px 0;
-    text-align: center;
-}
+document.addEventListener('DOMContentLoaded', function() {
+    // Number Generator
+    const generateNumberButton = document.getElementById('generate-number');
+    const minInput = document.getElementById('min');
+    const maxInput = document.getElementById('max');
+    const randomNumberDisplay = document.getElementById('random-number');
+    const allChosenMessage = document.getElementById('all-chosen');
+    const resetNumberGeneratorButton = document.getElementById('reset-number-generator');
 
-h1 {
-    margin: 0;
-}
+    let generatedNumbers = [];
 
-/* Section styles */
-section {
-    background-color: #fff; /* White section background */
-    margin: 20px;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Light shadow */
-}
+    generateNumberButton.addEventListener('click', function() {
+        const min = parseInt(minInput.value);
+        const max = parseInt(maxInput.value);
 
-/* Button styles */
-button {
-    background-color: #3498db; /* Blue button background */
-    color: #fff; /* White text on buttons */
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+        if (isNaN(min) || isNaN(max)) {
+            alert('Please enter valid numbers for both minimum and maximum values.');
+            return;
+        }
 
-button:hover {
-    background-color: #2980b9; /* Darker blue on hover */
-}
+        if (min >= max) {
+            alert('Minimum value must be less than the maximum value.');
+            return;
+        }
 
-/* Input styles */
-input[type="number"],
-input[type="text"] {
-    padding: 10px;
-    width: 100%;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    /* Adjust to move cursor to the top of the input box */
-    caret-color: #3498db; /* Blue caret color */
-    /* Add a slight top padding for input elements */
-    padding-top: 5px;
-}
+        // Check if all numbers have been chosen
+        if (generatedNumbers.length === (max - min + 1)) {
+            allChosenMessage.classList.remove('hidden');
+            randomNumberDisplay.textContent = '';
+        } else {
+            // Generate unique random number
+            let randomNumber;
+            do {
+                randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+            } while (generatedNumbers.includes(randomNumber));
 
-/* List styles */
-ul {
-    list-style-type: none;
-    padding: 0;
-}
+            generatedNumbers.push(randomNumber);
+            randomNumberDisplay.textContent = `Random Number: ${randomNumber}`;
+            allChosenMessage.classList.add('hidden'); // Hide the "All numbers have been chosen" message
+        }
+    });
 
-/* Additional styles for mobile devices */
-@media (max-width: 768px) {
-    /* Limit the width of number input fields */
-    input[type="number"] {
-        max-width: 100px; /* Adjust the width as needed */
-    }
+    resetNumberGeneratorButton.addEventListener('click', function() {
+        generatedNumbers = [];
+        allChosenMessage.classList.add('hidden');
+        randomNumberDisplay.textContent = '';
+        minInput.value = ''; // Clear the minimum input
+        maxInput.value = ''; // Clear the maximum input
+    });
 
-    /* Adjust the width and height of text input field for a more spacious appearance */
-    input[type="text"] {
-        max-width: 200px; /* Adjust the width as needed */
-        height: 150px; /* Adjust the height as needed */
-    }
+    // Name Generator
+    const selectNameOneByOneButton = document.getElementById('select-name');
+    const selectNamesAllButton = document.getElementById('select-names-all');
+    const nameListInput = document.getElementById('name-list');
+    const selectedNameDisplay = document.getElementById('selected-name');
+    const selectedNamesList = document.getElementById('selected-names-list');
+    const allChosenNamesMessage = document.getElementById('all-chosen-names');
+    const resetNameGeneratorButton = document.getElementById('reset-name-generator');
 
-    /* Adjust spacing between buttons for mobile devices */
-    #name-generator button {
-        display: block;
-        margin-bottom: 10px; /* Add some vertical spacing between the buttons */
-    }
-}
+    let availableNames = [];
+    let selectedNames = [];
 
-/* Instructions styles */
-.instructions {
-    font-style: italic;
-    color: #555; /* Dark gray for instructions */
-}
+    selectNameOneByOneButton.addEventListener('click', function() {
+        if (availableNames.length < 2) {
+            alert('Please enter at least two names in the list.');
+            return;
+        }
 
-/* Footer styles */
-footer {
-    text-align: center;
-    background-color: #3498db; /* Blue footer background */
-    color: #fff; /* White text in footer */
-    padding: 10px 0;
-    margin-top: 20px;
-}
+        if (selectedNames.length === availableNames.length) {
+            alert('All names have been chosen.');
+            return;
+        }
 
-/* Hidden class to hide elements */
-.hidden {
-    display: none;
-}
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * availableNames.length);
+        } while (selectedNames.includes(availableNames[randomIndex]));
+
+        const selectedName = availableNames[randomIndex];
+        selectedNames.push(selectedName);
+        selectedNamesList.innerHTML += `<li>${selectedName}</li>`;
+        selectedNameDisplay.textContent = `Selected Name: ${selectedName}`;
+
+        if (selectedNames.length === availableNames.length) {
+            allChosenNamesMessage.classList.remove('hidden');
+        }
+    });
+
+    selectNamesAllButton.addEventListener('click', function() {
+        if (canSelectAll) {
+            const namesInput = nameListInput.value.trim();
+            if (namesInput === '') {
+                alert('Please enter names in the list before selecting all names.');
+                return;
+            }
+
+            availableNames = namesInput.split(',').map(name => name.trim());
+            if (availableNames.length < 2) {
+                alert('Please enter at least two names in the list.');
+                return;
+            }
+
+            selectedNames = shuffle([...availableNames]);
+            selectedNamesList.innerHTML = selectedNames.map(name => `<li>${name}</li>`).join('');
+            allChosenNamesMessage.classList.remove('hidden');
+            selectedNameDisplay.textContent = '';
+
+            // Disable the button temporarily
+            canSelectAll = false;
+            selectNamesAllButton.disabled = true;
+
+            // Set a cooldown timer (e.g., 60 seconds)
+            cooldownTimer = setTimeout(function() {
+                // Re-enable the button after the cooldown period
+                canSelectAll = true;
+                selectNamesAllButton.disabled = false;
+            }, 60000); // 60,000 milliseconds = 60 seconds
+        } else {
+            // Display an error message to the user
+            alert("Please wait before selecting all names again.");
+        }
+    });
+
+    resetNameGeneratorButton.addEventListener('click', function() {
+        availableNames = [];
+        selectedNames = [];
+        allChosenNamesMessage.classList.add('hidden'); // Hide the "All names have been chosen" message
+       
