@@ -1,4 +1,4 @@
-// JavaScript code
+// JavaScript code (Section 1)
 let canSelectAll = true; // Initially, allow selecting all names
 let cooldownTimer; // Store the cooldown timer
 
@@ -63,8 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let availableNames = [];
     let selectedNames = [];
-
-    selectNameOneByOneButton.addEventListener('click', function() {
+        selectNameOneByOneButton.addEventListener('click', function() {
         if (availableNames.length < 2) {
             alert('Please enter at least two names in the list.');
             return;
@@ -129,4 +128,30 @@ document.addEventListener('DOMContentLoaded', function() {
         availableNames = [];
         selectedNames = [];
         allChosenNamesMessage.classList.add('hidden'); // Hide the "All names have been chosen" message
-       
+        selectedNameDisplay.textContent = '';
+        selectedNamesList.innerHTML = '';
+            nameListInput.value = ''; // Clear the name list input
+});
+
+nameListInput.addEventListener('input', function() {
+    availableNames = nameListInput.value.split(',').map(name => name.trim());
+    selectedNames = [];
+    selectedNamesList.innerHTML = '';
+    allChosenNamesMessage.classList.add('hidden');
+});
+
+// Function to shuffle an array randomly (no changes)
+function shuffle(array) {
+    let currentIndex = array.length, randomIndex, temporaryValue;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
