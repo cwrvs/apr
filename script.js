@@ -113,12 +113,12 @@ document.addEventListener('DOMContentLoaded', function() {
             canSelectAll = false;
             selectNamesAllButton.disabled = true;
 
-            // Set a cooldown timer (e.g., 60 seconds)
+            // Set a cooldown timer (e.g., 10 seconds)
             cooldownTimer = setTimeout(function() {
                 // Re-enable the button after the cooldown period
                 canSelectAll = true;
                 selectNamesAllButton.disabled = false;
-            }, 60000); // 60,000 milliseconds = 60 seconds
+            }, 10000); // 10,000 milliseconds = 10 seconds
         } else {
             // Display an error message to the user
             alert("Please wait before selecting all names again.");
