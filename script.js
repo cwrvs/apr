@@ -1,4 +1,4 @@
-// JavaScript code (Section 1)
+// JavaScript code
 let canSelectAll = true; // Initially, allow selecting all names
 let cooldownTimer; // Store the cooldown timer
 
@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Name Generator
     const selectNameOneByOneButton = document.getElementById('select-name');
     const selectNamesAllButton = document.getElementById('select-names-all');
+    const printResultsButton = document.getElementById('print-results'); // New "Print Results" button
     const nameListInput = document.getElementById('name-list');
     const selectedNameDisplay = document.getElementById('selected-name');
     const selectedNamesList = document.getElementById('selected-names-list');
@@ -63,7 +64,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let availableNames = [];
     let selectedNames = [];
-        selectNameOneByOneButton.addEventListener('click', function() {
+
+    selectNameOneByOneButton.addEventListener('click', function() {
         if (availableNames.length < 2) {
             alert('Please enter at least two names in the list.');
             return;
@@ -81,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const selectedName = availableNames[randomIndex];
         selectedNames.push(selectedName);
-        selectedNamesList.innerHTML += `<li>${selectedName}</li>`;
+        selectedNamesList.innerHTML += `<li>${capitalizeFirstLetter(selectedName)}</li>`; // Capitalize the first letter
         selectedNameDisplay.textContent = `Selected Name: ${selectedName}`;
 
         if (selectedNames.length === availableNames.length) {
@@ -104,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             selectedNames = shuffle([...availableNames]);
-            selectedNamesList.innerHTML = selectedNames.map(name => `<li>${name}</li>`).join('');
+            selectedNamesList.innerHTML = selectedNames.map(name => `<li>${capitalizeFirstLetter(name)}</li>`).join(''); // Capitalize the first letter
             allChosenNamesMessage.classList.remove('hidden');
             selectedNameDisplay.textContent = '';
 
@@ -124,34 +126,55 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    printResultsButton.addEventListener('click', function() {
+        // Create a string of selected names with a date and timestamp
+        const currentDate = new Date();
+        const formattedDate = `${currentDate.toDateString()} ${currentDate.toLocaleTimeString()}`;
+        const resultText = `Selected Names (${formattedDate}):\n\n${selectedNames.join('\n')}`;
+
+        // Open the print dialog with the result text
+        const printWindow = window.open('', '', 'width=600,height=600');
+        printWindow.document.open();
+        printWindow.document.write(`<pre>${resultText}</pre>`);
+        printWindow.document.close();
+        printWindow.print();
+        printWindow.close();
+    });
+
     resetNameGeneratorButton.addEventListener('click', function() {
         availableNames = [];
         selectedNames = [];
         allChosenNamesMessage.classList.add('hidden'); // Hide the "All names have been chosen" message
         selectedNameDisplay.textContent = '';
         selectedNamesList.innerHTML = '';
-            nameListInput.value = ''; // Clear the name list input
-});
+        nameListInput.value = ''; // Clear the name list input
+    });
 
-nameListInput.addEventListener('input', function() {
-    availableNames = nameListInput.value.split(',').map(name => name.trim());
-    selectedNames = [];
-    selectedNamesList.innerHTML = '';
-    allChosenNamesMessage.classList.add('hidden');
-});
+    nameListInput.addEventListener('input', function() {
+        availableNames = nameListInput.value.split(',').map(name => name.trim());
+        selectedNames = [];
+        selectedNamesList.innerHTML = '';
+        allChosenNamesMessage.classList.add('hidden');
+    });
 
-// Function to shuffle an array randomly (no changes)
-function shuffle(array) {
-    let currentIndex = array.length, randomIndex, temporaryValue;
+    // Function to shuffle an array randomly (no changes)
+    function shuffle(array) {
+        let currentIndex = array.length, randomIndex, temporaryValue;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
 
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+
+        return array;
     }
 
-    return array;
-}
+    // Function to capitalize the first letter of a string
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+});
