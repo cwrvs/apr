@@ -13,13 +13,7 @@ body {
     margin: 0;
     padding: 0;
 }
-.header-class {
-    background-color: #007acc;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-bottom: 20px;
-}
+
 header {
     background-color: #007acc; /* Blue header background */
     color: white;
