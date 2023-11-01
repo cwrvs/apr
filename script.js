@@ -1,7 +1,4 @@
 // JavaScript code
-let canSelectAll = true; // Initially, allow selecting all names
-let cooldownTimer; // Store the cooldown timer
-
 document.addEventListener('DOMContentLoaded', function() {
     // Number Generator
     const generateNumberButton = document.getElementById('generate-number');
@@ -16,14 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
     generateNumberButton.addEventListener('click', function() {
         const min = parseInt(minInput.value);
         const max = parseInt(maxInput.value);
-
+        
         if (isNaN(min) || isNaN(max)) {
-            alert('Please enter valid numbers for both minimum and maximum values.');
+            alert('Please enter valid numbers.');
             return;
         }
-
+        
         if (min >= max) {
-            alert('Minimum value must be less than the maximum value.');
+            alert('Minimum must be less than maximum.');
             return;
         }
 
@@ -32,15 +29,14 @@ document.addEventListener('DOMContentLoaded', function() {
             allChosenMessage.classList.remove('hidden');
             randomNumberDisplay.textContent = '';
         } else {
-            // Generate unique random number
             let randomNumber;
             do {
                 randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
             } while (generatedNumbers.includes(randomNumber));
-
+            
             generatedNumbers.push(randomNumber);
             randomNumberDisplay.textContent = `Random Number: ${randomNumber}`;
-            allChosenMessage.classList.add('hidden'); // Hide the "All numbers have been chosen" message
+            allChosenMessage.classList.add('hidden');
         }
     });
 
@@ -48,14 +44,14 @@ document.addEventListener('DOMContentLoaded', function() {
         generatedNumbers = [];
         allChosenMessage.classList.add('hidden');
         randomNumberDisplay.textContent = '';
-        minInput.value = ''; // Clear the minimum input
-        maxInput.value = ''; // Clear the maximum input
+        minInput.value = '';
+        maxInput.value = '';
     });
 
     // Name Generator
     const selectNameOneByOneButton = document.getElementById('select-name');
     const selectNamesAllButton = document.getElementById('select-names-all');
-    const printResultsButton = document.getElementById('print-results'); // New "Print Results" button
+    const printResultsButton = document.getElementById('print-results');
     const nameListInput = document.getElementById('name-list');
     const selectedNameDisplay = document.getElementById('selected-name');
     const selectedNamesList = document.getElementById('selected-names-list');
@@ -67,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     selectNameOneByOneButton.addEventListener('click', function() {
         if (availableNames.length < 2) {
-            alert('Please enter at least two names in the list.');
+            alert('Please enter at least two names.');
             return;
         }
 
@@ -83,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const selectedName = availableNames[randomIndex];
         selectedNames.push(selectedName);
-        selectedNamesList.innerHTML += `<li>${capitalizeFirstLetter(selectedName)}</li>`; // Capitalize the first letter
+        selectedNamesList.innerHTML += `<li>${selectedName}</li>`;
         selectedNameDisplay.textContent = `Selected Name: ${selectedName}`;
 
         if (selectedNames.length === availableNames.length) {
@@ -92,47 +88,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     selectNamesAllButton.addEventListener('click', function() {
-        if (canSelectAll) {
-            const namesInput = nameListInput.value.trim();
-            if (namesInput === '') {
-                alert('Please enter names in the list before selecting all names.');
-                return;
-            }
-
-            availableNames = namesInput.split(',').map(name => name.trim());
-            if (availableNames.length < 2) {
-                alert('Please enter at least two names in the list.');
-                return;
-            }
-
-            selectedNames = shuffle([...availableNames]);
-            selectedNamesList.innerHTML = selectedNames.map(name => `<li>${capitalizeFirstLetter(name)}</li>`).join(''); // Capitalize the first letter
-            allChosenNamesMessage.classList.remove('hidden');
-            selectedNameDisplay.textContent = '';
-
-            // Disable the button temporarily
-            canSelectAll = false;
-            selectNamesAllButton.disabled = true;
-
-            // Set a cooldown timer (e.g., 60 seconds)
-            cooldownTimer = setTimeout(function() {
-                // Re-enable the button after the cooldown period
-                canSelectAll = true;
-                selectNamesAllButton.disabled = false;
-            }, 60000); // 60,000 milliseconds = 60 seconds
-        } else {
-            // Display an error message to the user
-            alert("Please wait before selecting all names again.");
+        if (availableNames.length < 2) {
+            alert('Please enter at least two names.');
+            return;
         }
+
+        selectedNames = [...availableNames];
+        selectedNamesList.innerHTML = selectedNames.map(name => `<li>${name}</li>`).join('');
+        allChosenNamesMessage.classList.remove('hidden');
+        selectedNameDisplay.textContent = '';
     });
 
     printResultsButton.addEventListener('click', function() {
-        // Create a string of selected names with a date and timestamp
-        const currentDate = new Date();
-        const formattedDate = `${currentDate.toDateString()} ${currentDate.toLocaleTimeString()}`;
-        const resultText = `Selected Names (${formattedDate}):\n\n${selectedNames.join('\n')}`;
+        // Create a string of selected names
+        const resultText = `Selected Names:\n\n${selectedNames.join('\n')}`;
 
-        // Open the print dialog with the result text
+        // Open the print dialog
         const printWindow = window.open('', '', 'width=600,height=600');
         printWindow.document.open();
         printWindow.document.write(`<pre>${resultText}</pre>`);
@@ -144,46 +115,19 @@ document.addEventListener('DOMContentLoaded', function() {
     resetNameGeneratorButton.addEventListener('click', function() {
         availableNames = [];
         selectedNames = [];
-        allChosenNamesMessage.classList.add('hidden'); // Hide the "All names have been chosen" message
+        allChosenNamesMessage.classList.add('hidden');
         selectedNameDisplay.textContent = '';
         selectedNamesList.innerHTML = '';
-        nameListInput.value = ''; // Clear the name list input
+        nameListInput.value = '';
     });
 
     nameListInput.addEventListener('input', function() {
-    // Replace spaces with comma and a space
-    const cleanedNames = nameListInput.value.replace(/ +/g, ', ');
+        // Simply update the available names list based on commas
+        availableNames = nameListInput.value.split(',').map(name => name.trim());
 
-    // Update the input field value
-    nameListInput.value = cleanedNames;
-
-    // Rebuild the available names list
-    availableNames = cleanedNames.split(',').map(name => name.trim());
-
-    // Reset other variables
-    selectedNames = [];
-    selectedNamesList.innerHTML = '';
-    allChosenNamesMessage.classList.add('hidden');
-});
-
-    // Function to shuffle an array randomly (no changes)
-    function shuffle(array) {
-        let currentIndex = array.length, randomIndex, temporaryValue;
-
-        while (currentIndex !== 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
-
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
-        }
-
-        return array;
-    }
-
-    // Function to capitalize the first letter of a string
-    function capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
+        // Reset other variables
+        selectedNames = [];
+        selectedNamesList.innerHTML = '';
+        allChosenNamesMessage.classList.add('hidden');
+    });
 });
