@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Check if all numbers have been chosen
         if (generatedNumbers.length === (max - min + 1)) {
             allChosenMessage.classList.remove('hidden');
             randomNumberDisplay.textContent = '';
@@ -100,10 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     printResultsButton.addEventListener('click', function() {
-        // Create a string of selected names
         const resultText = `Selected Names:\n\n${selectedNames.join('\n')}`;
-
-        // Open the print dialog
         const printWindow = window.open('', '', 'width=600,height=600');
         printWindow.document.open();
         printWindow.document.write(`<pre>${resultText}</pre>`);
@@ -121,11 +117,16 @@ document.addEventListener('DOMContentLoaded', function() {
         nameListInput.value = '';
     });
 
-    nameListInput.addEventListener('input', function() {
-        // Simply update the available names list based on commas
-        availableNames = nameListInput.value.split(',').map(name => name.trim());
+    nameListInput.addEventListener('keypress', function(event) {
+        const lastChar = nameListInput.value.slice(-1);
+        if (event.key === ' ' && lastChar !== ' ' && lastChar !== ',') {
+            event.preventDefault();
+            nameListInput.value += ', ';
+        }
+    });
 
-        // Reset other variables
+    nameListInput.addEventListener('input', function() {
+        availableNames = nameListInput.value.split(',').map(name => name.trim());
         selectedNames = [];
         selectedNamesList.innerHTML = '';
         allChosenNamesMessage.classList.add('hidden');
