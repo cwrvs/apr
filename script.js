@@ -149,12 +149,28 @@ document.addEventListener('DOMContentLoaded', function() {
         selectedNamesList.innerHTML = '';
         nameListInput.value = ''; // Clear the name list input
     });
+    // ... (Previous code remains unchanged)
 
-    nameListInput.addEventListener('input', function() {
-        availableNames = nameListInput.value.split(',').map(name => name.trim());
-        selectedNames = [];
-        selectedNamesList.innerHTML = '';
-        allChosenNamesMessage.classList.add('hidden');
+// Existing nameListInput Event Listener
+nameListInput.addEventListener('input', function() {
+    availableNames = nameListInput.value.split(',').map(name => name.trim());
+    selectedNames = [];
+    selectedNamesList.innerHTML = '';
+    allChosenNamesMessage.classList.add('hidden');
+});
+
+// New Event Listener to add a comma and space on pressing spacebar
+nameListInput.addEventListener('keyup', function(event) {
+    if (event.keyCode === 32) {  // 32 is the keycode for the spacebar
+        let currentValue = nameListInput.value;
+
+        // Remove any trailing spaces and add a comma and space
+        nameListInput.value = `${currentValue.trim()}, `;
+    }
+});
+
+// ... (Remaining code remains unchanged)
+
     });
 
     // Function to shuffle an array randomly (no changes)
