@@ -1,4 +1,3 @@
-// JavaScript code
 document.addEventListener('DOMContentLoaded', function() {
     // Number Generator
     const generateNumberButton = document.getElementById('generate-number');
@@ -9,27 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const resetNumberGeneratorButton = document.getElementById('reset-number-generator');
 
     let generatedNumbers = [];
-
-    generateNumberButton.addEventListener('click', function() {
-        const min = parseInt(minInput.value);
-        const max = parseInt(maxInput.value);
-
-        if (isNaN(min) || isNaN(max)) {
-            alert('Please enter valid numbers for both minimum and maximum values.');
-            return;
-        }
-
-        if (min >= max) {
-            alert('Minimum value must be less than the maximum value.');
-            return;
-        }
-
-        // ... (Your previous code remains unchanged)
-    });
-
-    resetNumberGeneratorButton.addEventListener('click', function() {
-        // ... (Your previous code remains unchanged)
-    });
 
     // Name Generator
     const selectNameOneByOneButton = document.getElementById('select-name');
@@ -44,43 +22,15 @@ document.addEventListener('DOMContentLoaded', function() {
     let availableNames = [];
     let selectedNames = [];
 
-    selectNameOneByOneButton.addEventListener('click', function() {
-        // ... (Your previous code remains unchanged)
-    });
-
-    selectNamesAllButton.addEventListener('click', function() {
-        // ... (Your previous code remains unchanged)
-    });
-
-    printResultsButton.addEventListener('click', function() {
-        // ... (Your previous code remains unchanged)
-    });
-
-    resetNameGeneratorButton.addEventListener('click', function() {
-        // ... (Your previous code remains unchanged)
-    });
-
-    // Existing nameListInput Event Listener
-    nameListInput.addEventListener('input', function() {
-        availableNames = nameListInput.value.split(',').map(name => name.trim());
-        selectedNames = [];
-        selectedNamesList.innerHTML = '';
-        allChosenNamesMessage.classList.add('hidden');
-    });
-
-    // New Event Listener to add a comma and space on pressing spacebar
-    nameListInput.addEventListener('keyup', function(event) {
-        if (event.keyCode === 32) {  
-            let currentValue = nameListInput.value;
-            nameListInput.value = `${currentValue.trim()}, `;
-        }
-    });
-
-    // Function to shuffle an array randomly (no changes)
+    // Function to shuffle an array
     function shuffle(array) {
         let currentIndex = array.length, randomIndex, temporaryValue;
         while (currentIndex !== 0) {
-            // ... (Your previous code remains unchanged)
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
         }
         return array;
     }
@@ -89,4 +39,46 @@ document.addEventListener('DOMContentLoaded', function() {
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
+
+    // Number Generator Event Handlers
+    generateNumberButton.addEventListener('click', function() {
+        // your existing code for generating numbers here
+    });
+
+    resetNumberGeneratorButton.addEventListener('click', function() {
+        // your existing code for resetting the number generator here
+    });
+
+    // Name Generator Event Handlers
+    selectNameOneByOneButton.addEventListener('click', function() {
+        // your existing code for selecting one name at a time here
+    });
+
+    selectNamesAllButton.addEventListener('click', function() {
+        // your existing code for selecting all names at once here
+    });
+
+    printResultsButton.addEventListener('click', function() {
+        // your existing code for printing results here
+    });
+
+    resetNameGeneratorButton.addEventListener('click', function() {
+        // your existing code for resetting the name generator here
+    });
+
+    // Event Listener for input changes in the name list
+    nameListInput.addEventListener('input', function() {
+        availableNames = nameListInput.value.split(',').map(name => name.trim());
+        selectedNames = [];
+        selectedNamesList.innerHTML = '';
+        allChosenNamesMessage.classList.add('hidden');
+    });
+
+    // Event Listener to add a comma and space on pressing spacebar
+    nameListInput.addEventListener('keyup', function(event) {
+        if (event.keyCode === 32) {
+            let currentValue = nameListInput.value;
+            nameListInput.value = `${currentValue.trim()}, `;
+        }
+    });
 });
