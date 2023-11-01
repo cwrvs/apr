@@ -3,42 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EasyPickings - Random Name Selector and Number Generator</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Random Picker</title>
+    <style>
+        /* CSS code here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        button {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <header style="background-color: #007acc; color: white; text-align: center; padding: 20px; margin-bottom: 20px;">
-        <h1>EasyPickings - Random Name Selector & Number Generator</h1>
-    </header>
 
-    <section id="number-generator">
-        <h2>Generate Random Number</h2>
-        <p>Enter a range:</p>
-        <input type="number" id="min" placeholder="Min">
-        <input type="number" id="max" placeholder="Max">
-        <button id="generate-number">Generate</button>
-        <p id="random-number"></p>
-        <p id="all-chosen" class="hidden">All numbers have been chosen.</p>
-        <button id="reset-number-generator">Reset</button>
-    </section>
+    <h1>Random Number Picker</h1>
+    <label for="min">Minimum: </label>
+    <input type="number" id="min">
+    <label for="max">Maximum: </label>
+    <input type="number" id="max">
+    <button id="pick-number">Pick a number</button>
+    <p>Randomly picked number: <span id="picked-number"></span></p>
 
-    <section id="name-generator">
-        <h2>Random Name Selector</h2>
-        <p>Enter a list of names:</p>
-        <input type="text" id="name-list" placeholder="Name 1, Name 2, Name 3">
-        <button id="select-name">Select Name One by One</button>
-        <button id="select-names-all">Select All Names at Once</button>
-        <button id="print-results">Print Results</button>
-        <p id="selected-name"></p>
-        <ul id="selected-names-list"></ul>
-        <p id="all-chosen-names" class="hidden">All names have been chosen.</p>
-        <button id="reset-name-generator">Reset</button>
-    </section>
+    <script>
+        // JavaScript code here
+        document.addEventListener("DOMContentLoaded", function() {
+            const pickNumberButton = document.getElementById("pick-number");
+            const pickedNumberSpan = document.getElementById("picked-number");
+            let minInput = document.getElementById("min");
+            let maxInput = document.getElementById("max");
 
-    <footer>
-        <p>Potential Use Cases: Use this tool for decision-making, team selection, and more.</p>
-    </footer>
+            pickNumberButton.addEventListener("click", function() {
+                let min = parseInt(minInput.value);
+                let max = parseInt(maxInput.value);
 
-    <script src="script.js"></script>
+                if (isNaN(min) || isNaN(max)) {
+                    alert("Both min and max have to be numbers.");
+                    return;
+                }
+
+                let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+                pickedNumberSpan.textContent = randomNumber;
+            });
+        });
+    </script>
+
 </body>
 </html>
