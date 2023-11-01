@@ -3,49 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Picker</title>
+    <title>EasyPickings - Random Name Selector and Number Generator</title>
     <style>
-        /* CSS code here */
-        body {
-            font-family: Arial, sans-serif;
+        /* Reset some default styles */
+        body, h1, h2, p, ul, li, button, input[type="number"], input[type="text"] {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            box-sizing: border-box;
         }
-        button {
-            margin-top: 10px;
-        }
+
+        /* More CSS code */
+        /* ... */
     </style>
 </head>
 <body>
+    <header style="background-color: #007acc; color: white; text-align: center; padding: 20px; margin-bottom: 20px;">
+        <h1>EasyPickings - Random Name Selector & Number Generator</h1>
+    </header>
 
-    <h1>Random Number Picker</h1>
-    <label for="min">Minimum: </label>
-    <input type="number" id="min">
-    <label for="max">Maximum: </label>
-    <input type="number" id="max">
-    <button id="pick-number">Pick a number</button>
-    <p>Randomly picked number: <span id="picked-number"></span></p>
+    <section id="number-generator">
+        <h2>Generate Random Number</h2>
+        <p>Enter a range:</p>
+        <input type="number" id="min" placeholder="Min">
+        <input type="number" id="max" placeholder="Max">
+        <button id="generate-number">Generate</button>
+        <p id="random-number"></p>
+        <p id="all-chosen" class="hidden">All numbers have been chosen.</p>
+        <button id="reset-number-generator">Reset</button>
+    </section>
+
+    <section id="name-generator">
+        <h2>Random Name Selector</h2>
+        <p>Enter a list of names:</p>
+        <input type="text" id="name-list" placeholder="Name 1, Name 2, Name 3">
+        <button id="select-name">Select Name One by One</button>
+        <button id="select-names-all">Select All Names at Once</button>
+        <button id="print-results">Print Results</button>
+        <p id="selected-name"></p>
+        <ul id="selected-names-list"></ul>
+        <p id="all-chosen-names" class="hidden">All names have been chosen.</p>
+        <button id="reset-name-generator">Reset</button>
+    </section>
+
+    <footer>
+        <p>Potential Use Cases: Use this tool for decision-making, team selection, and more.</p>
+    </footer>
 
     <script>
-        // JavaScript code here
-        document.addEventListener("DOMContentLoaded", function() {
-            const pickNumberButton = document.getElementById("pick-number");
-            const pickedNumberSpan = document.getElementById("picked-number");
-            let minInput = document.getElementById("min");
-            let maxInput = document.getElementById("max");
+        document.addEventListener('DOMContentLoaded', function() {
+            // Number Generator
+            const generateNumberButton = document.getElementById('generate-number');
+            const minInput = document.getElementById('min');
+            const maxInput = document.getElementById('max');
+            const randomNumberDisplay = document.getElementById('random-number');
+            const allChosenMessage = document.getElementById('all-chosen');
+            const resetNumberGeneratorButton = document.getElementById('reset-number-generator');
 
-            pickNumberButton.addEventListener("click", function() {
-                let min = parseInt(minInput.value);
-                let max = parseInt(maxInput.value);
+            let generatedNumbers = [];
 
-                if (isNaN(min) || isNaN(max)) {
-                    alert("Both min and max have to be numbers.");
-                    return;
-                }
+            // Name Generator
+            const selectNameOneByOneButton = document.getElementById('select-name');
+            const selectNamesAllButton = document.getElementById('select-names-all');
+            const printResultsButton = document.getElementById('print-results');
+            const nameListInput = document.getElementById('name-list');
+            const selectedNameDisplay = document.getElementById('selected-name');
+            const selectedNamesList = document.getElementById('selected-names-list');
+            const allChosenNamesMessage = document.getElementById('all-chosen-names');
+            const resetNameGeneratorButton = document.getElementById('reset-name-generator');
 
-                let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-                pickedNumberSpan.textContent = randomNumber;
-            });
+            let availableNames = [];
+            let selectedNames = [];
+
+            // More JS code...
         });
     </script>
-
 </body>
 </html>
