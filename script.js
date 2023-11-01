@@ -151,11 +151,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     nameListInput.addEventListener('input', function() {
-        availableNames = nameListInput.value.split(',').map(name => name.trim());
-        selectedNames = [];
-        selectedNamesList.innerHTML = '';
-        allChosenNamesMessage.classList.add('hidden');
-    });
+    // Replace spaces with comma and a space
+    const cleanedNames = nameListInput.value.replace(/ +/g, ', ');
+
+    // Update the input field value
+    nameListInput.value = cleanedNames;
+
+    // Rebuild the available names list
+    availableNames = cleanedNames.split(',').map(name => name.trim());
+
+    // Reset other variables
+    selectedNames = [];
+    selectedNamesList.innerHTML = '';
+    allChosenNamesMessage.classList.add('hidden');
+});
 
     // Function to shuffle an array randomly (no changes)
     function shuffle(array) {
