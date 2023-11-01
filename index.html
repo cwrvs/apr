@@ -1,196 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EasyPickings - Random Name Selector & Number Generator</title>
-    <style>
-        /* Global Styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #004165;
-            color: #FFFFFF;
-            text-align: center;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        section {
-            background-color: #FFFFFF;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin: 20px;
-        }
-        h1, h2 {
-            color: #004165;
-        }
-        p {
-            margin: 10px 0;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        input[type="number"], input[type="text"] {
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #004165;
-            border-radius: 4px;
-            width: 100%;
-        }
-        button {
-            background-color: #004165;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin: 5px 0;
-            width: 100%;
-        }
-        button:hover {
-            background-color: #002b3f;
-        }
-        .hidden {
-            display: none;
-        }
-        @media (max-width: 600px) {
-            section {
-                padding: 10px;
-            }
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #004165;
-            color: white;
-        }
-    </style>
+  <title>Random Picker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+    }
+    h1, h2 {
+      color: #1c6e99;
+    }
+    button {
+      background-color: #1c6e99;
+      color: white;
+      padding: 10px;
+      margin: 5px;
+      border: none;
+      border-radius: 4px;
+    }
+    input[type="number"], input[type="text"] {
+      padding: 8px;
+      margin: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>EasyPickings - Random Name Selector & Number Generator</h1>
-    </header>
-    <section id="number-generator">
-        <h2>Generate Random Number</h2>
-        <p>Enter a range:</p>
-        <input type="number" id="min" placeholder="Min">
-        <input type="number" id="max" placeholder="Max">
-        <button id="generate-number">Generate</button>
-        <p id="random-number"></p>
-        <p id="all-chosen" class="hidden">All numbers have been chosen.</p>
-        <button id="reset-number-generator">Reset</button>
-    </section>
-    <section id="name-generator">
-        <h2>Random Name Selector</h2>
-        <p>Enter a list of names:</p>
-        <input type="text" id="name-list" placeholder="Name 1, Name 2, Name 3">
-        <button id="select-name">Select Name One by One</button>
-        <button id="select-names-all">Select All Names at Once</button>
-        <button id="print-results">Print Results</button>
-        <p id="selected-name"></p>
-        <ul id="selected-names-list"></ul>
-        <p id="all-chosen-names" class="hidden">All names have been chosen.</p>
-        <button id="reset-name-generator">Reset</button>
-    </section>
-    <footer>
-        <p>Potential Use Cases: Use this tool for decision-making, team selection, and more.</p>
-    </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const generateNumberButton = document.getElementById('generate-number');
-            const minInput = document.getElementById('min');
-            const maxInput = document.getElementById('max');
-            const randomNumberDisplay = document.getElementById('random-number');
-            const resetNumberGeneratorButton = document.getElementById('reset-number-generator');
-            const selectNameOneByOneButton = document.getElementById('select-name');
-            const selectNamesAllButton = document.getElementById('select-names-all');
-            const printResultsButton = document.getElementById('print-results');
-            const nameListInput = document.getElementById('name-list');
-            const selectedNameDisplay = document.getElementById('selected-name');
-            const selectedNamesList = document.getElementById('selected-names-list');
-            const resetNameGeneratorButton = document.getElementById('reset-name-generator');
-            let generatedNumbers = [];
-            let availableNames = [];
-            let selectedNames = [];
-            function shuffle(array) {
-                let currentIndex = array.length, randomIndex, temporaryValue;
-                while (currentIndex !== 0) {
-                    randomIndex = Math.floor(Math.random() * currentIndex);
-                    currentIndex--;
-                    temporaryValue = array[currentIndex];
-                    array[currentIndex] = array[randomIndex];
-                    array[randomIndex] = temporaryValue;
-                }
-                return array;
-            }
-            function capitalizeFirstLetter(string) {
-                return string.charAt(0).toUpperCase() + string.slice(1);
-            }
-            generateNumberButton.addEventListener('click', function() {
-                const min = parseInt
-                (minInput.value);
-                const max = parseInt(maxInput.value);
-                let allNumbers = Array.from({ length: max - min + 1 }, (_, i) => i + min);
-                let remainingNumbers = allNumbers.filter(n => !generatedNumbers.includes(n));
-                if (remainingNumbers.length === 0) {
-                    document.getElementById('all-chosen').classList.remove('hidden');
-                    return;
-                }
-                let randomNumber = remainingNumbers[Math.floor(Math.random() * remainingNumbers.length)];
-                generatedNumbers.push(randomNumber);
-                randomNumberDisplay.innerText = 'Random number is: ' + randomNumber;
-            });
-            resetNumberGeneratorButton.addEventListener('click', function() {
-                generatedNumbers = [];
-                randomNumberDisplay.innerText = '';
-                document.getElementById('all-chosen').classList.add('hidden');
-            });
-            selectNameOneByOneButton.addEventListener('click', function() {
-                availableNames = nameListInput.value.split(',').map(name => name.trim()).filter(Boolean);
-                let remainingNames = availableNames.filter(name => !selectedNames.includes(name));
-                if (remainingNames.length === 0) {
-                    document.getElementById('all-chosen-names').classList.remove('hidden');
-                    return;
-                }
-                let randomName = remainingNames[Math.floor(Math.random() * remainingNames.length)];
-                selectedNames.push(randomName);
-                selectedNameDisplay.innerText = 'Selected name: ' + capitalizeFirstLetter(randomName);
-                const li = document.createElement('li');
-                li.innerText = capitalizeFirstLetter(randomName);
-                selectedNamesList.appendChild(li);
-            });
-            selectNamesAllButton.addEventListener('click', function() {
-                availableNames = nameListInput.value.split(',').map(name => name.trim()).filter(Boolean);
-                if (availableNames.length === 0) {
-                    return;
-                }
-                let shuffledNames = shuffle(availableNames);
-                selectedNameDisplay.innerText = 'Selected names: ';
-                selectedNamesList.innerHTML = '';
-                for (let name of shuffledNames) {
-                    const li = document.createElement('li');
-                    li.innerText = capitalizeFirstLetter(name);
-                    selectedNamesList.appendChild(li);
-                }
-            });
-            printResultsButton.addEventListener('click', function() {
-                window.print();
-            });
-            resetNameGeneratorButton.addEventListener('click', function() {
-                selectedNames = [];
-                availableNames = [];
-                selectedNameDisplay.innerText = '';
-                selectedNamesList.innerHTML = '';
-                document.getElementById('all-chosen-names').classList.add('hidden');
-            });
-        });
-    </script>
+
+  <h1>Random Picker</h1>
+
+  <h2>Number Generator</h2>
+  <input type="number" id="min" placeholder="Min">
+  <input type="number" id="max" placeholder="Max">
+  <button id="generate">Generate Number</button>
+  <p id="numberOutput"></p>
+
+  <h2>Name Generator</h2>
+  <input type="text" id="names" placeholder="Enter names separated by commas">
+  <button id="pickName">Pick a Name</button>
+  <p id="nameOutput"></p>
+
+  <button id="reset">Reset</button>
+
+  <script>
+    let chosenNumbers = new Set();
+    let chosenNames = new Set();
+
+    document.getElementById('generate').addEventListener('click', function() {
+      const min = parseInt(document.getElementById('min').value);
+      const max = parseInt(document.getElementById('max').value);
+      let random = Math.floor(Math.random() * (max - min + 1)) + min;
+
+      if (isNaN(min) || isNaN(max)) {
+        alert('Please enter valid numbers.');
+        return;
+      }
+
+      if (chosenNumbers.size === (max - min + 1)) {
+        alert('All numbers have been generated.');
+        return;
+      }
+
+      while (chosenNumbers.has(random)) {
+        random = Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      chosenNumbers.add(random);
+      document.getElementById('numberOutput').innerText = `Random Number: ${random}`;
+    });
+
+    document.getElementById('pickName').addEventListener('click', function() {
+      const names = document.getElementById('names').value.split(',').map(name => name.trim());
+      if (names.length === 0 || names[0] === '') {
+        alert('Please enter some names.');
+        return;
+      }
+
+      if (chosenNames.size === names.length) {
+        alert('All names have been picked.');
+        return;
+      }
+
+      let randomName;
+      do {
+        randomName = names[Math.floor(Math.random() * names.length)];
+      } while (chosenNames.has(randomName));
+
+      chosenNames.add(randomName);
+      document.getElementById('nameOutput').innerText = `Picked Name: ${randomName}`;
+    });
+
+    document.getElementById('reset').addEventListener('click', function() {
+      chosenNumbers.clear();
+      chosenNames.clear();
+      document.getElementById('numberOutput').innerText = '';
+      document.getElementById('nameOutput').innerText = '';
+    });
+
+    document.getElementById('names').addEventListener('keydown', function(event) {
+      if (event.key === ' ') {
+        event.preventDefault();
+        document.getElementById('names').value += ',';
+      }
+    });
+  </script>
+
 </body>
 </html>
