@@ -11,11 +11,41 @@ document.addEventListener('DOMContentLoaded', function() {
     let generatedNumbers = [];
 
     generateNumberButton.addEventListener('click', function() {
-        // ... (unchanged code)
+        const min = parseInt(minInput.value);
+        const max = parseInt(maxInput.value);
+        
+        if (isNaN(min) || isNaN(max)) {
+            alert('Please enter valid numbers.');
+            return;
+        }
+        
+        if (min >= max) {
+            alert('Minimum must be less than maximum.');
+            return;
+        }
+
+        // Check if all numbers have been chosen
+        if (generatedNumbers.length === (max - min + 1)) {
+            allChosenMessage.classList.remove('hidden');
+            randomNumberDisplay.textContent = '';
+        } else {
+            let randomNumber;
+            do {
+                randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+            } while (generatedNumbers.includes(randomNumber));
+            
+            generatedNumbers.push(randomNumber);
+            randomNumberDisplay.textContent = `Random Number: ${randomNumber}`;
+            allChosenMessage.classList.add('hidden');
+        }
     });
 
     resetNumberGeneratorButton.addEventListener('click', function() {
-        // ... (unchanged code)
+        generatedNumbers = [];
+        allChosenMessage.classList.add('hidden');
+        randomNumberDisplay.textContent = '';
+        minInput.value = '';
+        maxInput.value = '';
     });
 
     // Name Generator
@@ -29,31 +59,75 @@ document.addEventListener('DOMContentLoaded', function() {
     const resetNameGeneratorButton = document.getElementById('reset-name-generator');
 
     let availableNames = [];
-    let usedNames = []; // new array to keep track of used names
+    let selectedNames = [];
 
     selectNameOneByOneButton.addEventListener('click', function() {
-        availableNames = nameListInput.value.split(',').map(name => name.trim());
-
         if (availableNames.length < 2) {
             alert('Please enter at least two names.');
             return;
         }
 
-        if (usedNames.length === availableNames.length) {
-            allChosenNamesMessage.classList.remove('hidden');
+        if (selectedNames.length === availableNames.length) {
+            alert('All names have been chosen.');
             return;
         }
 
         let randomIndex;
         do {
             randomIndex = Math.floor(Math.random() * availableNames.length);
-        } while (usedNames.includes(randomIndex));
+        } while (selectedNames.includes(availableNames[randomIndex]));
 
-        usedNames.push(randomIndex); // store the used index
         const selectedName = availableNames[randomIndex];
+        selectedNames.push(selectedName);
         selectedNamesList.innerHTML += `<li>${selectedName}</li>`;
         selectedNameDisplay.textContent = `Selected Name: ${selectedName}`;
+
+        if (selectedNames.length === availableNames.length) {
+            allChosenNamesMessage.classList.remove('hidden');
+        }
     });
 
-    // ... (unchanged code for other buttons and events)
+    selectNamesAllButton.addEventListener('click', function() {
+        if (availableNames.length < 2) {
+            alert('Please enter at least two names.');
+            return;
+        }
+
+        selectedNames = [...availableNames];
+        selectedNamesList.innerHTML = selectedNames.map(name => `<li>${name}</li>`).join('');
+        allChosenNamesMessage.classList.remove('hidden');
+        selectedNameDisplay.textContent = '';
+    });
+
+    printResultsButton.addEventListener('click', function() {
+        // Create a string of selected names
+        const resultText = `Selected Names:\n\n${selectedNames.join('\n')}`;
+
+        // Open the print dialog
+        const printWindow = window.open('', '', 'width=600,height=600');
+        printWindow.document.open();
+        printWindow.document.write(`<pre>${resultText}</pre>`);
+        printWindow.document.close();
+        printWindow.print();
+        printWindow.close();
+    });
+
+    resetNameGeneratorButton.addEventListener('click', function() {
+        availableNames = [];
+        selectedNames = [];
+        allChosenNamesMessage.classList.add('hidden');
+        selectedNameDisplay.textContent = '';
+        selectedNamesList.innerHTML = '';
+        nameListInput.value = '';
+    });
+
+    nameListInput.addEventListener('input', function() {
+        // Simply update the available names list based on commas
+        availableNames = nameListInput.value.split(',').map(name => name.trim());
+
+        // Reset other variables
+        selectedNames = [];
+        selectedNamesList.innerHTML = '';
+        allChosenNamesMessage.classList.add('hidden');
+    });
 });
