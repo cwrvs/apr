@@ -1,0 +1,107 @@
+/* Reset some default styles */
+body, h1, h2, p, ul, li, button, input[type="number"], input[type="text"] {
+    margin: 0;
+    padding: 0;
+    width: 100%; /* Set width to 100% for input fields */
+    box-sizing: border-box; /* Ensure padding and border are included in the total width */
+}
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #007acc; /* Blue header background */
+    color: #FFFFFF;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+section {
+    background-color: #f7f7f7; /* Light gray section background */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+}
+
+h1, h2 {
+    color: #007acc; /* Blue headings */
+}
+
+p {
+    margin: 10px 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Input Styles */
+input[type="number"], input[type="text"] {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #007acc; /* Blue border for input fields */
+    border-radius: 4px;
+    width: 100%;
+}
+
+/* Button Styles */
+button {
+    background-color: #007acc; /* Blue button background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 5px 0;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #005b9f; /* Darker blue on hover */
+}
+
+/* Hidden Class */
+.hidden {
+    display: none;
+}
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    section {
+        padding: 10px;
+    }
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #007acc; /* Blue footer background */
+    color: white;
+    clear: both;
+}
+
+/* Print Button Styles */
+#print-results {
+    background-color: #007acc; /* Blue print button background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    width: 100%;
+}
+
+#print-results:hover {
+    background-color: #005b9f; /* Darker blue on hover */
+}
