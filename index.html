@@ -5,20 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EasyPickings - Random Name Selector and Number Generator</title>
     <style>
-        /* Reset some default styles */
         body, h1, h2, p, ul, li, button, input[type="number"], input[type="text"] {
             margin: 0;
             padding: 0;
             width: 100%;
             box-sizing: border-box;
         }
-
-        /* More CSS code */
-        /* ... */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        header {
+            background-color: #007acc;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        section {
+            background-color: #f7f7f7;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #007acc;
+        }
+        p {
+            margin: 10px 0;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        input[type="number"], input[type="text"] {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #007acc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007acc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 5px 0;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #005b9f;
+        }
+        .hidden {
+            display: none;
+        }
+        @media (max-width: 600px) {
+            section {
+                padding: 10px;
+            }
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #007acc;
+            color: white;
+            clear: both;
+        }
+        #print-results {
+            background-color: #007acc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            width: 100%;
+        }
+        #print-results:hover {
+            background-color: #005b9f;
+        }
     </style>
 </head>
 <body>
-    <header style="background-color: #007acc; color: white; text-align: center; padding: 20px; margin-bottom: 20px;">
+    <header>
         <h1>EasyPickings - Random Name Selector & Number Generator</h1>
     </header>
 
@@ -51,31 +124,10 @@
     </footer>
 
     <script>
+        // Your JavaScript code goes here
         document.addEventListener('DOMContentLoaded', function() {
-            // Number Generator
-            const generateNumberButton = document.getElementById('generate-number');
-            const minInput = document.getElementById('min');
-            const maxInput = document.getElementById('max');
-            const randomNumberDisplay = document.getElementById('random-number');
-            const allChosenMessage = document.getElementById('all-chosen');
-            const resetNumberGeneratorButton = document.getElementById('reset-number-generator');
-
-            let generatedNumbers = [];
-
-            // Name Generator
-            const selectNameOneByOneButton = document.getElementById('select-name');
-            const selectNamesAllButton = document.getElementById('select-names-all');
-            const printResultsButton = document.getElementById('print-results');
-            const nameListInput = document.getElementById('name-list');
-            const selectedNameDisplay = document.getElementById('selected-name');
-            const selectedNamesList = document.getElementById('selected-names-list');
-            const allChosenNamesMessage = document.getElementById('all-chosen-names');
-            const resetNameGeneratorButton = document.getElementById('reset-name-generator');
-
-            let availableNames = [];
-            let selectedNames = [];
-
-            // More JS code...
+            // ... existing code ...
+            // ... continue the existing JavaScript code ...
         });
     </script>
 </body>
