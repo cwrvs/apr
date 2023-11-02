@@ -1,4 +1,3 @@
-// JavaScript code
 document.addEventListener('DOMContentLoaded', function() {
     // Number Generator
     const generateNumberButton = document.getElementById('generate-number');
@@ -72,12 +71,10 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        let randomIndex;
-        do {
-            randomIndex = Math.floor(Math.random() * availableNames.length);
-        } while (selectedNames.includes(availableNames[randomIndex]));
+        // Shuffle the available names array
+        shuffleArray(availableNames);
 
-        const selectedName = availableNames[randomIndex];
+        const selectedName = availableNames.pop();
         selectedNames.push(selectedName);
         selectedNamesList.innerHTML += `<li>${selectedName}</li>`;
         selectedNameDisplay.textContent = `Selected Name: ${selectedName}`;
@@ -130,4 +127,12 @@ document.addEventListener('DOMContentLoaded', function() {
         selectedNamesList.innerHTML = '';
         allChosenNamesMessage.classList.add('hidden');
     });
+
+    // Function to shuffle an array
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
 });
