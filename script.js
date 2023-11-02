@@ -1,138 +1,108 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Number Generator
-    const generateNumberButton = document.getElementById('generate-number');
-    const minInput = document.getElementById('min');
-    const maxInput = document.getElementById('max');
-    const randomNumberDisplay = document.getElementById('random-number');
-    const allChosenMessage = document.getElementById('all-chosen');
-    const resetNumberGeneratorButton = document.getElementById('reset-number-generator');
+document.addEventListener("DOMContentLoaded", function () {
+  // Random Number Generator
+  const minInput = document.getElementById("min");
+  const maxInput = document.getElementById("max");
+  const generateNumberBtn = document.getElementById("generate-number");
+  const randomNumberOutput = document.getElementById("random-number");
+  const allChosenOutput = document.getElementById("all-chosen");
+  const resetNumberGeneratorBtn = document.getElementById("reset-number-generator");
 
-    let generatedNumbers = [];
+  generateNumberBtn.addEventListener("click", function () {
+    const min = parseInt(minInput.value);
+    const max = parseInt(maxInput.value);
 
-    generateNumberButton.addEventListener('click', function() {
-        const min = parseInt(minInput.value);
-        const max = parseInt(maxInput.value);
-        
-        if (isNaN(min) || isNaN(max)) {
-            alert('Please enter valid numbers.');
-            return;
-        }
-        
-        if (min >= max) {
-            alert('Minimum must be less than maximum.');
-            return;
-        }
-
-        // Check if all numbers have been chosen
-        if (generatedNumbers.length === (max - min + 1)) {
-            allChosenMessage.classList.remove('hidden');
-            randomNumberDisplay.textContent = '';
-        } else {
-            let randomNumber;
-            do {
-                randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-            } while (generatedNumbers.includes(randomNumber));
-            
-            generatedNumbers.push(randomNumber);
-            randomNumberDisplay.textContent = `Random Number: ${randomNumber}`;
-            allChosenMessage.classList.add('hidden');
-        }
-    });
-
-    resetNumberGeneratorButton.addEventListener('click', function() {
-        generatedNumbers = [];
-        allChosenMessage.classList.add('hidden');
-        randomNumberDisplay.textContent = '';
-        minInput.value = '';
-        maxInput.value = '';
-    });
-
-    // Name Generator
-    const selectNameOneByOneButton = document.getElementById('select-name');
-    const selectNamesAllButton = document.getElementById('select-names-all');
-    const printResultsButton = document.getElementById('print-results');
-    const nameListInput = document.getElementById('name-list');
-    const selectedNameDisplay = document.getElementById('selected-name');
-    const selectedNamesList = document.getElementById('selected-names-list');
-    const allChosenNamesMessage = document.getElementById('all-chosen-names');
-    const resetNameGeneratorButton = document.getElementById('reset-name-generator');
-
-    let availableNames = [];
-    let selectedNames = [];
-
-    selectNameOneByOneButton.addEventListener('click', function() {
-        if (availableNames.length < 2) {
-            alert('Please enter at least two names.');
-            return;
-        }
-
-        if (selectedNames.length === availableNames.length) {
-            alert('All names have been chosen.');
-            return;
-        }
-
-        // Shuffle the available names array
-        shuffleArray(availableNames);
-
-        const selectedName = availableNames.pop();
-        selectedNames.push(selectedName);
-        selectedNamesList.innerHTML += `<li>${selectedName}</li>`;
-        selectedNameDisplay.textContent = `Selected Name: ${selectedName}`;
-
-        if (selectedNames.length === availableNames.length) {
-            allChosenNamesMessage.classList.remove('hidden');
-        }
-    });
-
-    selectNamesAllButton.addEventListener('click', function() {
-        if (availableNames.length < 2) {
-            alert('Please enter at least two names.');
-            return;
-        }
-
-        selectedNames = [...availableNames];
-        selectedNamesList.innerHTML = selectedNames.map(name => `<li>${name}</li>`).join('');
-        allChosenNamesMessage.classList.remove('hidden');
-        selectedNameDisplay.textContent = '';
-    });
-
-    printResultsButton.addEventListener('click', function() {
-        // Create a string of selected names
-        const resultText = `Selected Names:\n\n${selectedNames.join('\n')}`;
-
-        // Open the print dialog
-        const printWindow = window.open('', '', 'width=600,height=600');
-        printWindow.document.open();
-        printWindow.document.write(`<pre>${resultText}</pre>`);
-        printWindow.document.close();
-        printWindow.print();
-        printWindow.close();
-    });
-
-    resetNameGeneratorButton.addEventListener('click', function() {
-        availableNames = [];
-        selectedNames = [];
-        allChosenNamesMessage.classList.add('hidden');
-        selectedNameDisplay.textContent = '';
-        selectedNamesList.innerHTML = '';
-        nameListInput.value = '';
-    });
-
-    nameListInput.addEventListener('input', function() {
-        // Simply update the available names list based on commas
-        availableNames = nameListInput.value.split(',').map(name => name.trim());
-
-        // Reset other variables
-        selectedNames = [];
-        selectedNamesList.innerHTML = '';
-        allChosenNamesMessage.classList.add('hidden');
-    });
-
-    // Function to shuffle an array
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
+    if (!isNaN(min) && !isNaN(max)) {
+      const randomNum = getRandomNumber(min, max);
+      randomNumberOutput.textContent = `Random Number: ${randomNum}`;
     }
+  });
+
+  resetNumberGeneratorBtn.addEventListener("click", function () {
+    minInput.value = "";
+    maxInput.value = "";
+    randomNumberOutput.textContent = "";
+    allChosenOutput.classList.add("hidden");
+  });
+
+  // Random Name Selector
+  const nameListInput = document.getElementById("name-list");
+  const selectNameBtn = document.getElementById("select-name");
+  const selectNamesAllBtn = document.getElementById("select-names-all");
+  const printResultsBtn = document.getElementById("print-results");
+  const selectedNameOutput = document.getElementById("selected-name");
+  const selectedNamesList = document.getElementById("selected-names-list");
+  const allChosenNamesOutput = document.getElementById("all-chosen-names");
+  const resetNameGeneratorBtn = document.getElementById("reset-name-generator");
+  const nameFileInput = document.getElementById("name-file");
+
+  selectNameBtn.addEventListener("click", function () {
+    const names = parseNames(nameListInput.value);
+
+    if (names.length > 0) {
+      const randomIndex = getRandomNumber(0, names.length - 1);
+      const selectedName = names[randomIndex];
+      selectedNameOutput.textContent = `Selected Name: ${selectedName}`;
+      names.splice(randomIndex, 1); // Remove the selected name
+      if (names.length === 0) {
+        allChosenNamesOutput.classList.remove("hidden");
+      }
+    }
+  });
+
+  selectNamesAllBtn.addEventListener("click", function () {
+    const names = parseNames(nameListInput.value);
+    selectedNamesList.innerHTML = ""; // Clear previous results
+
+    if (names.length > 0) {
+      shuffleArray(names); // Shuffle the array of names
+      names.forEach((name) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = name;
+        selectedNamesList.appendChild(listItem);
+      });
+      allChosenNamesOutput.classList.remove("hidden");
+    }
+  });
+
+  printResultsBtn.addEventListener("click", function () {
+    window.print();
+  });
+
+  resetNameGeneratorBtn.addEventListener("click", function () {
+    nameListInput.value = "";
+    selectedNameOutput.textContent = "";
+    selectedNamesList.innerHTML = "";
+    allChosenNamesOutput.classList.add("hidden");
+  });
+
+  // Handle file upload
+  nameFileInput.addEventListener("change", function () {
+    const file = nameFileInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        nameListInput.value = e.target.result;
+      };
+      reader.readAsText(file);
+    }
+  });
+
+  function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+    }
+  }
+
+  function parseNames(input) {
+    const names = input
+      .split(/\n|,|, /) // Split by newline, comma, or comma + space
+      .map((name) => name.trim())
+      .filter((name) => name !== "");
+    return names;
+  }
 });
