@@ -1,5 +1,5 @@
 /* Reset some default styles */
-body, h1, h2, p, ul, li, button, input[type="number"], input[type="text"] {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -8,34 +8,34 @@ body, h1, h2, p, ul, li, button, input[type="number"], input[type="text"] {
 /* Global Styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #F5F5F5;  /* Light gray background */
+    background-color: #f0f0f0; /* Light gray background */
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #2C3E50; /* Dark navy blue header background */
-    color: #ECF0F1;  /* Light gray text */
+    background-color: #333; /* Dark gray header background */
+    color: #fff; /* White text */
     text-align: center;
     padding: 20px;
     margin-bottom: 20px;
 }
 
 section {
-    background-color: #ECF0F1; /* Light gray section background */
-    border-radius: 12px;
+    background-color: #fff; /* White section background */
+    border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin: 20px;
 }
 
 h1, h2 {
-    color: #000000;  /* Dark navy blue headings */
+    color: #333; /* Dark gray headings */
 }
 
 p {
     margin: 10px 0;
-    color: #333333;  /* Dark gray text */
+    color: #666; /* Medium gray text */
 }
 
 ul {
@@ -47,18 +47,18 @@ ul {
 input[type="number"], input[type="text"] {
     padding: 12px;
     margin: 10px 0;
-    border: 1px solid #BDC3C7;  /* Light gray border */
-    border-radius: 8px;
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px;
     width: 100%;
 }
 
 /* Button Styles */
 button {
-    background-color: #3498DB;  /* Bright blue button */
-    color: #FFFFFF;  /* White text */
+    background-color: #007bff; /* Bright blue button */
+    color: #fff; /* White text */
     border: none;
     padding: 12px 24px;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin: 10px 0;
@@ -66,7 +66,7 @@ button {
 }
 
 button:hover {
-    background-color: #2980B9;  /* Darker blue on hover */
+    background-color: #0056b3; /* Darker blue on hover */
 }
 
 /* Hidden class */
@@ -86,7 +86,7 @@ button:hover {
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #2C3E50;  /* Dark navy blue footer */
-    color: #ECF0F1;  /* Light gray text */
+    background-color: #333; /* Dark gray footer */
+    color: #fff; /* White text */
     clear: both;
 }
