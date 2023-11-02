@@ -1,5 +1,5 @@
 /* Reset some default styles */
-body, h1, h2, p, ul, li, button, input[type="number"], input[type="text"] {
+body, h1, h2, p, ul, li, button, input[type="number"], input[type="text"], textarea {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -8,26 +8,26 @@ body, h1, h2, p, ul, li, button, input[type="number"], input[type="text"] {
 /* Global Styles */
 body {
     font-family: 'Roboto', sans-serif; /* Modern font choice */
-    background-color: #f0f0f0;  /* Slightly lighter gray background */
+    background-color: #f5f5f5;  /* Light gray background */
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #3498db; /* Modern blue header background */
-    color: #ffffff;  /* White text */
+    background-color: #007BFF; /* Bright blue header background */
+    color: #FFFFFF;  /* White text */
     text-align: center;
     padding: 20px;
     margin-bottom: 20px;
 }
 
 section {
-    background-color: #ffffff; /* White section background */
+    background-color: #FFFFFF; /* White section background */
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Slightly larger box shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin: 20px auto; /* Center section horizontally */
-    max-width: 800px; /* Control maximum width */
+    margin: 20px;
+    max-width: 800px;
 }
 
 h1, h2 {
@@ -45,18 +45,18 @@ ul {
 }
 
 /* Input Styles */
-input[type="number"], input[type="text"] {
+input[type="number"], input[type="text"], textarea {
     padding: 12px;
     margin: 10px 0;
-    border: 1px solid #d1d1d1;  /* Light gray border */
+    border: 1px solid #D1D1D1;  /* Light gray border */
     border-radius: 8px;
     width: 100%;
 }
 
 /* Button Styles */
 button {
-    background-color: #f39c12;  /* Modern orange button */
-    color: #ffffff;  /* White text */
+    background-color: #FF5722;  /* Orange button */
+    color: #FFFFFF;  /* White text */
     border: none;
     padding: 12px 24px;
     border-radius: 8px;
@@ -67,7 +67,7 @@ button {
 }
 
 button:hover {
-    background-color: #e67e22;  /* Darker orange on hover */
+    background-color: #E64A19;  /* Darker orange on hover */
 }
 
 /* Hidden class */
@@ -87,7 +87,7 @@ button:hover {
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #3498db;  /* Modern blue footer */
-    color: #ffffff;  /* White text */
+    background-color: #007BFF;  /* Bright blue footer */
+    color: #FFFFFF;  /* White text */
     clear: both;
 }
