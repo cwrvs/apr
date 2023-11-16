@@ -22,8 +22,6 @@ function calculateLoan() {
     }
 
     var effectiveInterestRate = (totalInterestPaid / amount) / (month / 12) * 100;
-
-    // Calculate interest saved
     var totalInterestWithoutExtra = amount * monthlyInterestRate * loanTerm;
     interestSaved = totalInterestWithoutExtra - totalInterestPaid;
 
