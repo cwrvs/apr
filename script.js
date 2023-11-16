@@ -5,12 +5,12 @@ function calculateLoan() {
     var extraPayment = parseFloat(document.getElementById('extraPayment').value);
 
     var monthlyInterestRate = (interestRate / 100) / 12;
-    var firstMonthsInterest = amount * monthlyInterestRate;
     var standardPayment = amount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -loanTerm));
     
     var currentBalance = amount;
     var totalInterestPaid = 0;
     var month = 0;
+    var totalInterestForOriginalSchedule = standardPayment * loanTerm - amount;
     var interestSaved = 0;
 
     while (currentBalance > 0) {
@@ -22,18 +22,19 @@ function calculateLoan() {
         if (month >= loanTerm) break; // Avoid infinite loop if balance never reaches 0
     }
 
-    var effectiveInterestRate = (totalInterestPaid / amount) / (month / 12) * 100;
-    var totalInterestWithoutExtra = amount * monthlyInterestRate * loanTerm;
-    interestSaved = totalInterestWithoutExtra - totalInterestPaid;
+    var effectiveInterestRate = interestRate; // Default to nominal interest rate
+    if (extraPayment > 0) {
+        effectiveInterestRate = (totalInterestPaid / amount) / (month / 12) * 100;
+        interestSaved = totalInterestForOriginalSchedule - totalInterestPaid;
+    }
 
     var resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = 'Standard Monthly Payment: ' + standardPayment.toFixed(2) + '<br/>' +
-                           'First Month\'s Interest: ' + firstMonthsInterest.toFixed(2) + '<br/>' +
-                           'Total Interest Without Extra Payments: ' + totalInterestWithoutExtra.toFixed(2) + '<br/>' +
-                           'Total Interest With Extra Payments: ' + totalInterestPaid.toFixed(2) + '<br/>' +
-                           'Interest Saved: ' + interestSaved.toFixed(2) + '<br/>' +
-                           'Total Months: ' + month + '<br/>' +
-                           'Effective Interest Rate: ' + effectiveInterestRate.toFixed(2) + '%';
+                           'Total Interest Paid with Extra Payments: ' + totalInterestPaid.toFixed(2) + '<br/>' +
+                           'Total Interest Without Extra Payments: ' + totalInterestForOriginalSchedule.toFixed(2) + '<br/>' +
+                           'Interest Saved by Extra Payments: ' + interestSaved.toFixed(2) + '<br/>' +
+                           'Total Months to Pay Off: ' + month + '<br/>' +
+                           'Effective Interest Rate with Extra Payments: ' + effectiveInterestRate.toFixed(2) + '%';
 }
 
 window.onload = function() {
@@ -44,6 +45,6 @@ window.onload = function() {
         opt.innerHTML = i + ' months';
         select.appendChild(opt);
     }
-    // Preselect a loan term
-    document.getElementById('loanTerm').value = 120;
+    // Preselect a loan term, if needed
+    // document.getElementById('loanTerm').value = 120;
 };
