@@ -18,10 +18,12 @@ function calculateLoan() {
         currentBalance -= principalForThisMonth;
         totalInterestPaid += interestForThisMonth;
         month++;
-        if (month >= loanTerm) break;
+        if (month >= loanTerm) break; // Avoid infinite loop if balance never reaches 0
     }
 
     var effectiveInterestRate = (totalInterestPaid / amount) / (month / 12) * 100;
+
+    // Calculate interest saved
     var totalInterestWithoutExtra = amount * monthlyInterestRate * loanTerm;
     interestSaved = totalInterestWithoutExtra - totalInterestPaid;
 
@@ -42,4 +44,3 @@ window.onload = function() {
         select.appendChild(opt);
     }
 };
-```
