@@ -1,42 +1,38 @@
 function calculateLoan() {
-    var amount = document.getElementById('amount').value;
-    var interestRate = document.getElementById('interestRate').value;
-    var loanTerm = document.getElementById('loanTerm').value;
-    var payoffMonths = document.getElementById('payoffMonths').value;
-    var extraPayment = document.getElementById('extraPayment').value;
+    var amount = parseFloat(document.getElementById('amount').value);
+    var interestRate = parseFloat(document.getElementById('interestRate').value);
+    var loanTerm = parseInt(document.getElementById('loanTerm').value, 10);
+    var extraPayment = parseFloat(document.getElementById('extraPayment').value);
 
-    // Convert annual interest rate to monthly and decimal form
     var monthlyInterestRate = (interestRate / 100) / 12;
+    var standardPayment = amount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -loanTerm));
     
-    // Calculate standard monthly payment without extra payment
-    var standardPayment = amount * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, loanTerm)) / (Math.pow(1 + monthlyInterestRate, loanTerm) - 1);
+    document.getElementById('standardPayment').innerHTML = 'Standard Monthly Payment: ' + standardPayment.toFixed(2);
 
-    // Initialize variables for calculation with extra payment
     var currentBalance = amount;
     var totalInterestPaid = 0;
     var month = 0;
 
-    // Calculate loan payoff with extra payments
-    while (currentBalance > 0 && month < payoffMonths) {
+    while (currentBalance > 0) {
         var interestForThisMonth = currentBalance * monthlyInterestRate;
-        var principalForThisMonth = standardPayment - interestForThisMonth + parseFloat(extraPayment);
-        if (principalForThisMonth > currentBalance) {
-            principalForThisMonth = currentBalance; // Prevent overpayment
-        }
+        var principalForThisMonth = Math.min(standardPayment - interestForThisMonth + extraPayment, currentBalance);
         currentBalance -= principalForThisMonth;
         totalInterestPaid += interestForThisMonth;
         month++;
+        if (month >= loanTerm) break; // Avoid infinite loop if balance never reaches 0
     }
 
+    var effectiveInterestRate = (totalInterestPaid / amount) / (month / 12) * 100;
+
     var resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = 'Total Interest Paid: ' + totalInterestPaid.toFixed(2) + '<br/>' + 
-                           'Total Months: ' + month;
+    resultsDiv.innerHTML = 'Total Interest Paid: ' + totalInterestPaid.toFixed(2) + '<br/>' +
+                           'Total Months: ' + month + '<br/>' +
+                           'Effective Interest Rate: ' + effectiveInterestRate.toFixed(2) + '%';
 }
 
-// Populate Payoff Months dropdown
 window.onload = function() {
-    var select = document.getElementById('payoffMonths');
-    for (var i = 12; i <= 239; i++) {
+    var select = document.getElementById('loanTerm');
+    for (var i = 84; i <= 240; i+=12) {
         var opt = document.createElement('option');
         opt.value = i;
         opt.innerHTML = i + ' months';
