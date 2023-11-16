@@ -5,6 +5,7 @@ function calculateLoan() {
     var extraPayment = parseFloat(document.getElementById('extraPayment').value);
 
     var monthlyInterestRate = (interestRate / 100) / 12;
+    var firstMonthsInterest = amount * monthlyInterestRate;
     var standardPayment = amount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -loanTerm));
     
     var currentBalance = amount;
@@ -27,7 +28,9 @@ function calculateLoan() {
 
     var resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = 'Standard Monthly Payment: ' + standardPayment.toFixed(2) + '<br/>' +
-                           'Total Interest Paid: ' + totalInterestPaid.toFixed(2) + '<br/>' +
+                           'First Month\'s Interest: ' + firstMonthsInterest.toFixed(2) + '<br/>' +
+                           'Total Interest Without Extra Payments: ' + totalInterestWithoutExtra.toFixed(2) + '<br/>' +
+                           'Total Interest With Extra Payments: ' + totalInterestPaid.toFixed(2) + '<br/>' +
                            'Interest Saved: ' + interestSaved.toFixed(2) + '<br/>' +
                            'Total Months: ' + month + '<br/>' +
                            'Effective Interest Rate: ' + effectiveInterestRate.toFixed(2) + '%';
@@ -41,4 +44,6 @@ window.onload = function() {
         opt.innerHTML = i + ' months';
         select.appendChild(opt);
     }
+    // Preselect a loan term
+    document.getElementById('loanTerm').value = 120;
 };
