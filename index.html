@@ -43,6 +43,7 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
+            width: 100%;
         }
 
         button:hover {
@@ -56,10 +57,16 @@
             border-radius: 4px;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .container {
                 width: 100%;
-                padding: 10px;
+                padding: 15px;
+            }
+
+            input[type="number"],
+            select,
+            button {
+                font-size: larger; /* Larger font for smaller screens */
             }
         }
     </style>
@@ -140,3 +147,4 @@
     </script>
 </body>
 </html>
+```
