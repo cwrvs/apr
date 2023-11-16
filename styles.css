@@ -54,4 +54,10 @@ button:hover {
         width: 100%;
         padding: 15px;
     }
+
+    input[type="number"],
+    select,
+    button {
+        font-size: larger; /* Larger font for smaller screens */
+    }
 }
