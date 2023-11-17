@@ -27,27 +27,11 @@ function calculateLoan() {
     var effectiveInterestRate = (extraPayment > 0) ? (totalInterestPaidWithExtra / amount) / (month / 12) * 100 : interestRate;
     var interestSaved = totalInterestWithoutExtra - totalInterestPaidWithExtra;
 
-    var resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = `
-        <div class='result-highlight'>
-            <h3>Extra Payment and Effective Interest Rate:</h3>
-            <p>Extra Monthly Payment: ${extraPayment.toFixed(2)}</p>
-            <p>Effective Interest Rate: ${effectiveInterestRate.toFixed(2)}%</p>
-            <p>Interest Saved by Extra Payments: ${interestSaved.toFixed(2)}</p>
-        </div>
-        <!-- ... code for displaying other loan terms ... -->
-    `;
+    var adjacentTerms = [84, 96, 120, 144, 180, 204, 240];
+    var currentTermIndex = adjacentTerms.indexOf(loanTerm);
+    var nextTerm = adjacentTerms[currentTermIndex + 1] || loanTerm;
+    var prevTerm = adjacentTerms[currentTermIndex - 1] || loanTerm;
 
-    // ... rest of your code for displaying selected term, next term, and previous term ...
-}
-
-window.onload = function() {
-    var select = document.getElementById('loanTerm');
-    var terms = [84, 96, 120, 144, 180, 204, 240];
-    terms.forEach(term => {
-        var opt = document.createElement('option');
-        opt.value = term;
-        opt.innerHTML = term + ' months';
-        select.appendChild(opt);
-    });
-};
+    var nextTermPayment = calculatePayment(nextTerm);
+    var prevTermPayment = calculatePayment(prevTerm);
+ 
