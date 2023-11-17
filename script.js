@@ -43,4 +43,17 @@ function calculateLoan() {
         <div class='result-section'>
             <h3>Previous Term (${prevTerm} months):</h3>
             <p>Monthly Payment: ${prevTermPayment.toFixed(2)}</p>
-            <p>Total Interest: ${prevTermTotalInterest.toFixed(
+            <p>Total Interest: ${prevTermTotalInterest.toFixed(2)}</p>
+        </div>`;
+}
+
+window.onload = function() {
+    var select = document.getElementById('loanTerm');
+    var terms = [84, 96, 120, 144, 180, 204, 240];
+    terms.forEach(term => {
+        var opt = document.createElement('option');
+        opt.value = term;
+        opt.innerHTML = term + ' months';
+        select.appendChild(opt);
+    });
+};
