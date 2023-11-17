@@ -12,6 +12,21 @@ function calculateLoan() {
     var standardPayment = calculatePayment(loanTerm);
     var totalInterest = standardPayment * loanTerm - amount;
 
+    var currentBalance = amount;
+    var totalInterestPaid = 0;
+    var month = 0;
+    while (currentBalance > 0) {
+        var interestForThisMonth = currentBalance * monthlyInterestRate;
+        var principalForThisMonth = Math.min(standardPayment - interestForThisMonth + extraPayment, currentBalance);
+        currentBalance -= principalForThisMonth;
+        totalInterestPaid += interestForThisMonth;
+        month++;
+        if (month >= loanTerm) break;
+    }
+
+    // Calculate effective interest rate here
+    var effectiveInterestRate = (extraPayment > 0) ? (totalInterestPaid / amount) / (month / 12) * 100 : interestRate;
+
     var adjacentTerms = [84, 96, 120, 144, 180, 204, 240];
     var currentTermIndex = adjacentTerms.indexOf(loanTerm);
     var nextTerm = adjacentTerms[currentTermIndex + 1] || loanTerm;
