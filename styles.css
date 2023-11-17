@@ -60,4 +60,21 @@ button:hover {
     button {
         font-size: larger; /* Larger font for smaller screens */
     }
+/* ... existing styles ... */
+
+.result-section {
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.result-section h3 {
+    color: #007bff;
+}
+
+.result-section p {
+    margin: 5px 0;
+}
 }
