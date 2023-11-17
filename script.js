@@ -1,76 +1,55 @@
 function calculateLoan() {
     var amount = parseFloat(document.getElementById('amount').value) || 0;
     var interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
-    var loanTerm = parseInt(document.getElementById('loanTerm').value, 10) || 0;
-    var extraPayment = parseFloat(document.getElementById('extraPayment').value) || 0;
-
-    // Define monthlyInterestRate here for global access within this function
+    var loanTerm = parseInt(document.getElementById('loanTerm').value, 10);
     var monthlyInterestRate = (interestRate / 100) / 12;
 
-    // Function to calculate payment and total interest for a given term
-    function calculateForTerm(term) {
-        var standardPayment = amount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -term));
-        var totalInterest = standardPayment * term - amount;
-        return { standardPayment, totalInterest };
+    function calculatePayment(term) {
+        return amount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -term));
     }
 
-    // Calculate for current, shorter, and longer terms
-    var currentTermDetails = calculateForTerm(loanTerm);
-    var shorterTermDetails = loanTerm > 12 ? calculateForTerm(loanTerm - 12) : null;
-    var longerTermDetails = calculateForTerm(loanTerm + 12);
+    var standardPayment = calculatePayment(loanTerm);
+    var totalInterest = standardPayment * loanTerm - amount;
 
-    var currentBalance = amount;
-    var totalInterestPaid = 0;
-    var month = 0;
-    var totalInterestForOriginalSchedule = currentTermDetails.standardPayment * loanTerm - amount;
-    var interestSaved = 0;
+    var adjacentTerms = [84, 96, 120, 144, 180, 204, 240];
+    var currentTermIndex = adjacentTerms.indexOf(loanTerm);
+    var nextTerm = adjacentTerms[currentTermIndex + 1] || loanTerm;
+    var prevTerm = adjacentTerms[currentTermIndex - 1] || loanTerm;
 
-    while (currentBalance > 0) {
-        var interestForThisMonth = currentBalance * monthlyInterestRate;
-        var principalForThisMonth = Math.min(currentTermDetails.standardPayment - interestForThisMonth + extraPayment, currentBalance);
-        currentBalance -= principalForThisMonth;
-        totalInterestPaid += interestForThisMonth;
-        month++;
-        if (month >= loanTerm) break;
-    }
+    var nextTermPayment = calculatePayment(nextTerm);
+    var prevTermPayment = calculatePayment(prevTerm);
 
-    var effectiveInterestRate = interestRate; 
-    if (extraPayment > 0) {
-        effectiveInterestRate = (totalInterestPaid / amount) / (month / 12) * 100;
-        interestSaved = totalInterestForOriginalSchedule - totalInterestPaid;
-    }
+    var nextTermTotalInterest = nextTermPayment * nextTerm - amount;
+    var prevTermTotalInterest = prevTermPayment * prevTerm - amount;
 
-    // Display current term results
     var resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = 'Current Term (' + loanTerm + ' months):<br/>' +
-                           'Monthly Payment: ' + currentTermDetails.standardPayment.toFixed(2) + '<br/>' +
-                           'Total Interest: ' + currentTermDetails.totalInterest.toFixed(2) + '<br/>' +
-                           'Total Interest Paid with Extra Payments: ' + totalInterestPaid.toFixed(2) + '<br/>' +
-                           'Interest Saved by Extra Payments: ' + interestSaved.toFixed(2) + '<br/>' +
-                           'Total Months to Pay Off: ' + month + '<br/>' +
-                           'Effective Interest Rate with Extra Payments: ' + effectiveInterestRate.toFixed(2) + '%';
-
-    // Display shorter term results if applicable
-    if (shorterTermDetails) {
-        resultsDiv.innerHTML += '<br/>Shorter Term (' + (loanTerm - 12) + ' months):<br/>' +
-                                'Monthly Payment: ' + shorterTermDetails.standardPayment.toFixed(2) + '<br/>' +
-                                'Total Interest: ' + shorterTermDetails.totalInterest.toFixed(2) + '<br/>';
-    }
-
-    // Display longer term results
-    resultsDiv.innerHTML += '<br/>Longer Term (' + (loanTerm + 12) + ' months):<br/>' +
-                            'Monthly Payment: ' + longerTermDetails.standardPayment.toFixed(2) + '<br/>' +
-                            'Total Interest: ' + longerTermDetails.totalInterest.toFixed(2);
+    resultsDiv.innerHTML = `
+        <div class='result-section'>
+            <h3>Selected Term (${loanTerm} months):</h3>
+            <p>Monthly Payment: ${standardPayment.toFixed(2)}</p>
+            <p>Total Interest: ${totalInterest.toFixed(2)}</p>
+        </div>
+        <div class='result-section'>
+            <h3>Next Term (${nextTerm} months):</h3>
+            <p>Monthly Payment: ${nextTermPayment.toFixed(2)} (${(nextTermPayment - standardPayment).toFixed(2)} difference)</p>
+            <p>Total Interest: ${nextTermTotalInterest.toFixed(2)} (${(nextTermTotalInterest - totalInterest).toFixed(2)} difference)</p>
+        </div>
+        <div class='result-section'>
+            <h3>Previous Term (${prevTerm} months):</h3>
+            <p>Monthly Payment: ${prevTermPayment.toFixed(2)} (${(prevTermPayment - standardPayment).toFixed(2)} difference)</p>
+            <p>Total Interest: ${prevTermTotalInterest.toFixed(2)} (${(prevTermTotalInterest - totalInterest).toFixed(2)} difference)</p>
+        </div>`;
 }
 
 window.onload = function() {
     var select = document.getElementById('loanTerm');
-    for (var i = 84; i <= 240; i+=12) {
+    var terms = [84, 96, 120, 144, 180, 204, 240];
+    terms.forEach(term => {
         var opt = document.createElement('option');
-        opt.value = i;
-        opt.innerHTML = i + ' months';
+        opt.value = term;
+        opt.innerHTML = term + ' months';
         select.appendChild(opt);
-    }
+    });
     // Optionally preselect a loan term
     // document.getElementById('loanTerm').value = 120;
 };
