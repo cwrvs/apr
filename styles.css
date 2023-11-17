@@ -42,42 +42,9 @@ button:hover {
     background-color: #0056b3;
 }
 
-#results, #instructions, #disclaimer {
+#results {
     margin-top: 20px;
-    padding: 15px;
-    background-color: #e9ecef;
-    border-radius: 4px;
 }
-
-@media (max-width: 768px) {
-    .container {
-        width: 100%;
-        padding: 15px;
-    }
-
-    input[type="number"],
-    select,
-    button {
-        font-size: larger; /* Larger font for smaller screens */
-    }
-/* ... existing styles ... */
-
-.result-section {
-    background-color: #f1f1f1;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 5px;
-}
-
-.result-section h3 {
-    color: #007bff;
-}
-
-.result-section p {
-    margin: 5px 0;
-}
-    /* Existing styles ... */
 
 .result-section, .result-highlight {
     background-color: #f1f1f1;
@@ -102,6 +69,4 @@ button:hover {
 
 .result-section p, .result-highlight p {
     margin: 5px 0;
-}
-
 }
