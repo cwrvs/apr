@@ -77,4 +77,31 @@ button:hover {
 .result-section p {
     margin: 5px 0;
 }
+    /* Existing styles ... */
+
+.result-section, .result-highlight {
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.result-highlight {
+    background-color: #e0f7fa;
+    border-color: #b2ebf2;
+}
+
+.result-highlight h3 {
+    color: #0097a7;
+}
+
+.result-section h3 {
+    color: #007bff;
+}
+
+.result-section p, .result-highlight p {
+    margin: 5px 0;
+}
+
 }
