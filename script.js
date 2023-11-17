@@ -4,9 +4,11 @@ function calculateLoan() {
     var loanTerm = parseInt(document.getElementById('loanTerm').value, 10) || 0;
     var extraPayment = parseFloat(document.getElementById('extraPayment').value) || 0;
 
+    // Define monthlyInterestRate here for global access within this function
+    var monthlyInterestRate = (interestRate / 100) / 12;
+
     // Function to calculate payment and total interest for a given term
     function calculateForTerm(term) {
-        var monthlyInterestRate = (interestRate / 100) / 12;
         var standardPayment = amount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -term));
         var totalInterest = standardPayment * term - amount;
         return { standardPayment, totalInterest };
@@ -14,8 +16,8 @@ function calculateLoan() {
 
     // Calculate for current, shorter, and longer terms
     var currentTermDetails = calculateForTerm(loanTerm);
-    var shorterTermDetails = loanTerm > 12 ? calculateForTerm(loanTerm - 12) : null; // Check if shorter term is valid
-    var longerTermDetails = calculateForTerm(loanTerm + 12); // Longer term
+    var shorterTermDetails = loanTerm > 12 ? calculateForTerm(loanTerm - 12) : null;
+    var longerTermDetails = calculateForTerm(loanTerm + 12);
 
     var currentBalance = amount;
     var totalInterestPaid = 0;
@@ -29,10 +31,10 @@ function calculateLoan() {
         currentBalance -= principalForThisMonth;
         totalInterestPaid += interestForThisMonth;
         month++;
-        if (month >= loanTerm) break; // Avoid infinite loop if balance never reaches 0
+        if (month >= loanTerm) break;
     }
 
-    var effectiveInterestRate = interestRate; // Default to nominal interest rate
+    var effectiveInterestRate = interestRate; 
     if (extraPayment > 0) {
         effectiveInterestRate = (totalInterestPaid / amount) / (month / 12) * 100;
         interestSaved = totalInterestForOriginalSchedule - totalInterestPaid;
