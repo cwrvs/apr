@@ -2,6 +2,7 @@ function calculateLoan() {
     var amount = parseFloat(document.getElementById('amount').value) || 0;
     var interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
     var loanTerm = parseInt(document.getElementById('loanTerm').value, 10);
+    var extraPayment = parseFloat(document.getElementById('extraPayment').value) || 0;
     var monthlyInterestRate = (interestRate / 100) / 12;
 
     function calculatePayment(term) {
@@ -10,6 +11,23 @@ function calculateLoan() {
 
     var standardPayment = calculatePayment(loanTerm);
     var totalInterest = standardPayment * loanTerm - amount;
+
+    var currentBalance = amount;
+    var totalInterestPaid = 0;
+    var month = 0;
+    while (currentBalance > 0) {
+        var interestForThisMonth = currentBalance * monthlyInterestRate;
+        var principalForThisMonth = Math.min(standardPayment - interestForThisMonth + extraPayment, currentBalance);
+        currentBalance -= principalForThisMonth;
+        totalInterestPaid += interestForThisMonth;
+        month++;
+        if (month >= loanTerm) break;
+    }
+
+    var effectiveInterestRate = interestRate; // Default to nominal interest rate
+    if (extraPayment > 0) {
+        effectiveInterestRate = (totalInterestPaid / amount) / (month / 12) * 100;
+    }
 
     var adjacentTerms = [84, 96, 120, 144, 180, 204, 240];
     var currentTermIndex = adjacentTerms.indexOf(loanTerm);
@@ -38,6 +56,11 @@ function calculateLoan() {
             <h3>Previous Term (${prevTerm} months):</h3>
             <p>Monthly Payment: ${prevTermPayment.toFixed(2)} (${(prevTermPayment - standardPayment).toFixed(2)} difference)</p>
             <p>Total Interest: ${prevTermTotalInterest.toFixed(2)} (${(prevTermTotalInterest - totalInterest).toFixed(2)} difference)</p>
+        </div>
+        <div class='result-section'>
+            <h3>Extra Payment and Effective Interest Rate:</h3>
+            <p>Extra Monthly Payment: ${extraPayment.toFixed(2)}</p>
+            <p>Effective Interest Rate: ${effectiveInterestRate.toFixed(2)}%</p>
         </div>`;
 }
 
@@ -50,6 +73,4 @@ window.onload = function() {
         opt.innerHTML = term + ' months';
         select.appendChild(opt);
     });
-    // Optionally preselect a loan term
-    // document.getElementById('loanTerm').value = 120;
 };
