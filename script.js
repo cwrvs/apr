@@ -10,6 +10,7 @@ function calculateLoan() {
     }
 
     var standardPayment = calculatePayment(loanTerm);
+    var totalPaymentWithExtra = standardPayment + extraPayment;
     var totalInterestWithoutExtra = standardPayment * loanTerm - amount;
 
     var currentBalance = amount;
@@ -31,25 +32,28 @@ function calculateLoan() {
     var resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = `
         <div class='result-highlight'>
-            <h3>Extra Payment and Effective Interest Rate:</h3>
-            <p>Extra Monthly Payment: ${extraPayment.toFixed(2)}</p>
+            <h3>Loan Payment Details:</h3>
+            <p>Base Monthly Payment (Principal + Interest): ${standardPayment.toFixed(2)}</p>
+            <p>Additional Principal Payment: ${extraPayment.toFixed(2)}</p>
+            <p>Total Monthly Payment: ${totalPaymentWithExtra.toFixed(2)}</p>
             <p>Effective Interest Rate: ${effectiveInterestRate.toFixed(2)}%</p>
             <p>Interest Saved: ${interestSaved.toFixed(2)}</p>
             <p>Loan will be paid off in ${monthsWithExtra} months, ${monthsReduced} months sooner than the original term.</p>
         </div>
         <!-- ... code for displaying other loan terms ... -->
     `;
-
-    // ... rest of your code for displaying selected term, next term, and previous term ...
 }
 
 window.onload = function() {
-    var select = document.getElementById('loanTerm');
-    var terms = [84, 96, 120, 144, 180, 204, 240];
-    terms.forEach(term => {
-        var opt = document.createElement('option');
-        opt.value = term;
-        opt.innerHTML = term + ' months';
-        select.appendChild(opt);
-    });
+    var slider = document.getElementById('loanTerm');
+    slider.min = 0;
+    slider.max = 6;
+    slider.value = 0; // Default position
+    slider.oninput = function() {
+        var terms = [84, 96, 120, 144, 180, 204, 240];
+        var termValue = terms[this.value];
+        document.getElementById('loanTermDisplay').textContent = termValue + ' months';
+        calculateLoan();
+    };
+    slider.oninput(); // Initialize
 };
