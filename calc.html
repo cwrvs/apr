@@ -88,6 +88,13 @@
         .slider-value {
             font-weight: bold;
         }
+
+        /* CSS to prevent printing of the page */
+        @media print {
+            body {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -103,8 +110,8 @@
         </div>
         <div>
             <label for="loanTerm">Loan Term:</label>
+            <span id="loanTermDisplay"></span> <!-- Moved above the slider -->
             <input type="range" id="loanTerm">
-            <span id="loanTermDisplay"></span>
         </div>
         <div>
             <label class="slider-label" for="extraPayment">Extra Monthly Payment: <span id="extraPaymentDisplay">$25</span></label>
@@ -214,4 +221,3 @@
     </script>
 </body>
 </html>
-
