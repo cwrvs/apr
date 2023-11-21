@@ -110,7 +110,7 @@
         </div>
         <div>
             <label for="loanTerm">Loan Term:</label>
-            <span id="loanTermDisplay"></span> <!-- Moved above the slider -->
+            <span id="loanTermDisplay"></span>
             <input type="range" id="loanTerm">
         </div>
         <div>
@@ -123,24 +123,10 @@
             <!-- Results will be displayed here -->
         </div>
 
-        <div id="effectiveRateDisclaimer">
-            <h2>Effective Interest Rate Calculation Disclaimer</h2>
-            <p>The effective interest rate shown is calculated based on the total interest paid over the actual duration of the loan, taking into account any extra payments made. It represents the annualized interest rate you effectively pay, differing from the nominal rate due to these additional payments.</p>
-        </div>
-
-        <div id="instructions">
-            <h2>Instructions</h2>
-            <p>Enter the loan amount, interest rate, and select a loan term. Optionally, enter an extra monthly payment amount. Click 'Calculate' to see the detailed payment breakdown, including the effective interest rate with extra payments and comparisons with adjacent loan terms.</p>
-        </div>
-
-        <div id="disclaimer">
-            <h2>Disclaimer</h2>
-            <p>This calculator provides estimates based on the input values and is intended for illustrative purposes only. Actual loan terms may vary based on credit and lender policies.</p>
-        </div>
+        <!-- Other informational sections... -->
     </div>
 
     <script>
-        // JavaScript code
         function calculateLoan() {
             var amount = parseFloat(document.getElementById('amount').value) || 0;
             var interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
@@ -194,7 +180,20 @@
                     <p>Interest Saved: ${interestSaved.toFixed(2)}</p>
                     <p>Loan will be paid off in ${monthsWithExtra} months, ${monthsReduced} months sooner than the original term.</p>
                 </div>
-                <!-- ... code for displaying other loan terms ... -->
+            `;
+
+            // Calculate and display next and previous term payments
+            var nextTerm = terms[loanTermIndex + 1];
+            var prevTerm = terms[loanTermIndex - 1];
+            var nextTermPayment = nextTerm ? calculatePayment(nextTerm) + extraPayment : null;
+            var prevTermPayment = prevTerm ? calculatePayment(prevTerm) + extraPayment : null;
+
+            resultsDiv.innerHTML += `
+                <div class='result-section'>
+                    <h3>Comparison with Adjacent Terms:</h3>
+                    ${prevTerm ? `<p>Payment for ${prevTerm} months term: $${prevTermPayment.toFixed(2)} (Difference: $${(prevTermPayment - totalPaymentWithExtra).toFixed(2)})</p>` : ''}
+                    ${nextTerm ? `<p>Payment for ${nextTerm} months term: $${nextTermPayment.toFixed(2)} (Difference: $${(nextTermPayment - totalPaymentWithExtra).toFixed(2)})</p>` : ''}
+                </div>
             `;
         }
 
