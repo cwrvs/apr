@@ -24,118 +24,35 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        label, h1, h2 {
-            display: block;
-            margin: 10px 0 5px;
-        }
+        /* ... Existing CSS ... */
 
-        input[type="number"], input[type="range"],
-        select, button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        #results {
-            margin-top: 20px;
-        }
-
-        .result-section, .result-highlight {
-            background-color: #f1f1f1;
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-        }
-
-        .result-highlight {
-            background-color: #e0f7fa;
-            border-color: #b2ebf2;
-        }
-
-        .result-highlight h3 {
-            color: #0097a7;
-        }
-
-        .result-section h3 {
-            color: #007bff;
-        }
-
-        .result-section p, .result-highlight p {
-            margin: 5px 0;
-        }
-
-        .slider-label {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .slider-value {
-            font-weight: bold;
-        }
-
-        .loan-term-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* CSS to Disable Printing */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #results, #results * {
+                visibility: visible;
+            }
+            #results {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>QuickLoan Calc</h1>
-        <div>
-            <label for="amount">Amount Financed:</label>
-            <input type="number" id="amount" value="10000" />
-        </div>
-        <div>
-            <label for="interestRate">Interest Rate (%):</label>
-            <input type="number" id="interestRate" step="0.01" value="11.99" />
-        </div>
-        <div class="loan-term-container">
-            <label for="loanTerm">Loan Term:</label>
-            <span id="loanTermDisplay">120 months</span>
-        </div>
-        <input type="range" id="loanTerm" min="0" max="7" value="2">
-        <div>
-            <label class="slider-label" for="extraPayment">Extra Monthly Payment: <span id="extraPaymentDisplay">$25</span></label>
-            <input type="range" id="extraPayment" min="0" max="500" value="25" step="25">
-        </div>
+        <!-- Existing HTML Content -->
+
         <button onclick="calculateLoan()">Calculate</button>
 
         <div id="results">
             <!-- Results will be displayed here -->
         </div>
 
-        <div id="effectiveRateDisclaimer">
-            <h2>Effective Interest Rate Calculation Disclaimer</h2>
-            <p>The effective interest rate shown is calculated based on the total interest paid over the actual duration of the loan, taking into account any extra payments made. It represents the annualized interest rate you effectively pay, differing from the nominal rate due to these additional payments.</p>
-        </div>
-
-        <div id="instructions">
-            <h2>Instructions</h2>
-            <p>Enter the loan amount, interest rate, and select a loan term. Optionally, enter an extra monthly payment amount. Click 'Calculate' to see the detailed payment breakdown, including the effective interest rate with extra payments and comparisons with adjacent loan terms.</p>
-        </div>
-
-        <div id="disclaimer">
-            <h2>Disclaimer</h2>
-            <p>This calculator provides estimates based on the input values and is intended for illustrative purposes only. Actual loan terms may vary based on credit and lender policies.</p>
-        </div>
+        <!-- ... Existing HTML Sections ... -->
     </div>
 
     <script>
@@ -147,7 +64,7 @@
             var extraPayment = parseFloat(document.getElementById('extraPayment').value) || 0;
             var monthlyInterestRate = (interestRate / 100) / 12;
 
-            var terms = [72, 84, 96, 120, 144, 180, 204, 240]; // Updated terms
+            var terms = [72, 84, 96, 120, 144, 180, 204, 240]; // Loan terms
             var loanTerm = terms[loanTermIndex];
 
             function calculatePayment(term) {
@@ -157,6 +74,7 @@
                 return amount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -term));
             }
 
+            // Validate loan term and amount
             if (loanTerm <= 0 || amount <= 0) {
                 alert("Please ensure that the loan amount and term are correctly set.");
                 return;
@@ -166,32 +84,33 @@
             var totalPaymentWithExtra = standardPayment + extraPayment;
             var totalInterestWithoutExtra = standardPayment * loanTerm - amount;
 
+            // Calculation with extra payments
             var currentBalance = amount;
             var totalInterestPaidWithExtra = 0;
             var monthsWithExtra = 0;
             while (currentBalance > 0) {
-                var interestForThisMonth = current_balance * monthly_interest_rate;
-                var principalForThisMonth = Math.min(standard_payment - interestForThisMonth + extra_payment, current_balance);
-                current_balance -= principalForThisMonth;
-                total_interest_paid_with_extra += interestForThisMonth;
+                var interestForThisMonth = currentBalance * monthlyInterestRate;
+                var principalForThisMonth = Math.min(standardPayment - interestForThisMonth + extraPayment, currentBalance);
+                currentBalance -= principalForThisMonth;
+                totalInterestPaidWithExtra += interestForThisMonth;
                 monthsWithExtra++;
                 if (monthsWithExtra >= loanTerm) break;
             }
 
-            var effective_interest_rate = (extra_payment > 0) ? (total_interest_paid_with_extra / loan_amount) / (monthsWithExtra / 12) * 100 : interest_rate;
-            var interest_saved = total_interest_without_extra - total_interest_paid_with_extra;
-            var months_reduced = loan_term - monthsWithExtra;
+            var effectiveInterestRate = (extraPayment > 0) ? (totalInterestPaidWithExtra / amount) / (monthsWithExtra / 12) * 100 : interestRate;
+            var interestSaved = totalInterestWithoutExtra - totalInterestPaidWithExtra;
+            var monthsReduced = loanTerm - monthsWithExtra;
 
-            var results_div = document.getElementById('results');
-            results_div.innerHTML = `
+            var resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `
                 <div class='result-highlight'>
                     <h3>Loan Payment Details:</h3>
-                    <p>Base Monthly Payment (Principal + Interest): ${standard_payment.toFixed(2)}</p>
-                    <p>Additional Principal Payment: ${extra_payment.toFixed(2)}</p>
-                    <p>Total Monthly Payment: ${total_payment_with_extra.toFixed(2)}</p>
-                    <p>Effective Interest Rate: ${effective_interest_rate.toFixed(2)}%</p>
-                    <p>Interest Saved: ${interest_saved.toFixed(2)}</p>
-                    <p>Loan will be paid off in ${monthsWithExtra} months, ${months_reduced} months sooner than the original term.</p>
+                    <p>Base Monthly Payment (Principal + Interest): $${standardPayment.toFixed(2)}</p>
+                    <p>Additional Principal Payment: $${extraPayment.toFixed(2)}</p>
+                    <p>Total Monthly Payment: $${totalPaymentWithExtra.toFixed(2)}</p>
+                    <p>Effective Interest Rate: ${effectiveInterestRate.toFixed(2)}%</p>
+                    <p>Interest Saved: $${interestSaved.toFixed(2)}</p>
+                    <p>Loan will be paid off in ${monthsWithExtra} months, ${monthsReduced} months sooner than the original term.</p>
                 </div>
                 <!-- ... code for displaying other loan terms ... -->
             `;
