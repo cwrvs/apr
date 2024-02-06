@@ -118,7 +118,7 @@
             <input type="range" id="loanTerm" min="0" max="6" value="0">
         </div>
         <div>
-            <label class="slider-label" for="extraPayment">Extra Monthly Payment: <span id="extraPaymentDisplay">$0</span></label>
+            <label class="slider-label" for="extraPayment">Extra Monthly Payment: <span id="extraPaymentDisplay">$0.00</span></label>
             <input type="range" id="extraPayment" min="0" max="500" value="0" step="25">
         </div>
         <button onclick="calculateLoan()">Calculate</button>
@@ -134,7 +134,7 @@
 
         <div id="instructions">
             <h2>Instructions</h2>
-            <p>Enter the loan amount, interest rate, and select a loan term. Optionally, enter an extra monthly payment amount. Click 'Calculate' to see the detailed payment breakdown, including the effective interest rate with extra payments and comparisons with adjacent loan terms.</p>
+            <p>Enter the loan amount, interest rate, desired interest rate, and select a loan term. Optionally, enter an extra monthly payment amount. Click 'Calculate' to see the detailed payment breakdown, including the effective interest rate with extra payments and comparisons with adjacent loan terms.</p>
         </div>
 
         <div id="disclaimer">
@@ -261,7 +261,7 @@
             var extraPaymentDisplay = document.getElementById('extraPaymentDisplay');
 
             extraPaymentSlider.oninput = function() {
-                extraPaymentDisplay.textContent = '$' + this.value;
+                extraPaymentDisplay.textContent = '$' + this.value.toFixed(2);
             };
         };
     </script>
