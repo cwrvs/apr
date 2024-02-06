@@ -109,20 +109,19 @@
             <input type="number" id="interestRate" step="0.01" />
         </div>
         <div>
+            <label for="desiredInterestRate">Desired Interest Rate (%):</label> <!-- Added Desired Interest Rate Input -->
+            <input type="number" id="desiredInterestRate" step="0.01" /> <!-- Added Desired Interest Rate Input -->
+        </div>
+        <div>
             <label for="loanTerm">Loan Term:</label>
             <span id="loanTermDisplay"></span> <!-- Moved above the slider -->
             <input type="range" id="loanTerm">
         </div>
         <div>
-            <label for="desiredInterestRate">Desired Interest Rate (%):</label>
-            <input type="number" id="desiredInterestRate" step="0.01" />
-        </div>
-        <div>
             <label class="slider-label" for="extraPayment">Extra Monthly Payment: <span id="extraPaymentDisplay">$25</span></label>
             <input type="range" id="extraPayment" min="25" max="500" value="25" step="25">
         </div>
-        <button onclick="document.getElementById('calculateButtonClicked').value = 'true'; calculateLoan()">Calculate</button>
-        <input type="hidden" id="calculateButtonClicked" value="false">
+        <button onclick="calculateLoan()">Calculate</button>
 
         <div id="results">
             <!-- Results will be displayed here -->
@@ -135,7 +134,7 @@
 
         <div id="instructions">
             <h2>Instructions</h2>
-            <p>Enter the loan amount, interest rate, desired interest rate, and select a loan term. Optionally, enter an extra monthly payment amount. Click 'Calculate' to see the detailed payment breakdown, including the effective interest rate with extra payments, comparisons with adjacent loan terms, and the extra payment required to reach the desired interest rate.</p>
+            <p>Enter the loan amount, interest rate, desired interest rate, and select a loan term. Optionally, enter an extra monthly payment amount. Click 'Calculate' to see the detailed payment breakdown, including the effective interest rate with extra payments and comparisons with adjacent loan terms.</p>
         </div>
 
         <div id="disclaimer">
@@ -150,7 +149,7 @@
             // Get input values...
             var amount = parseFloat(document.getElementById('amount').value) || 0;
             var interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
-            var desiredInterestRate = parseFloat(document.getElementById('desiredInterestRate').value) || 0;
+            var desiredInterestRate = parseFloat(document.getElementById('desiredInterestRate').value) || 0; // Added Desired Interest Rate
             var loanTermIndex = parseInt(document.getElementById('loanTerm').value, 10);
             var monthlyInterestRate = (interestRate / 100) / 12;
 
