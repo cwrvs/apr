@@ -193,11 +193,11 @@
             resultsDiv.innerHTML = `
                 <div class='result-highlight'>
                     <h3>Loan Payment Details:</h3>
-                    <p>Base Monthly Payment (Principal + Interest): ${standardPayment.toFixed(2)}</p>
-                    <p>Additional Principal Payment: ${extraPayment.toFixed(2)}</p>
-                    <p>Total Monthly Payment: ${totalPaymentWithExtra.toFixed(2)}</p>
+                    <p>Base Monthly Payment (Principal + Interest): $${standardPayment.toFixed(2)}</p>
+                    <p>Additional Principal Payment: $${extraPayment.toFixed(2)}</p>
+                    <p>Total Monthly Payment: $${totalPaymentWithExtra.toFixed(2)}</p>
                     <p>Effective Interest Rate: ${effectiveInterestRate.toFixed(2)}%</p>
-                    <p>Interest Saved: ${interestSaved.toFixed(2)}</p>
+                    <p>Interest Saved: $${interestSaved.toFixed(2)}</p>
                     <p>Loan will be paid off in ${monthsWithExtra} months, ${monthsReduced} months sooner than the original term.</p>
                 </div>
             `;
