@@ -109,12 +109,12 @@
             <input type="number" id="interestRate" step="0.01" />
         </div>
         <div>
-            <label for="desiredInterestRate">Desired Interest Rate (%):</label> <!-- Added Desired Interest Rate Input -->
-            <input type="number" id="desiredInterestRate" step="0.01" /> <!-- Added Desired Interest Rate Input -->
+            <label for="desiredInterestRate">Desired Interest Rate (%):</label>
+            <input type="number" id="desiredInterestRate" step="0.01" />
         </div>
         <div>
             <label for="loanTerm">Loan Term:</label>
-            <span id="loanTermDisplay"></span> <!-- Moved above the slider -->
+            <span id="loanTermDisplay">84 months</span>
             <input type="range" id="loanTerm">
         </div>
         <div>
@@ -146,13 +146,12 @@
     <script>
         // JavaScript code...
         function calculateLoan() {
-            // Get input values...
             var amount = parseFloat(document.getElementById('amount').value) || 0;
             var interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
-            var desiredInterestRate = parseFloat(document.getElementById('desiredInterestRate').value) || 0; // Added Desired Interest Rate
+            var desiredInterestRate = parseFloat(document.getElementById('desiredInterestRate').value) || 0;
             var loanTermIndex = parseInt(document.getElementById('loanTerm').value, 10);
+            var extraPayment = parseFloat(document.getElementById('extraPayment').value) || 0;
             var monthlyInterestRate = (interestRate / 100) / 12;
-
             var terms = [84, 96, 120, 144, 180, 204, 240];
             var loanTerm = terms[loanTermIndex];
 
@@ -169,11 +168,7 @@
             }
 
             var standardPayment = calculatePayment(loanTerm);
-
-            // Calculation for extra payment required to reach desired interest rate...
-            var extraPaymentToReachDesiredRate = ((monthlyInterestRate * amount) - (monthlyInterestRate * amount * (Math.pow((1 + monthlyInterestRate), (-loanTerm)))) - (desiredInterestRate / 100) / 12 * amount) / (1 - (Math.pow((1 + monthlyInterestRate), (-loanTerm))));
-            
-            var totalPaymentWithExtra = standardPayment + extraPaymentToReachDesiredRate;
+            var totalPaymentWithExtra = standardPayment + extraPayment;
             var totalInterestWithoutExtra = standardPayment * loanTerm - amount;
 
             var currentBalance = amount;
@@ -181,33 +176,75 @@
             var monthsWithExtra = 0;
             while (currentBalance > 0) {
                 var interestForThisMonth = currentBalance * monthlyInterestRate;
-                var principalForThisMonth = Math.min(standardPayment - interestForThisMonth + extraPaymentToReachDesiredRate, currentBalance);
+                var principalForThisMonth = Math.min(standardPayment - interestForThisMonth + extraPayment, currentBalance);
                 currentBalance -= principalForThisMonth;
                 totalInterestPaidWithExtra += interestForThisMonth;
                 monthsWithExtra++;
                 if (monthsWithExtra >= loanTerm) break;
             }
 
-            var effectiveInterestRate = (extraPaymentToReachDesiredRate > 0) ? (totalInterestPaidWithExtra / amount) / (monthsWithExtra / 12) * 100 : interestRate;
+            var effectiveInterestRate = (extraPayment > 0) ? (totalInterestPaidWithExtra / amount) / (monthsWithExtra / 12) * 100 : interestRate;
             var interestSaved = totalInterestWithoutExtra - totalInterestPaidWithExtra;
             var monthsReduced = loanTerm - monthsWithExtra;
 
-            // Update results...
             var resultsDiv = document.getElementById('results');
             resultsDiv.innerHTML = `
                 <div class='result-highlight'>
                     <h3>Loan Payment Details:</h3>
                     <p>Base Monthly Payment (Principal + Interest): ${standardPayment.toFixed(2)}</p>
-                    <p>Additional Principal Payment: ${extraPaymentToReachDesiredRate.toFixed(2)}</p>
+                    <p>Additional Principal Payment: ${extraPayment.toFixed(2)}</p>
                     <p>Total Monthly Payment: ${totalPaymentWithExtra.toFixed(2)}</p>
                     <p>Effective Interest Rate: ${effectiveInterestRate.toFixed(2)}%</p>
                     <p>Interest Saved: ${interestSaved.toFixed(2)}</p>
                     <p>Loan will be paid off in ${monthsWithExtra} months, ${monthsReduced} months sooner than the original term.</p>
-                    <p>Extra Monthly Payment Required to Reach Desired Interest Rate: ${extraPaymentToReachDesiredRate.toFixed(2)}</p>
                 </div>
                 <!-- ... code for displaying other loan terms ... -->
             `;
+
+            var extraPaymentToDesiredRate = calculateExtraPaymentToDesiredRate(amount, interestRate, desiredInterestRate, loanTerm);
+            var termDifferenceToDesiredRate = calculateTermDifferenceToDesiredRate(amount, interestRate, desiredInterestRate, extraPayment);
+
+            resultsDiv.innerHTML += `
+                <div class='result-section'>
+                    <h3>Desired Interest Rate:</h3>
+                    <p>Extra Monthly Payment Required to Achieve ${desiredInterestRate.toFixed(2)}%: $${extraPaymentToDesiredRate.toFixed(2)}</p>
+                    <p>Loan Term Difference to Achieve ${desiredInterestRate.toFixed(2)}%: ${termDifferenceToDesiredRate} months</p>
+                </div>
+            `;
         }
+
+        function calculateExtraPaymentToDesiredRate(amount, currentRate, desiredRate, loanTerm) {
+            if (currentRate === desiredRate) {
+                return 0;
+            }
+            var monthlyInterestRate = (currentRate / 100) / 12;
+            var standardPayment = amount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -loanTerm));
+            var desiredMonthlyInterestRate = (desiredRate / 100) / 12;
+            var extraPayment = (amount * desiredMonthlyInterestRate) / (1 - Math.pow(1 + desiredMonthlyInterestRate, -loanTerm)) - standardPayment;
+            return extraPayment;
+        }
+
+        function calculateTermDifferenceToDesiredRate(amount, currentRate, desiredRate, extraPayment) {
+            var monthlyInterestRate = (currentRate / 100) / 12;
+            var standardPayment = amount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -loanTerm));
+            var desiredMonthlyInterestRate = (desiredRate / 100) / 12;
+            var desiredTerm = -Math.log(1 - (amount * desiredMonthlyInterestRate) / (extraPayment + desiredMonthlyInterestRate * amount)) / Math.log(1 + desiredMonthlyInterestRate);
+            return Math.ceil(desiredTerm - loanTerm);
+        }
+
+        // Initialize loan term display
+        document.getElementById('loanTermDisplay').textContent = terms[0] + ' months';
+
+        // Update loan term display as slider is moved
+        var loanTermSlider = document.getElementById('loanTerm');
+        loanTermSlider.oninput = function() {
+            var termValue = terms[this.value];
+            document.getElementById('loanTermDisplay').textContent = termValue + ' months';
+            calculateLoan();
+        };
+        loanTermSlider.oninput(); // Initialize
+
+        // ... (Rest of JavaScript code) ...
     </script>
 </body>
 </html>
