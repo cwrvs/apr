@@ -114,8 +114,8 @@
             <input type="range" id="loanTerm">
         </div>
         <div>
-            <label class="slider-label" for="extraPayment">Extra Monthly Payment: <span id="extraPaymentDisplay">$25</span></label>
-            <input type="range" id="extraPayment" min="25" max="500" value="25" step="25">
+            <label class="slider-label" for="extraPayment">Extra Monthly Payment: <span id="extraPaymentDisplay">$0</span></label>
+            <input type="range" id="extraPayment" min="0" max="500" value="0" step="25">
         </div>
         <button onclick="calculateLoan()">Calculate</button>
 
@@ -159,7 +159,7 @@
             }
 
             if (loanTerm <= 0 || amount <= 0) {
-                alert("Please ensure that the loan amount and term are correctly set.");
+                // alert("Please ensure that the loan amount and term are correctly set.");
                 return;
             }
 
