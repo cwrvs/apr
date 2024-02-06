@@ -3,154 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="QuickLoan Calc - Easily calculate your loan payments and see how much interest you can save with extra payments.">
-    <title>QuickLoan Calc - Your Smart Loan Calculator</title>
+    <title>Loan Calculator with Extra Payments</title>
     <style>
-        /* Dark Theme CSS for Modern Look */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212; /* Dark background */
-            color: #e0e0e0; /* Light text for readability */
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: #fff;
             margin: 0;
             padding: 20px;
         }
         .container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
-            background: #1e1e1e; /* Slightly lighter dark shade for container */
+            background: #222;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         }
-        label, h1, h2 {
-            color: #adadad; /* Light grey for labels and headings */
-        }
-        input[type="number"], input[type="range"], select, button {
-            background-color: #333; /* Darker elements for inputs and buttons */
-            color: #fff; /* White text */
-            border: 1px solid #555; /* Dark border for elements */
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-            width: 100%; /* Ensure full width for form elements */
-            box-sizing: border-box; /* Include padding and border in the element's total width and height */
-        }
-        button {
-            background-color: #007bff; /* Blue background for buttons */
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-        }
-        button:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-        }
-        .result-section, .result-highlight {
-            background-color: #2a2a2a; /* Darker background for result sections */
-            color: #ddd; /* Light grey text for readability */
-            border: 1px solid #3c3c3c; /* Slightly lighter border for contrast */
+        input, button {
+            width: 100%;
             padding: 10px;
             margin-top: 10px;
             border-radius: 5px;
+            border: 1px solid #555;
+            box-sizing: border-box;
         }
-        .result-highlight {
-            background-color: #333; /* Even darker background for emphasis */
-            border-color: #444; /* Dark border for differentiation */
+        button {
+            background-color: #008cba;
+            color: white;
+            cursor: pointer;
         }
-        .result-highlight h3, .result-section h3 {
-            color: #4fc3f7; /* Bright blue for headers within result boxes */
+        button:hover {
+            background-color: #005f6b;
         }
-        .slider-label {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #ccc; /* Light grey for slider labels */
+        .results {
+            margin-top: 20px;
         }
-        @media print {
-            body {
-                display: none; /* Hide everything in print mode */
-            }
+        .result-item {
+            background-color: #404040;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>QuickLoan Calc</h1>
-        <div>
-            <label for="amount">Amount Financed:</label>
-            <input type="number" id="amount" />
-        </div>
-        <div>
-            <label for="interestRate">Interest Rate (%):</label>
-            <input type="number" id="interestRate" step="0.01" />
-        </div>
-        <div>
-            <label for="desiredInterestRate">Desired Interest Rate (%):</label>
-            <input type="number" id="desiredInterestRate" step="0.01" />
-        </div>
-        <div>
-            <label for="loanTerm">Loan Term:</label>
-            <span id="loanTermDisplay"></span>
-            <input type="range" id="loanTerm" min="0" max="6" value="0" onchange="updateLoanTermDisplay()" oninput="updateLoanTermDisplay()">
-        </div>
-        <div>
-            <label class="slider-label" for="extraPayment">Extra Monthly Payment: <span id="extraPaymentDisplay">$0.00</span></label>
-            <input type="range" id="extraPayment" min="0" max="500" value="0" step="25" oninput="updateExtraPaymentDisplay()">
-        </div>
+        <h1>Loan Calculator with Extra Payments</h1>
+        <label for="amount">Loan Amount ($):</label>
+        <input type="number" id="amount" placeholder="Total loan amount">
+        
+        <label for="interestRate">Annual Interest Rate (%):</label>
+        <input type="number" id="interestRate" placeholder="Annual interest rate">
+        
+        <label for="loanTerm">Loan Term (years):</label>
+        <input type="number" id="loanTerm" placeholder="Term in years">
+        
+        <label for="extraPayment">Extra Monthly Payment ($):</label>
+        <input type="number" id="extraPayment" placeholder="Extra payment amount">
+        
         <button onclick="calculateLoan()">Calculate</button>
-        <div id="results"></div>
-        <div id="effectiveRateDisclaimer">
-            <h2>Effective Interest Rate Calculation Disclaimer</h2>
-            <p>The effective interest rate shown is calculated based on the total interest paid over the actual duration of the loan, taking into account any extra payments made. It represents the annualized interest rate you effectively pay, differing from the nominal rate due to these additional payments.</p>
-        </div>
-        <div id="instructions">
-            <h2>Instructions</h2>
-            <p>Enter the loan amount, interest rate, desired interest rate, and select a loan term. Optionally, enter an extra monthly payment amount. Click 'Calculate' to see the detailed payment breakdown, including the effective interest rate with extra payments and comparisons with adjacent loan terms.</p>
-        </div>
-        <div id="disclaimer">
-            <h2>Disclaimer</h2>
-            <p>This calculator provides estimates based on the input values and is intended for illustrative purposes only. Actual loan terms may vary based on credit and lender policies.</p>
+        
+        <div class="results" id="results">
+            <!-- Results will be displayed here -->
         </div>
     </div>
+
     <script>
-        var terms = [84, 96, 120, 144, 180, 204, 240];
-
-        function updateLoanTermDisplay() {
-            var loanTermSlider = document.getElementById('loanTerm');
-            var loanTermDisplay = document.getElementById('loanTermDisplay');
-            loanTermDisplay.textContent = terms[loanTermSlider.value] + ' months';
-        }
-
-        function updateExtraPaymentDisplay() {
-            var extraPaymentSlider = document.getElementById('extraPayment');
-            var extraPaymentDisplay = document.getElementById('extraPaymentDisplay');
-            extraPaymentDisplay.textContent = '$' + parseFloat(extraPaymentSlider.value).toFixed(2);
-        }
-
         function calculateLoan() {
-            var amount = parseFloat(document.getElementById('amount').value) || 0;
-            var interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
-            var desiredInterestRate = parseFloat(document.getElementById('desiredInterestRate').value) || 0;
-            var loanTermIndex = parseInt(document.getElementById('loanTerm').value, 10);
-            var extraPayment = parseFloat(document.getElementById('extraPayment').value) || 0;
-            var monthlyInterestRate = (interestRate / 100) / 12;
-            var loanTerm = terms[loanTermIndex];
-            var standardPayment = calculatePayment(amount, monthlyInterestRate, loanTerm);
-            var resultsDiv = document.getElementById('results');
-            // Your calculation logic here...
+            const amount = parseFloat(document.getElementById('amount').value);
+            const interestRate = parseFloat(document.getElementById('interestRate').value) / 100 / 12;
+            const loanTerm = parseFloat(document.getElementById('loanTerm').value) * 12;
+            const extraPayment = parseFloat(document.getElementById('extraPayment').value) || 0;
+            
+            if (!amount || !interestRate || !loanTerm) {
+                document.getElementById('results').innerHTML = '<p>Please fill all the fields correctly.</p>';
+                return;
+            }
 
-            resultsDiv.innerHTML = '<div class="result-section">Your calculation results here...</div>';
-            // Include further calculation details and update resultsDiv accordingly
+            let balance = amount;
+            let totalInterest = 0;
+            let monthlyPayment = (amount * interestRate) / (1 - Math.pow(1 + interestRate, -loanTerm));
+            let month = 0;
+            let paymentList = '';
+
+            while (balance > 0) {
+                let thisMonthInterest = balance * interestRate;
+                let principal = monthlyPayment - thisMonthInterest + extraPayment;
+                if (principal > balance) {
+                    principal = balance + thisMonthInterest;
+                }
+                balance -= (principal - thisMonthInterest);
+                totalInterest += thisMonthInterest;
+                month++;
+                if(month > loanTerm) break; // Safety break to avoid infinite loop
+            }
+
+            paymentList += `
+                <div class="result-item">
+                    <h3>Loan Summary:</h3>
+                    <p>Monthly Payment (without extra): $${monthlyPayment.toFixed(2)}</p>
+                    <p>Total Interest Paid: $${totalInterest.toFixed(2)}</p>
+                    <p>Loan Paid Off in: ${month} months (${(month / 12).toFixed(1)} years)</p>
+                    <p>Total Payments (with extra): $${(monthlyPayment + extraPayment).toFixed(2)}</p>
+                    <p>Total Interest Savings: $${((monthlyPayment * loanTerm - amount) - totalInterest).toFixed(2)}</p>
+                </div>`;
+
+            document.getElementById('results').innerHTML = paymentList;
         }
-
-        function calculatePayment(amount, monthlyInterestRate, term) {
-            if (monthlyInterestRate === 0) return amount / term;
-            return amount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -term));
-        }
-
-        window.onload = function() {
-            updateExtraPaymentDisplay(); // Initialize the extra payment display
-            updateLoanTermDisplay(); // Initialize the loan term display
-        };
     </script>
 </body>
 </html>
