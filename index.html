@@ -114,8 +114,8 @@
         </div>
         <div>
             <label for="loanTerm">Loan Term:</label>
-            <span id="loanTermDisplay">84 months</span>
-            <input type="range" id="loanTerm">
+            <span id="loanTermDisplay"></span>
+            <input type="range" id="loanTerm" min="0" max="6" value="0">
         </div>
         <div>
             <label class="slider-label" for="extraPayment">Extra Monthly Payment: <span id="extraPaymentDisplay">$25</span></label>
@@ -144,7 +144,9 @@
     </div>
 
     <script>
-        // JavaScript code...
+        // JavaScript code
+        var terms = [84, 96, 120, 144, 180, 204, 240];
+
         function calculateLoan() {
             var amount = parseFloat(document.getElementById('amount').value) || 0;
             var interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
@@ -152,7 +154,7 @@
             var loanTermIndex = parseInt(document.getElementById('loanTerm').value, 10);
             var extraPayment = parseFloat(document.getElementById('extraPayment').value) || 0;
             var monthlyInterestRate = (interestRate / 100) / 12;
-            var terms = [84, 96, 120, 144, 180, 204, 240];
+
             var loanTerm = terms[loanTermIndex];
 
             function calculatePayment(term) {
@@ -191,14 +193,13 @@
             resultsDiv.innerHTML = `
                 <div class='result-highlight'>
                     <h3>Loan Payment Details:</h3>
-                    <p>Base Monthly Payment (Principal + Interest): ${standardPayment.toFixed(2)}</p>
-                    <p>Additional Principal Payment: ${extraPayment.toFixed(2)}</p>
-                    <p>Total Monthly Payment: ${totalPaymentWithExtra.toFixed(2)}</p>
+                    <p>Base Monthly Payment (Principal + Interest): $${standardPayment.toFixed(2)}</p>
+                    <p>Additional Principal Payment: $${extraPayment.toFixed(2)}</p>
+                    <p>Total Monthly Payment: $${totalPaymentWithExtra.toFixed(2)}</p>
                     <p>Effective Interest Rate: ${effectiveInterestRate.toFixed(2)}%</p>
-                    <p>Interest Saved: ${interestSaved.toFixed(2)}</p>
+                    <p>Interest Saved: $${interestSaved.toFixed(2)}</p>
                     <p>Loan will be paid off in ${monthsWithExtra} months, ${monthsReduced} months sooner than the original term.</p>
                 </div>
-                <!-- ... code for displaying other loan terms ... -->
             `;
 
             var extraPaymentToDesiredRate = calculateExtraPaymentToDesiredRate(amount, interestRate, desiredInterestRate, loanTerm);
@@ -229,22 +230,25 @@
             var standardPayment = amount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -loanTerm));
             var desiredMonthlyInterestRate = (desiredRate / 100) / 12;
             var desiredTerm = -Math.log(1 - (amount * desiredMonthlyInterestRate) / (extraPayment + desiredMonthlyInterestRate * amount)) / Math.log(1 + desiredMonthlyInterestRate);
-            return Math.ceil(desiredTerm - loanTerm);
+            return Math.round(desiredTerm - loanTerm);
         }
 
-        // Initialize loan term display
-        document.getElementById('loanTermDisplay').textContent = terms[0] + ' months';
+        window.onload = function() {
+            var loanTermSlider = document.getElementById('loanTerm');
+            var loanTermDisplay = document.getElementById('loanTermDisplay');
 
-        // Update loan term display as slider is moved
-        var loanTermSlider = document.getElementById('loanTerm');
-        loanTermSlider.oninput = function() {
-            var termValue = terms[this.value];
-            document.getElementById('loanTermDisplay').textContent = termValue + ' months';
-            calculateLoan();
+            loanTermSlider.oninput = function() {
+                var termValue = terms[this.value];
+                loanTermDisplay.textContent = termValue + ' months';
+            };
+
+            var extraPaymentSlider = document.getElementById('extraPayment');
+            var extraPaymentDisplay = document.getElementById('extraPaymentDisplay');
+
+            extraPaymentSlider.oninput = function() {
+                extraPaymentDisplay.textContent = '$' + this.value;
+            };
         };
-        loanTermSlider.oninput(); // Initialize
-
-        // ... (Rest of JavaScript code) ...
     </script>
 </body>
 </html>
