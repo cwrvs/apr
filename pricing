@@ -1,0 +1,12 @@
+import pandas as pd
+
+# Load the CSV file
+df = pd.read_csv('models.csv')
+
+# Group by model and compare prices
+for model, group in df.groupby('Model'):
+    if 2024 in group['Year'].values and 2023 in group['Year'].values:
+        price_2023 = group[group['Year'] == 2023]['Price'].values[0]
+        price_2024 = group[group['Year'] == 2024]['Price'].values[0]
+        if price_2024 < price_2023:
+            print(f'Discrepancy found: {model} is cheaper in 2024 (${price_2024}) than in 2023 (${price_2023})')
