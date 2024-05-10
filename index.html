@@ -2,100 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="QuickLoan Calc - Easily calculate your loan payments and see how much interest you can save with extra payments.">
     <title>QuickLoan Calc - Your Smart Loan Calculator</title>
-    <style>
-        /* CSS styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        label, h1, h2 {
-            display: block;
-            margin: 10px 0 5px;
-        }
-
-        input[type="number"], input[type="range"],
-        select, button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        #results {
-            margin-top: 20px;
-        }
-
-        .result-section, .result-highlight {
-            background-color: #f1f1f1;
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-        }
-
-        .result-highlight {
-            background-color: #e0f7fa;
-            border-color: #b2ebf2;
-        }
-
-        .result-highlight h3 {
-            color: #0097a7;
-        }
-
-        .result-section h3 {
-            color: #007bff;
-        }
-
-        .result-section p, .result-highlight p {
-            margin: 5px 0;
-        }
-
-        .slider-label {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .slider-value {
-            font-weight: bold;
-        }
-
-        /* CSS to prevent printing of the page */
-        @media print {
-            body {
-                display: none;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -110,7 +20,7 @@
         </div>
         <div>
             <label for="loanTerm">Loan Term:</label>
-            <span id="loanTermDisplay"></span> <!-- Display will be updated by JavaScript -->
+            <span id="loanTermDisplay"></span>
             <input type="range" id="loanTerm" min="0" max="8" value="0">
         </div>
         <div>
@@ -118,97 +28,22 @@
             <input type="range" id="extraPayment" min="0" max="500" value="0" step="25">
         </div>
         <button onclick="calculateLoan()">Calculate</button>
-
         <div id="results">
             <!-- Results will be displayed here -->
         </div>
-
         <div id="effectiveRateDisclaimer">
             <h2>Effective Interest Rate Calculation Disclaimer</h2>
             <p>The effective interest rate shown is calculated based on the total interest paid over the actual duration of the loan, taking into account any extra payments made. It represents the annualized interest rate you effectively pay, differing from the nominal rate due to these additional payments.</p>
         </div>
-
         <div id="instructions">
             <h2>Instructions</h2>
             <p>Enter the loan amount, interest rate, and select a loan term. Optionally, enter an extra monthly payment amount. Click 'Calculate' to see the detailed payment breakdown, including the effective interest rate with extra payments and comparisons with adjacent loan terms.</p>
         </div>
-
         <div id="disclaimer">
-                    <h2>Disclaimer</h2>
+            <h2>Disclaimer</h2>
             <p>This calculator provides estimates based on the input values and is intended for illustrative purposes only. Actual loan terms may vary based on credit and lender policies.</p>
         </div>
     </div>
-
-    <script>
-        function calculateLoan() {
-            var amount = parseFloat(document.getElementById('amount').value) || 0;
-            var interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
-            var loanTermIndex = parseInt(document.getElementById('loanTerm').value, 10);
-            var extraPayment = parseFloat(document.getElementById('extraPayment').value) || 0;
-            var monthlyInterestRate = (interestRate / 100) / 12;
-
-            // Updated array of loan terms based on your requirements
-            var terms = [60, 72, 84, 96, 120, 144, 180, 204, 240];
-            var loanTerm = terms[loanTermIndex];
-
-            function calculatePayment(term) {
-                if (interestRate === 0) {
-                    return amount / term;
-                }
-                return amount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -term));
-            }
-
-            if (loanTerm <= 0 || amount <= 0) {
-                // Error handling for invalid input
-                return;
-            }
-
-            var standardPayment = calculatePayment(loanTerm);
-            var totalPaymentWithExtra = standardPayment + extraPayment;
-            var totalInterestWithoutExtra = standardPayment * loanTerm - amount;
-
-            var currentBalance = amount;
-            var totalInterestPaidWithExtra = 0;
-            var monthsWithExtra = 0;
-            while (currentBalance > 0) {
-                var interestForThisMonth = currentBalance * monthlyInterestRate;
-                var principalForThisMonth = Math.min(standardPayment - interestForThisMonth + extraPayment, currentBalance);
-                currentBalance -= principalForThisMonth;
-                totalInterestPaidWithExtra += interestForThisMonth;
-                monthsWithExtra++;
-                if (monthsWithExtra >= loanTerm) break;
-            }
-
-            var effectiveInterestRate = (extraPayment > 0) ? (totalInterestPaidWithExtra / amount) / (monthsWithExtra / 12) * 100 : interestRate;
-            var interestSaved = totalInterestWithoutExtra - totalInterestPaidWithExtra;
-            var monthsReduced = loanTerm - monthsWithExtra;
-
-            var resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = `
-                <div class='result-highlight'>
-                    <h3>Loan Payment Details:</h3>
-                    <p>Base Monthly Payment (Principal + Interest): ${standardPayment.toFixed(2)}</p>
-                    <p>Additional Principal Payment: ${extraPayment.toFixed(2)}</p>
-                    <p>Total Monthly Payment: ${totalPaymentWithExtra.toFixed(2)}</p>
-                    <p>Effective Interest Rate: ${effectiveInterestRate.toFixed(2)}%</p>
-                    <p>Interest Saved: ${interestSaved.toFixed(2)}</p>
-                    <p>Loan will be paid off in ${monthsWithExtra} months, ${monthsReduced} months sooner than the original term.</p>
-                </div>
-                <!-- ... code for displaying other loan terms ... -->
-            `;
-        }
-
-        window.onload = function() {
-            var loanTermSlider = document.getElementById('loanTerm');
-            var terms = [60, 72, 84, 96, 120, 144, 180, 204, 240];
-            loanTermSlider.oninput = function() {
-                var termValue = terms[this.value];
-                document.getElementById('loanTermDisplay').textContent = termValue + ' months';
-                calculateLoan();
-            };
-            loanTermSlider.oninput(); // Initialize
-            document.getElementById('extraPayment').oninput(); // Initialize
-        };
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
