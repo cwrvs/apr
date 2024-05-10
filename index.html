@@ -110,8 +110,8 @@
         </div>
         <div>
             <label for="loanTerm">Loan Term:</label>
-            <span id="loanTermDisplay"></span> <!-- Moved above the slider -->
-            <input type="range" id="loanTerm">
+            <span id="loanTermDisplay"></span> <!-- Display will be updated by JavaScript -->
+            <input type="range" id="loanTerm" min="0" max="8" value="0">
         </div>
         <div>
             <label class="slider-label" for="extraPayment">Extra Monthly Payment: <span id="extraPaymentDisplay">$0</span></label>
@@ -134,13 +134,12 @@
         </div>
 
         <div id="disclaimer">
-            <h2>Disclaimer</h2>
+                    <h2>Disclaimer</h2>
             <p>This calculator provides estimates based on the input values and is intended for illustrative purposes only. Actual loan terms may vary based on credit and lender policies.</p>
         </div>
     </div>
 
     <script>
-        // JavaScript code
         function calculateLoan() {
             var amount = parseFloat(document.getElementById('amount').value) || 0;
             var interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
@@ -148,7 +147,8 @@
             var extraPayment = parseFloat(document.getElementById('extraPayment').value) || 0;
             var monthlyInterestRate = (interestRate / 100) / 12;
 
-            var terms = [84, 96, 120, 144, 180, 204, 240];
+            // Updated array of loan terms based on your requirements
+            var terms = [60, 72, 84, 96, 120, 144, 180, 204, 240];
             var loanTerm = terms[loanTermIndex];
 
             function calculatePayment(term) {
@@ -159,7 +159,7 @@
             }
 
             if (loanTerm <= 0 || amount <= 0) {
-                // alert("Please ensure that the loan amount and term are correctly set.");
+                // Error handling for invalid input
                 return;
             }
 
@@ -200,23 +200,14 @@
 
         window.onload = function() {
             var loanTermSlider = document.getElementById('loanTerm');
-            loanTermSlider.min = 0;
-            loanTermSlider.max = 6;
-            loanTermSlider.value = 0; // Default position
+            var terms = [60, 72, 84, 96, 120, 144, 180, 204, 240];
             loanTermSlider.oninput = function() {
-                var terms = [84, 96, 120, 144, 180, 204, 240];
                 var termValue = terms[this.value];
                 document.getElementById('loanTermDisplay').textContent = termValue + ' months';
                 calculateLoan();
             };
-
-            var extraPaymentSlider = document.getElementById('extraPayment');
-            extraPaymentSlider.oninput = function() {
-                document.getElementById('extraPaymentDisplay').textContent = '$' + this.value;
-                calculateLoan();
-            };
             loanTermSlider.oninput(); // Initialize
-            extraPaymentSlider.oninput(); // Initialize
+            document.getElementById('extraPayment').oninput(); // Initialize
         };
     </script>
 </body>
